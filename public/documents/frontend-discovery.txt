@@ -1,0 +1,13 @@
+FRONTEND DISCOVERY CHECKLIST
+Local sample resource for learning. Not a completed client assessment.
+
+1. Who is the primary user?
+2. What task should they be able to complete?
+3. What information do they need at each step?
+4. Which constraints are confirmed, and which are assumptions?
+5. What does an empty, invalid, or unavailable state look like?
+6. Can the journey be completed with a keyboard?
+7. Does the layout remain readable at small widths and high zoom?
+8. What is intentionally outside the current scope?
+9. What would a useful manual walkthrough demonstrate?
+10. Which decisions need to be recorded before extending the project?

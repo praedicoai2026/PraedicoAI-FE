@@ -1,0 +1,93 @@
+import type { Resource } from "@/types/content";
+export const resources: Resource[] = [
+  {
+    title: "Frontend discovery checklist",
+    type: "Checklist",
+    audience: "Product teams",
+    category: "Architecture",
+    summary: "A local sample checklist for framing a frontend project.",
+    download: "/documents/frontend-discovery.txt",
+  },
+  {
+    title: "Architecture decision template",
+    type: "Architecture template",
+    audience: "Technical teams",
+    category: "Architecture",
+    summary: "A short local template for recording context and trade-offs.",
+    download: "/documents/architecture-decision.txt",
+  },
+  {
+    title: "AI-agent discovery worksheet",
+    type: "Worksheet",
+    audience: "Business teams",
+    category: "AI",
+    summary: "Questions about purpose, information, and human approval.",
+    download: "/documents/ai-discovery.txt",
+  },
+  {
+    title: "Workflow mapping worksheet",
+    type: "Worksheet",
+    audience: "Operations teams",
+    category: "Workflows",
+    summary: "A structure for documenting handoffs, exceptions, and ownership.",
+  },
+  {
+    title: "TypeScript field guide",
+    type: "Technical guide",
+    audience: "Developers",
+    category: "Learning",
+    summary: "A planned reference for typed models and everyday narrowing.",
+  },
+  {
+    title: "Frontend learning workbook",
+    type: "Training material",
+    audience: "Students",
+    category: "Learning",
+    summary: "A planned companion for guided frontend exercises.",
+  },
+  {
+    title: "Architecture conversation deck",
+    type: "Presentation resource",
+    audience: "Technology leaders",
+    category: "Architecture",
+    summary: "A planned visual outline for discussing technical decisions.",
+  },
+  {
+    title: "Practical digital foundations",
+    type: "E-book",
+    audience: "Professionals",
+    category: "Digital growth",
+    summary: "A planned introduction to credible digital presence and content.",
+  },
+  {
+    title: "Professional profile",
+    type: "Downloadable profile",
+    audience: "Collaborators",
+    category: "Profile",
+    summary:
+      "A verified professional profile will be added after personal details are confirmed.",
+  },
+  {
+    title: "Webinar reflection notes",
+    type: "Webinar material",
+    audience: "Learners",
+    category: "Learning",
+    summary: "A planned reflection worksheet for future knowledge sessions.",
+  },
+  {
+    title: "Technology evaluation prompts",
+    type: "Useful tool",
+    audience: "Technical teams",
+    category: "Architecture",
+    summary:
+      "A planned set of prompts for evaluating tools against real constraints.",
+  },
+].map((resource, index) => ({
+  ...resource,
+  slug: `resource-${index + 1}`,
+  tags: [resource.type],
+  label: resource.download ? "Local sample resource" : "Coming Soon",
+  image: "/images/training/learning.png",
+  imageAlt: "Abstract document and learning modules",
+  sections: [],
+}));

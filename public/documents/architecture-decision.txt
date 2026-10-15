@@ -1,0 +1,11 @@
+ARCHITECTURE DECISION RECORD
+Local sample template. Replace each bracketed prompt.
+
+Title: [A short description of the decision]
+Status: [Proposed / Agreed / Revisit]
+Context: [The problem and verified constraints]
+Options: [Plausible alternatives and their trade-offs]
+Decision: [The chosen direction and reason]
+Consequences: [Benefits, costs, and ownership]
+Assumptions: [What remains unverified]
+Review trigger: [What evidence would change this decision]

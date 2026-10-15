@@ -1,0 +1,66 @@
+import Link from "next/link";
+import type { FormKind } from "@/types/contact";
+import { formDefinitions } from "@/data/forms";
+import { faqs } from "@/data/faqs";
+import { PageHero, ContactAside } from "./shared";
+import { Section, SectionHeader, FAQList } from "@/components/ui/primitives";
+import {
+  ContactForm,
+  ProposalForm,
+  TrainingRequestForm,
+  ConsultationForm,
+} from "@/components/forms/inquiry-form";
+import { SocialLinks } from "@/components/layout/footer";
+const forms = {
+  contact: ContactForm,
+  proposal: ProposalForm,
+  training: TrainingRequestForm,
+  consultation: ConsultationForm,
+};
+export function InquiryPage({ kind }: { kind: FormKind }) {
+  const definition = formDefinitions[kind];
+  const Form = forms[kind];
+  return (
+    <>
+      <PageHero
+        title={definition.title}
+        description={definition.description}
+        eyebrow={definition.subjectPrefix}
+        path={definition.path}
+      />
+      <Section>
+        <div className="form-layout">
+          <div>
+            <ContactAside />
+            <SocialLinks />
+            <nav className="grid gap-3 mt-7" aria-label="Other inquiry options">
+              <Link href="/request-proposal" className="text-link">
+                Request a proposal
+              </Link>
+              <Link href="/book-consultation" className="text-link">
+                Request a consultation
+              </Link>
+              <Link href="/training/request-training" className="text-link">
+                Request training
+              </Link>
+            </nav>
+          </div>
+          <Form />
+        </div>
+      </Section>
+      <Section className="section-tinted">
+        <SectionHeader title="Before you send" />
+        <FAQList items={[faqs[3], faqs[0], faqs[6]]} />
+        <p className="muted text-sm mt-7">
+          Forms are processed only in your browser. Your email application
+          handles the information after you choose to open or send an email. See
+          the{" "}
+          <Link className="text-link" href="/privacy">
+            privacy notice
+          </Link>
+          .
+        </p>
+      </Section>
+    </>
+  );
+}

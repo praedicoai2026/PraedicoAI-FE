@@ -1,0 +1,13 @@
+AI USE-CASE DISCOVERY WORKSHEET
+Local sample for discussion only. No agent or automation is implemented.
+
+Purpose: [One bounded task]
+People: [Who benefits and who reviews]
+Information: [Permitted sources and known limitations]
+Output: [What a useful response would contain]
+Uncertainty: [How missing or conflicting evidence should appear]
+Approval: [What requires explicit human judgment]
+Stopping conditions: [When the assistant should decline or escalate]
+Evaluation: [Representative, non-confidential example situations]
+Ownership: [Who maintains the knowledge and reviews the design]
+Next step: [A small discussion or prototype, not an automated action]
