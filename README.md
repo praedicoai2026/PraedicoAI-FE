@@ -1,6 +1,6 @@
 # PraedicoAI Services Private Limited
 
-A frontend-only company website for PraedicoAI Services Private Limited, with services, training, events, and a blog.
+A frontend-only company website for PraedicoAI Services Private Limited, focused on applied AI, intelligent software, workflow design, and practical enablement.
 
 ## Run Locally
 
@@ -30,13 +30,13 @@ For production review, stop the dev server, run `npm run build`, then `npm run s
 
 Next.js App Router, React, strict TypeScript, Tailwind CSS, ESLint, Prettier, Lucide React, limited Framer Motion, `next/image`, and `next/font/local`. Static pages use Server Components; navigation, filtering, theme controls, inquiries, and interactive home sections use small Client Components.
 
-The visual system uses white surfaces, dark ink typography, orange calls to action, and pale lavender section bands, inspired by the supplied Whatfix landing-page reference without reusing its branding, claims, or assets. Compact spacing and a centered hero keep the portfolio identity prominent. It includes staggered hero entrances, a brief name-accent animation, a pointer-responsive abstract backdrop with focus tabs, a category-based service explorer, scroll-triggered reveals, lifted card and button hover states, native FAQ disclosures, a mobile navigation dialog, light/dark/system themes, and visible keyboard focus. Cards also respond to keyboard focus. Tab controls support arrow keys, Home, and End. Reduced-motion preferences disable optional movement. The preview device may suppress animations when that preference is enabled.
+The visual system uses white surfaces, dark ink typography, blue/cyan accents, and responsive section layouts. It includes a pointer-responsive abstract hero with focus tabs, a category-based service explorer, subtle scroll reveals, native FAQ disclosures, a mobile navigation dialog, light/dark/system themes, and visible keyboard focus. Cards also respond to keyboard focus. Tab controls support arrow keys, Home, and End. Reduced-motion preferences disable optional movement.
 
 ## Scope And Honest Content
 
 There is no backend, API route, Server Action, database, authentication, admin, CMS, CRM, email provider, analytics, payment system, booking integration, or event registration. There is no cloud, Docker, deployment, or CI/CD configuration. No environment variables are required; `.env.example` is intentionally comment-only.
 
-Projects and case studies are demonstrations, not fabricated customer engagements. Employment dates/titles, institutions, qualifications, certifications, project outcomes, social URLs, and testimonials remain explicit placeholders until verified. Course outlines and event examples are not confirmed offerings. All imagery is original abstract placeholder artwork, not a portrait or evidence of delivered work. Legal pages contain draft text requiring professional review.
+The site presents PraedicoAI as focused on applied AI, intelligent software, and workflow design. Portfolio and case-study entries are illustrative concepts, not client engagements or measured results. Course outlines and event examples are not confirmed schedules or accredited programs. No testimonials or certifications are published without verification. The website itself does not run an AI model or submit form data to a backend. Images are abstract illustrations, not customer evidence. Legal pages are drafts requiring review against actual company operations.
 
 ## Structure
 
@@ -81,20 +81,20 @@ Service slugs: `software-development`, `web-application-development`, `ai-agents
 
 Solution slugs: `startups`, `enterprises`, `professionals`, `students`, `educational-institutions`, `manufacturing`.
 
-Detail routes derive from local data through `generateStaticParams`; unknown slugs show the custom 404. [src/lib/routes.ts](src/lib/routes.ts) provides the sitemap inventory. Canonical/social URLs use the local `site.url`. Indexing is intentionally disabled for this learning sample; robots rules are not access control.
+Detail routes derive from local data through `generateStaticParams`; unknown slugs show the custom 404. [src/lib/routes.ts](src/lib/routes.ts) provides the sitemap inventory. Canonical/social URLs currently use the local `site.url`. Indexing is disabled until the production domain and launch settings are configured; robots rules are not access control.
 
 ## Customize Content
 
 - Start with [src/data/site.ts](src/data/site.ts) for identity, title, availability, expertise, process, local URL, and email. Replace `REPLACE_WITH_YOUR_EMAIL@example.com` with an address you control before real contact.
 - Add verified social URLs in [src/data/navigation.ts](src/data/navigation.ts). Missing URLs are non-link placeholders.
-- Update verified employment, education, certification, speaking, and permission-based feedback in [src/data/profile.ts](src/data/profile.ts). Do not invent dates, qualifications, achievements, or endorsements.
+- Add verified speaking details and permission-based customer feedback in [src/data/profile.ts](src/data/profile.ts). Do not invent dates, qualifications, achievements, or endorsements.
 - Edit hero focus copy and service-group introductions in [src/data/home.ts](src/data/home.ts). The service explorer receives a small projection of the existing service data.
 - Add a service in [src/data/services.ts](src/data/services.ts), with a unique slug, existing category, audience, capabilities, challenges, deliverables, and tags. Detail routes, service choices, and sitemap derive from the data. Add new categories to the home service groups if needed.
 - Add a solution in [src/data/solutions.ts](src/data/solutions.ts); related service slugs must exist.
-- Add a project in [src/data/portfolio.ts](src/data/portfolio.ts). Retain its Concept Project, Learning Project, UI Prototype, or Personal Project label. Add only verified outcomes. Case studies belong in [src/data/caseStudies.ts](src/data/caseStudies.ts), with clear hypothetical disclosures.
+- Add a project in [src/data/portfolio.ts](src/data/portfolio.ts). Label concepts and prototypes clearly; include only verified outcomes. Case studies belong in [src/data/caseStudies.ts](src/data/caseStudies.ts), with clear illustrative disclosures.
 - Add an article in [src/data/blogPosts.ts](src/data/blogPosts.ts), including slug, category, tags, author, dates, and structured sections. Paragraphs, bullets, code, and callouts are supported. Reading time and related articles are derived locally.
 - Add a course in [src/data/courses.ts](src/data/courses.ts), with prerequisites, objectives, curriculum, resources, and FAQs. Add events in [src/data/events.ts](src/data/events.ts); leave dates and availability unverified until confirmed.
-- Add resources in [src/data/resources.ts](src/data/resources.ts). Use a real local file in `public/documents` or retain Coming Soon. Never link a download that does not exist.
+- Add resources in [src/data/resources.ts](src/data/resources.ts). Use a real local file in `public/documents`; never link a download that does not exist.
 
 Repeated domain content lives in typed data modules. Unique page introductions remain colocated with their pages. Run typecheck/build after changing content or slugs and manually check related links and filters.
 

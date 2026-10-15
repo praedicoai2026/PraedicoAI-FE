@@ -17,7 +17,7 @@ export const caseStudies: CaseStudy[] = portfolioProjects
         title: "Executive summary",
         paragraphs: [
           project.summary,
-          "Illustrative, anonymized learning scenario. It is not a report of a real customer engagement.",
+          "Illustrative scenario created to explain a possible approach. It is not anonymized client work or a report of a real customer engagement.",
         ],
       },
       {

@@ -1,5 +1,15 @@
 export const focusAreas = [
   {
+    id: "intelligence",
+    label: "Applied AI",
+    title: "Put AI to work on a real problem.",
+    description:
+      "Find a bounded task where an assistant or agent could help, then define its evidence, limits, evaluation, and human review.",
+    href: "/services/ai-agents",
+    action: "Explore applied AI",
+    image: "/images/portfolio/knowledge.png",
+  },
+  {
     id: "architecture",
     label: "Architecture",
     title: "Build a foundation that can evolve.",
@@ -8,16 +18,6 @@ export const focusAreas = [
     href: "/services/technology-consulting",
     action: "Explore architecture",
     image: "/images/hero/connected-architecture.png",
-  },
-  {
-    id: "intelligence",
-    label: "Applied AI",
-    title: "Put AI to work on a real problem.",
-    description:
-      "Find a bounded task where an assistant or agent could help, then define its evidence, limits, evaluation, and human review.",
-    href: "/services/ai-agents",
-    action: "Explore AI consulting",
-    image: "/images/portfolio/knowledge.png",
   },
   {
     id: "learning",
@@ -32,16 +32,16 @@ export const focusAreas = [
 ];
 export const serviceGroups = [
   {
-    category: "Engineering",
-    title: "Make the product foundation fit the problem.",
-    description:
-      "Design and develop the interfaces, integrations, and application foundations that make a useful AI or software experience possible.",
-  },
-  {
     category: "AI & Automation",
     title: "Apply AI to work worth improving.",
     description:
       "Explore knowledge assistants, task support, and workflow automation with data boundaries, evaluation, and human decisions designed in.",
+  },
+  {
+    category: "Engineering",
+    title: "Make the product foundation fit the problem.",
+    description:
+      "Design and develop the interfaces, integrations, and application foundations that make a useful AI or software experience possible.",
   },
   {
     category: "Strategy",

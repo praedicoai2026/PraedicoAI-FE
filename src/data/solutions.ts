@@ -45,13 +45,13 @@ const audiences = [
   },
   {
     slug: "professionals",
-    title: "Professionals",
+    title: "Professional Teams",
     summary:
-      "Use AI and digital tools thoughtfully to strengthen everyday work, communication, and professional learning.",
+      "Help specialists and small teams use AI and digital tools thoughtfully to improve repeatable work without losing expertise or accountability.",
     approach:
       "Identify a repeatable task or learning goal, select tools that fit the sensitivity of the information involved, and keep important decisions under human control.",
     needs: [
-      "Personal branding",
+      "AI-assisted work practices",
       "Portfolio websites",
       "Practical AI literacy and tool evaluation",
       "Technology mentoring",

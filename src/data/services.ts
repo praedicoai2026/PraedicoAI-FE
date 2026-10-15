@@ -71,7 +71,7 @@ const seeds: ServiceSeed[] = [
   },
   {
     slug: "ai-agents",
-    title: "AI Agent Consulting",
+    title: "Applied AI & Agent Design",
     icon: "brain",
     category: "AI & Automation",
     summary:
@@ -108,7 +108,8 @@ const seeds: ServiceSeed[] = [
     title: "Workflow Consulting",
     icon: "workflow",
     category: "AI & Automation",
-    summary: "Make information, handoffs, and decisions easier to understand.",
+    summary:
+      "Redesign information flow and handoffs so AI assistance supports a process people can understand, review, and own.",
     audience: ["Operations teams", "Growing businesses"],
     capabilities: [
       "Business process understanding",
@@ -310,19 +311,26 @@ const seeds: ServiceSeed[] = [
     tags: ["Next.js", "TypeScript", "AI Fundamentals"],
   },
 ];
-export const services: Service[] = seeds.map((seed) => ({
-  ...seed,
-  image: "/images/services/architecture.png",
-  imageAlt: "Abstract layered technology architecture",
-  label: "Consulting & services",
-  sections: [],
-  benefits: [seed.deliverables[0], "Clear scope and practical next steps"],
-  faqs:
-    seed.slug === "ai-agents"
-      ? [faqs[5], faqs[0]]
-      : seed.category === "Digital Growth"
-        ? [faqs[7], faqs[0]]
-        : [faqs[1], faqs[0]],
-}));
+export const services: Service[] = seeds
+  .map((seed) => ({
+    ...seed,
+    image: "/images/services/architecture.png",
+    imageAlt: "Abstract layered technology architecture",
+    label: "Consulting & services",
+    sections: [],
+    benefits: [seed.deliverables[0], "Clear scope and practical next steps"],
+    faqs:
+      seed.slug === "ai-agents"
+        ? [faqs[8], faqs[9], faqs[10], faqs[11], faqs[12], faqs[13]]
+        : seed.slug === "workflow-consulting"
+          ? [faqs[8], faqs[9], faqs[0]]
+          : seed.category === "Digital Growth"
+            ? [faqs[7], faqs[0]]
+            : [faqs[1], faqs[0]],
+  }))
+  .sort(
+    (left, right) =>
+      Number(right.slug === "ai-agents") - Number(left.slug === "ai-agents"),
+  );
 export const getServiceBySlug = (slug: string) =>
   services.find((service) => service.slug === slug);

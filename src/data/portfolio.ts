@@ -3,12 +3,12 @@ export const portfolioCategories = [
   "Web Applications",
   "Enterprise Applications",
   "AI Concepts",
+  "AI Product Strategy",
   "Workflow Concepts",
   "Digital Marketing",
   "AI Video",
   "Training",
   "Architecture",
-  "Personal Branding",
   "UI Modernization",
 ];
 const seeds = [
@@ -38,7 +38,7 @@ const seeds = [
     category: "AI Concepts",
     tags: ["Responsible AI", "TypeScript", "Agent Design"],
     projectType: "Concept Project",
-    service: "AI Agent Consulting",
+    service: "Applied AI & Agent Design",
     industry: "Professional Services",
     challenge: "Human oversight",
     image: "/images/portfolio/knowledge.png",
@@ -85,22 +85,22 @@ const seeds = [
       "Represent ownership, required evidence, and escalation as distinct states. Keep the proposed workflow display-only.",
   },
   {
-    slug: "professional-presence",
-    title: "A professional story, connected",
+    slug: "ai-product-presence",
+    title: "An AI product story people can understand",
     summary:
-      "A personal-branding portfolio concept connecting expertise, writing, and a clear inquiry journey.",
-    category: "Personal Branding",
-    tags: ["Next.js", "Content Strategy", "SEO"],
-    projectType: "Personal Project",
+      "A startup website concept that explains an AI product's purpose, limits, and next step without relying on unsupported performance claims.",
+    category: "AI Product Strategy",
+    tags: ["Product Positioning", "UX Writing", "Next.js"],
+    projectType: "Concept Project",
     service: "Web Application Development",
-    industry: "Professional Services",
+    industry: "Technology Startups",
     challenge: "Content discovery",
     image: "/images/portfolio/learning.png",
-    users: "Independent professionals and prospective collaborators",
+    users: "Prospective users, buyers, and product collaborators",
     problem:
-      "A résumé alone does not explain how expertise translates into services or learning opportunities.",
+      "AI product sites can overemphasize model capabilities while leaving intended users unsure about the actual workflow, limitations, and evidence.",
     approach:
-      "Organize content around the visitor's question: who, what, how, and what to do next.",
+      "Organize the story around the user's task: the current challenge, what the product assists with, where human judgment remains, and what a safe next step looks like.",
   },
   {
     slug: "explain-with-video",
@@ -122,6 +122,120 @@ const seeds = [
   },
 ];
 function projectSections(seed: (typeof seeds)[number]): ContentSection[] {
+  const highlights: Record<
+    string,
+    { objectives: string[]; features: string[]; validation: string[] }
+  > = {
+    "operations-workspace": {
+      objectives: [
+        "Help an operations reviewer identify the next item that needs attention",
+        "Keep exceptions and supporting context visible alongside the work queue",
+        "Make status and ownership understandable without relying on color alone",
+      ],
+      features: [
+        "Prioritized work queue with clear status labels",
+        "Selected-work detail view with issue and decision context",
+        "Distinct states for delayed, blocked, and review-required work",
+        "Responsive layout for a dense operational interface",
+      ],
+      validation: [
+        "Can a reviewer find the next item requiring attention?",
+        "Can the user distinguish an exception from routine work?",
+        "Can the status and next owner be understood at mobile widths?",
+      ],
+    },
+    "knowledge-assistant": {
+      objectives: [
+        "Help a knowledge worker inspect relevant guidance before acting",
+        "Make the source and its relevant context visible",
+        "Show how the experience responds when evidence is missing",
+      ],
+      features: [
+        "Source-preview and evidence states",
+        "Explicit uncertainty and no-answer handling",
+        "Human review and escalation points",
+        "Permission and content-freshness questions represented in the flow",
+      ],
+      validation: [
+        "Does the cited source actually support the proposed response?",
+        "Does the interface clearly handle stale, conflicting, or missing evidence?",
+        "Can a reviewer reject or escalate an unsupported answer?",
+      ],
+    },
+    "learning-hub": {
+      objectives: [
+        "Help learners compare a course with their goals and starting level",
+        "Make prerequisites and sample outcomes clear before an inquiry",
+        "Keep the next action useful without implying enrollment",
+      ],
+      features: [
+        "Course discovery by topic and learner level",
+        "Visible prerequisites, outline, and learning objectives",
+        "Readable empty and filtered-result states",
+        "Inquiry path that does not imply booking or enrollment",
+      ],
+      validation: [
+        "Can a learner identify an appropriate starting course?",
+        "Are prerequisites and sample-outline limitations clear?",
+        "Can the catalog be navigated with a keyboard and small screen?",
+      ],
+    },
+    "approval-workbench": {
+      objectives: [
+        "Show who owns the next process step",
+        "Expose the evidence required for a review",
+        "Make exception routing and escalation visible",
+      ],
+      features: [
+        "Owner, status, and next-action indicators",
+        "Review context and missing-evidence states",
+        "Separate routine approvals from exceptions",
+        "Decision-history concept for process traceability",
+      ],
+      validation: [
+        "Can a requester see who owns the current step?",
+        "Can an approver identify what evidence is missing?",
+        "Are exceptions and escalation paths distinguishable from routine flow?",
+      ],
+    },
+    "ai-product-presence": {
+      objectives: [
+        "Explain the intended user and task before presenting AI capabilities",
+        "Make product limits and human responsibilities easy to find",
+        "Offer a next step without making unverified performance claims",
+      ],
+      features: [
+        "Problem-first product narrative",
+        "Plain-language explanation of AI-assisted tasks",
+        "Visible data, limitation, and human-review notes",
+        "Clear evaluation and inquiry journey",
+      ],
+      validation: [
+        "Can a prospective user explain the product's intended task?",
+        "Are limitations and human review as visible as potential benefits?",
+        "Does the page avoid implying unverified customer results?",
+      ],
+    },
+    "explain-with-video": {
+      objectives: [
+        "Structure a technical explanation around one audience question",
+        "Make the narrative understandable without relying on visuals alone",
+        "Plan accessibility and review as part of the content",
+      ],
+      features: [
+        "Audience and learning objective",
+        "Script outline with a concrete example",
+        "Storyboard beats and visual descriptions",
+        "Caption and transcript planning",
+      ],
+      validation: [
+        "Can the intended audience follow the explanation without unexplained jargon?",
+        "Does the script communicate one clear idea?",
+        "Are captions, transcript, and visual alternatives planned?",
+      ],
+    },
+  };
+  const detail = highlights[seed.slug];
   return [
     {
       title: "Project context",
@@ -135,13 +249,9 @@ function projectSections(seed: (typeof seeds)[number]): ContentSection[] {
     {
       title: "Objectives",
       paragraphs: [
-        "Make the primary task understandable, expose the relevant context, and provide a clear next action.",
+        "This concept explores how to make the task, decision context, and next action explicit for the intended user.",
       ],
-      bullets: [
-        "Reduce ambiguity in navigation",
-        "Make empty and error states useful",
-        "Keep interfaces accessible across devices",
-      ],
+      bullets: detail.objectives,
     },
     {
       title: "Constraints",
@@ -171,18 +281,14 @@ function projectSections(seed: (typeof seeds)[number]): ContentSection[] {
     {
       title: "Main features",
       paragraphs: [],
-      bullets: [
-        "Responsive content layouts",
-        "Local search and filtering concepts",
-        "Explicit loading, empty, and feedback states",
-        "Accessible navigation and labeled controls",
-      ],
+      bullets: detail.features,
     },
     {
       title: "Manual validation approach",
       paragraphs: [
-        "Walk through the main task using keyboard only, check mobile and desktop widths, combine filters, and review labels and contrast in both themes.",
+        "Use these questions to review the proposed experience with representative, non-confidential examples. A real deployment would need domain-specific testing and user feedback.",
       ],
+      bullets: detail.validation,
     },
     {
       title: "Challenges",

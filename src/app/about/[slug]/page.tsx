@@ -71,7 +71,7 @@ export default async function AboutDetailPage({
               {processSteps.map(([title, description], index) => (
                 <li key={title}>
                   <span className="process-number">0{index + 1}</span>
-                  <h2>{title}</h2>
+                  <h3>{title}</h3>
                   <p className="muted text-sm">{description}</p>
                 </li>
               ))}
@@ -118,9 +118,9 @@ export default async function AboutDetailPage({
         {slug === "certifications" && (
           <>
             <Alert>
-              PraedicoAI does not currently publish certifications or
-              compliance attestations on this page. No accreditation or
-              certification claim is made.
+              PraedicoAI does not currently publish certifications or compliance
+              attestations on this page. No accreditation or certification claim
+              is made.
             </Alert>
             <SectionHeader
               title="Responsible AI is a product requirement"
@@ -129,7 +129,7 @@ export default async function AboutDetailPage({
             <div className="grid-three">
               {principles.slice(1, 6).map(([title, description]) => (
                 <article className="principle" key={title}>
-                  <h2>{title}</h2>
+                  <h3>{title}</h3>
                   <p className="muted">{description}</p>
                 </article>
               ))}
@@ -157,7 +157,9 @@ export default async function AboutDetailPage({
               ))}
             </div>
             <div className="button-row">
-              <ButtonLink href="/contact">Discuss a speaking session</ButtonLink>
+              <ButtonLink href="/contact">
+                Discuss a speaking session
+              </ButtonLink>
               <ButtonLink href="/events" secondary>
                 Sample events
               </ButtonLink>

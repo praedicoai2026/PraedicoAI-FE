@@ -16,14 +16,16 @@ import {
   TechnologyTags,
 } from "@/components/ui/primitives";
 import { ExpertiseStrip, ProcessSteps } from "@/components/sections/shared";
-import {
-  ContentCard,
-  SolutionCard,
-} from "@/components/cards/content-card";
+import { ContentCard, SolutionCard } from "@/components/cards/content-card";
 import { InteractiveHero } from "@/components/sections/interactive-hero";
 import { ServiceExplorer } from "@/components/sections/service-explorer";
 
 export default function Home() {
+  const featuredCourses = [
+    ...courses.filter((course) => course.topic.toLowerCase().includes("ai")),
+    ...courses.filter((course) => !course.topic.toLowerCase().includes("ai")),
+  ].slice(0, 3);
+
   return (
     <>
       <InteractiveHero />
@@ -40,9 +42,9 @@ export default function Home() {
           </div>
           <div>
             <p className="muted">
-              PraedicoAI Services Private Limited connects business questions
-              with practical technology decisions across software, AI,
-              consulting, and learning.
+              PraedicoAI Services Private Limited is an AI-focused technology
+              company connecting business questions with practical software,
+              workflow, and AI design.
             </p>
             <p className="muted">
               We connect AI, software engineering, and business process design.
@@ -146,12 +148,14 @@ export default function Home() {
             </h2>
             <p className="muted mt-5">
               Useful AI starts with a business question, a bounded task, and an
-              understanding of where human judgment belongs. These are
-              consulting concepts, not live AI services.
+              understanding of where human judgment belongs. This website is an
+              information and inquiry site, not a live AI product. Project
+              scope, implementation, and ongoing operations are discussed and
+              agreed separately.
             </p>
             <div className="button-row">
               <ButtonLink href="/services/ai-agents">
-                Explore AI consulting
+                Explore applied AI design
               </ButtonLink>
             </div>
           </div>
@@ -214,7 +218,7 @@ export default function Home() {
         />
         <TechnologyTags tags={learningAudiences} />
         <div className="grid-three mt-7">
-          {courses.slice(0, 3).map((course) => (
+          {featuredCourses.map((course) => (
             <ContentCard
               key={course.slug}
               item={course}
@@ -253,9 +257,16 @@ export default function Home() {
           linkLabel="All articles"
         />
         <div className="grid-three">
-          {blogPosts.slice(0, 3).map((post) => (
-            <ContentCard key={post.slug} item={post} basePath="/blog" />
-          ))}
+          {blogPosts
+            .filter((post) =>
+              ["AI Adoption", "Responsible AI", "AI Agents"].includes(
+                post.category,
+              ),
+            )
+            .slice(0, 3)
+            .map((post) => (
+              <ContentCard key={post.slug} item={post} basePath="/blog" />
+            ))}
         </div>
       </Section>
       <Section>

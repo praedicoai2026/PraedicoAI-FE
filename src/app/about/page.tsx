@@ -60,7 +60,10 @@ export default function AboutPage() {
         />
       </Section>
       <Section className="section-tinted">
-        <SectionHeader title="Professional values" />
+        <SectionHeader
+          title="Principles for building useful AI"
+          description="We make the intended task, evidence, limitations, and human responsibilities visible in the product and the delivery conversation."
+        />
         <div className="grid-three">
           {principles.map(([title, description]) => (
             <article className="principle" key={title}>

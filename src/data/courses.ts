@@ -14,9 +14,9 @@ export const trainingTopics = [
   "AI data and governance fundamentals",
   "Workflow concepts",
   "Digital transformation",
-  "Personal branding",
-  "Digital marketing foundations",
-  "Social media fundamentals",
+  "AI product discovery",
+  "Human-centered AI design",
+  "AI-assisted workflow fundamentals",
 ];
 const seeds = [
   {

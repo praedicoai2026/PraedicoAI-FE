@@ -19,7 +19,7 @@ export async function generateMetadata({
   return category
     ? pageMetadata(
         category,
-        `Sample articles about ${category.toLowerCase()}.`,
+        `Articles and practical perspectives on ${category.toLowerCase()}.`,
         `/blog/category/${slug}`,
       )
     : {};
@@ -53,7 +53,7 @@ export default async function BlogCategoryPage({
         ) : (
           <EmptyState
             title="More perspectives to come"
-            description="No articles have been published in this sample category yet."
+            description="There are no articles in this topic yet. Browse the journal for related perspectives."
           >
             <ButtonLink href="/blog">Explore all articles</ButtonLink>
           </EmptyState>

@@ -3,7 +3,7 @@ import { CatalogPage, optionsFor } from "@/components/sections/catalog-page";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Events",
-  "Sample upcoming and past webinars, workshops, speaking sessions, and learning events.",
+  "Explore proposed conversations and workshop concepts on applied AI, responsible adoption, workflow design, and software architecture.",
   "/events",
 );
 export default function EventsPage() {

@@ -84,10 +84,10 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             <SectionHeader title="Possible deliverables" />
             <BulletList items={service.deliverables} />
             <Alert>
-              These service areas describe potential project scope; this
-              website itself does not run an AI agent or automated workflow.
-              Data access, model selection, security, evaluation, and
-              implementation boundaries must be agreed for each project.
+              These service areas describe potential project scope; this website
+              itself does not run an AI agent or automated workflow. Data
+              access, model selection, security, evaluation, and implementation
+              boundaries must be agreed for each project.
             </Alert>
           </div>
         </div>

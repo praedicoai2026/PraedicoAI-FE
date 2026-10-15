@@ -96,7 +96,7 @@ const groups = [
       ["Portfolio", "/portfolio"],
       ["Case studies", "/case-studies"],
       ["Speaking", "/about/speaking"],
-      ["Sample feedback", "/testimonials"],
+      ["Customer stories", "/testimonials"],
       ["Contact", "/contact"],
       ["FAQ", "/faq"],
     ],

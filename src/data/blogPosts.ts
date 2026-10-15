@@ -2,23 +2,11 @@ import type { BlogPost } from "@/types/content";
 import { site } from "./site";
 export const blogCategories = [
   "Software Architecture",
-  "Web Development",
   "Next.js",
-  "TypeScript",
   "AI Agents",
   "AI Adoption",
   "Responsible AI",
-  "Workflow Automation",
-  "Generative AI",
-  "Workflow Concepts",
-  "Digital Transformation",
-  "Manufacturing Technology",
   "Career and Learning",
-  "Training",
-  "Digital Marketing",
-  "Personal Branding",
-  "Social Media",
-  "Technology Leadership",
 ];
 export const blogPosts: BlogPost[] = [
   {
@@ -325,14 +313,16 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
-].map((post, index) => ({
+].map((post) => ({
   ...post,
   author: site.name,
   published: "2026-10-13",
   updated: "2026-10-13",
   imageAlt: `${post.category}: illustrative technology composition`,
-  label: "Sample article",
-  featured: index === 0,
+  label: "PraedicoAI Insights",
+  featured: ["AI Adoption", "Responsible AI", "AI Agents"].includes(
+    post.category,
+  ),
 }));
 export const getBlogPostBySlug = (slug: string) =>
   blogPosts.find((post) => post.slug === slug);

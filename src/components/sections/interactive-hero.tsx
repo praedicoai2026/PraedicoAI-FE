@@ -21,7 +21,7 @@ import { focusAreas } from "@/data/home";
 import { site } from "@/data/site";
 import { Container } from "@/components/ui/primitives";
 
-const focusIcons = [Layers3, BrainCircuit, GraduationCap];
+const focusIcons = [BrainCircuit, Layers3, GraduationCap];
 
 export function InteractiveHero() {
   const [active, setActive] = useState(0);

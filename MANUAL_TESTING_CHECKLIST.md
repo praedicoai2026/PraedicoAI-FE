@@ -56,13 +56,13 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Status:** Not Tested. **Notes:** [Result]
 
-## 6. About
+## 6. Company Information
 
-**Objective:** Review profile integrity.
+**Objective:** Review the company story, working approach, learning, responsible-AI principles, and speaking information.
 
-**Steps:** Visit About, Experience, Education, Certifications, and Speaking. Inspect placeholders and subnavigation.
+**Steps:** Visit About, How We Work, Learning, Responsible AI, and Speaking. Follow subnavigation and contact links.
 
-**Expected:** No fabricated titles, dates, institutions, qualifications, or awards; all links resolve.
+**Expected:** Company-focused content is consistent; no unsupported personal credentials, certifications, or customer claims are shown; all links resolve.
 
 **Status:** Not Tested. **Notes:** [Result]
 

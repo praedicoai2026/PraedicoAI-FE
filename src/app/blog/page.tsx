@@ -5,16 +5,16 @@ import { Section, SectionHeader } from "@/components/ui/primitives";
 import { slugify } from "@/lib/formatting";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
-  "Journal",
-  "Sample articles on architecture, AI, frontend development, and practical learning.",
+  "AI & Technology Insights",
+  "Practical articles on applied AI, workflow design, responsible adoption, software architecture, and learning.",
   "/blog",
 );
 export default function BlogPage() {
   return (
     <>
       <CatalogPage
-        title="Notes from a curious mind."
-        description="Practical perspectives on technology, architecture, responsible AI, and learning. Original sample articles for this demonstration."
+        title="Think clearly about what AI should do."
+        description="Practical perspectives on applied AI, workflow design, evaluation, software architecture, and helping people adapt to new capabilities."
         eyebrow="The journal"
         basePath="/blog"
         items={blogPosts}
