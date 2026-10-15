@@ -1,11 +1,5 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import {
-  experiences,
-  education,
-  certifications,
-  speakingFormats,
-} from "@/data/profile";
+import { speakingFormats } from "@/data/profile";
 import { PageHero } from "@/components/sections/shared";
 import {
   Section,
@@ -13,24 +7,29 @@ import {
   ButtonLink,
   TechnologyTags,
   SectionHeader,
+  FAQList,
 } from "@/components/ui/primitives";
+import { processSteps, principles, learningAudiences } from "@/data/site";
+import { faqs } from "@/data/faqs";
+import { courses } from "@/data/courses";
+import { ContentCard } from "@/components/cards/content-card";
 import { pageMetadata } from "@/lib/metadata";
 const pages = {
   experience: [
-    "Professional experience",
-    "A configurable career timeline. Roles, dates, and responsibilities await verification.",
+    "How we work",
+    "A practical path from a business challenge to a well-bounded, evaluated AI or software solution.",
   ],
   education: [
-    "Education & learning",
-    "Configurable education entries. These are placeholders, not verified qualifications.",
+    "Learning & enablement",
+    "Practical AI literacy, technical learning, and team enablement shaped around real work.",
   ],
   certifications: [
-    "Certifications",
-    "A space for verified credentials and supporting evidence.",
+    "Responsible AI",
+    "Principles for considering data, risk, human oversight, evaluation, and appropriate use.",
   ],
   speaking: [
     "Ideas worth discussing",
-    "Architecture, AI awareness, digital transformation, and practical learning in an accessible format.",
+    "AI adoption, software architecture, workflow design, and practical learning in an accessible format.",
   ],
 };
 export const dynamicParams = false;
@@ -58,74 +57,87 @@ export default async function AboutDetailPage({
       <PageHero
         title={item[0]}
         description={item[1]}
-        eyebrow={`About / ${slug}`}
+        eyebrow={`PraedicoAI / ${slug}`}
         path={`/about/${slug}`}
       />
       <Section>
         {slug === "experience" && (
           <>
-            <Alert>
-              Listed organizations are configurable profile entries. Chronology,
-              job titles, dates, and responsibilities have not been verified.
-            </Alert>
-            <ol className="timeline">
-              {experiences.map((experience) => (
-                <li key={experience.organization}>
-                  <p className="eyebrow">{experience.dates}</p>
-                  <h2>{experience.organization}</h2>
-                  <p>{experience.role}</p>
-                  <p className="muted text-sm">{experience.description}</p>
+            <SectionHeader
+              title="From the problem to the next decision"
+              description="Each step creates clarity before the next commitment. The scope, pace, and deliverables are agreed with the team."
+            />
+            <ol className="process-grid">
+              {processSteps.map(([title, description], index) => (
+                <li key={title}>
+                  <span className="process-number">0{index + 1}</span>
+                  <h2>{title}</h2>
+                  <p className="muted text-sm">{description}</p>
                 </li>
               ))}
             </ol>
+            <SectionHeader
+              title="Principles that guide the work"
+              description="The practical questions behind how we approach AI-enabled products and workflows."
+            />
+            <div className="grid-three">
+              {principles.map(([title, description]) => (
+                <article className="principle" key={title}>
+                  <h3>{title}</h3>
+                  <p className="muted">{description}</p>
+                </article>
+              ))}
+            </div>
           </>
         )}
         {slug === "education" && (
-          <div className="grid-two">
-            {education.map((entry) => (
-              <article className="info-card" key={entry.degree}>
-                <p className="eyebrow">Unverified placeholder</p>
-                <h2>{entry.degree}</h2>
-                <p>{entry.institution}</p>
-                <p>{entry.subject}</p>
-                <p>
-                  {entry.startDate} / {entry.completionDate}
-                </p>
-                <p>{entry.description}</p>
-              </article>
-            ))}
-          </div>
+          <>
+            <SectionHeader
+              title="Learning should change what a team can do"
+              description="Sessions can help participants understand new concepts, practice review skills, and apply ideas to work they recognize. The content and level are agreed for each audience."
+            />
+            <TechnologyTags tags={learningAudiences} />
+            <div className="grid-three mt-8">
+              {courses
+                .filter((course) => course.topic.toLowerCase().includes("ai"))
+                .map((course) => (
+                  <ContentCard
+                    key={course.slug}
+                    item={course}
+                    basePath="/training/courses"
+                  />
+                ))}
+            </div>
+            <div className="button-row">
+              <ButtonLink href="/training/request-training">
+                Discuss a learning session
+              </ButtonLink>
+            </div>
+          </>
         )}
         {slug === "certifications" && (
-          <div className="grid-three">
-            {certifications.map((certificate) => (
-              <article className="info-card" key={certificate.name}>
-                <Image
-                  src={certificate.image}
-                  alt="Certificate placeholder, not an awarded credential"
-                  width={1200}
-                  height={720}
-                  sizes="(max-width: 700px) 100vw, 33vw"
-                />
-                <h2>{certificate.name}</h2>
-                <p>{certificate.issuer}</p>
-                <p>{certificate.date}</p>
-                <p>{certificate.credentialId}</p>
-                <TechnologyTags tags={certificate.skills} />
-                <div className="mt-5">
-                  {certificate.credentialLink ? (
-                    <a className="text-link" href={certificate.credentialLink}>
-                      View credential
-                    </a>
-                  ) : (
-                    <button className="button button-secondary" disabled>
-                      Credential link unavailable
-                    </button>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
+          <>
+            <Alert>
+              PraedicoAI does not currently publish certifications or
+              compliance attestations on this page. No accreditation or
+              certification claim is made.
+            </Alert>
+            <SectionHeader
+              title="Responsible AI is a product requirement"
+              description="Responsible design is not a badge. It is a set of decisions about data, access, reliability, human accountability, and what happens when a system is uncertain."
+            />
+            <div className="grid-three">
+              {principles.slice(1, 6).map(([title, description]) => (
+                <article className="principle" key={title}>
+                  <h2>{title}</h2>
+                  <p className="muted">{description}</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-8">
+              <FAQList items={[faqs[8], faqs[9], faqs[10]]} />
+            </div>
+          </>
         )}
         {slug === "speaking" && (
           <>
@@ -145,7 +157,7 @@ export default async function AboutDetailPage({
               ))}
             </div>
             <div className="button-row">
-              <ButtonLink href="/contact">Invite me to speak</ButtonLink>
+              <ButtonLink href="/contact">Discuss a speaking session</ButtonLink>
               <ButtonLink href="/events" secondary>
                 Sample events
               </ButtonLink>

@@ -1,0 +1,39 @@
+AI OPPORTUNITY READINESS CHECKLIST
+Workshop aid. Not a compliance or security certification.
+
+PROBLEM FIT
+[ ] The task and current workflow are described in plain language.
+[ ] A real user and accountable process owner are identified.
+[ ] The problem matters enough to justify changing the workflow.
+[ ] A simpler rule, search, interface, or process change was considered.
+
+INFORMATION
+[ ] Required information sources and their owners are known.
+[ ] Source quality, freshness, and contradictions have been reviewed.
+[ ] Data access and user permissions are understood.
+[ ] Sensitive and prohibited information is identified.
+[ ] Privacy, retention, and provider questions have an owner.
+
+RISK AND HUMAN CONTROL
+[ ] Consequences of a wrong or incomplete result are understood.
+[ ] Decisions that must remain with a person are explicit.
+[ ] Reviewers can inspect relevant evidence and correct a result.
+[ ] Escalation, fallback, and stop conditions are defined.
+[ ] Abuse, misuse, and out-of-scope requests are considered.
+
+EVALUATION
+[ ] Representative test cases can be prepared without exposing secrets.
+[ ] Expected behavior and acceptance criteria are written down.
+[ ] Failure cases include uncertainty, missing data, and conflicting sources.
+[ ] Review effort and error cost will be considered alongside output quality.
+[ ] A named decision owner will decide whether to continue or stop.
+
+DELIVERY READINESS
+[ ] Integration boundaries and dependencies have been identified.
+[ ] Operational ownership, monitoring, and incident handling are discussed.
+[ ] Model/provider selection will follow the use case and constraints.
+[ ] Pilot scope is small, reversible, and proportionate to risk.
+[ ] The next decision and evidence needed are agreed.
+
+If important items are unknown, capture them as discovery work. Do not treat
+this checklist as an approval to process sensitive or production information.

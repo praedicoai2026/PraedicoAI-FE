@@ -197,9 +197,9 @@ function projectSections(seed: (typeof seeds)[number]): ContentSection[] {
       ],
     },
     {
-      title: "Outcome",
+      title: "Concept outcome",
       paragraphs: [
-        "[Add verified project outcome]. This concept describes a proposed direction only; no customer result or performance improvement is claimed.",
+        "The concept makes a user journey and its important interface states tangible enough to discuss and evaluate. It is not a production implementation, user-tested result, or claim of customer impact.",
       ],
     },
   ];

@@ -1,0 +1,38 @@
+WORKFLOW OPPORTUNITY MAP
+Workshop worksheet for understanding a process before automating it.
+
+PROCESS
+Name and purpose: [What outcome should the process produce?]
+Start trigger: [What starts the work?]
+End condition: [How does an owner know it is complete?]
+Process owner: [Who is accountable for the whole process?]
+
+MAP EACH STEP
+Step: [What happens?]
+Role: [Who performs it?]
+Input: [What information or evidence is needed?]
+Decision: [What judgment or rule is applied?]
+System: [Which tool or record is used?]
+Handoff: [Who receives the work next?]
+Wait or rework: [What causes delay, repetition, or missing context?]
+Exception: [What can go wrong and who handles it?]
+
+OPPORTUNITY REVIEW
+[ ] Is the step repetitive and well understood?
+[ ] Could a rule or better interface solve it more predictably?
+[ ] Would AI add useful flexibility for variable information?
+[ ] Is the required information approved, current, and accessible?
+[ ] What must a person check or approve?
+[ ] What happens when information is missing or contradictory?
+[ ] How will an exception be routed and tracked?
+[ ] What evidence would show the change helped?
+
+PROPOSED NEXT STEP
+Smallest workflow slice: [One task and one user group]
+Change to explore: [Process, software, AI assistance, or a combination]
+Owner and reviewer: [Named responsibilities]
+Risks and assumptions: [Separate facts from items to verify]
+Measure and review trigger: [What evidence changes the next decision?]
+
+Use non-confidential examples in this worksheet. It is not an implementation
+plan or authorization to automate a controlled or safety-critical process.

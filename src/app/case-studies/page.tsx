@@ -3,14 +3,14 @@ import { CatalogPage, optionsFor } from "@/components/sections/catalog-page";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Case Studies",
-  "Illustrative case studies exploring architecture and design decisions without confidential customer information.",
+  "Illustrative AI, workflow, and software scenarios showing how a challenge can be framed and evaluated without claiming client work.",
   "/case-studies",
 );
 export default function CaseStudiesPage() {
   return (
     <CatalogPage
-      title="The thinking behind the interface."
-      description="Anonymized demonstration scenarios. Explore the challenge, the proposed approach, and the questions still to be answered."
+      title="Explore the reasoning, not invented results."
+      description="Illustrative scenarios show how a problem could be framed, what a responsible solution might include, and what would need validation in a real project. They are not anonymized client engagements."
       eyebrow="Case studies"
       basePath="/case-studies"
       items={caseStudies}

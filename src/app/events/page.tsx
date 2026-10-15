@@ -10,7 +10,7 @@ export default function EventsPage() {
   return (
     <CatalogPage
       title="A space for shared ideas."
-      description="Sample upcoming and past event entries. Dates, formats, and recording availability are placeholders, not confirmed announcements."
+      description="Illustrative event concepts only. Dates and formats are not scheduled, and no registration or recording is available."
       eyebrow="Events & speaking"
       basePath="/events"
       items={events}

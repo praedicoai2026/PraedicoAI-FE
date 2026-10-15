@@ -9,8 +9,8 @@ export const metadata = pageMetadata(
 export default function PortfolioPage() {
   return (
     <CatalogPage
-      title="Ideas made tangible."
-      description="Concept projects, learning explorations, and interface prototypes. A transparent look at possible approaches, not claims of completed client work."
+      title="Explore how ideas could work."
+      description="AI, workflow, and product-interface concepts make possible approaches tangible. These prototypes are not production deployments or claims of completed client work."
       eyebrow="Portfolio"
       basePath="/portfolio"
       items={portfolioProjects}

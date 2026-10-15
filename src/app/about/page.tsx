@@ -22,32 +22,32 @@ export default function AboutPage() {
             {
               title: "Our company",
               paragraphs: [
-                "PraedicoAI Services Private Limited focuses on solution architecture, software and web applications, technology consulting, and digital transformation.",
-                "We explore how AI assistants, thoughtful workflows, and clear digital communication can support people in their work. This site brings those services together without making claims about unverified customer outcomes.",
+                "PraedicoAI Services Private Limited is an AI-focused technology company working at the intersection of applied AI, software engineering, and business workflows.",
+                "The company focuses on helping organizations identify meaningful opportunities, validate the information and operating conditions they depend on, and shape a responsible path to an AI-enabled product or process.",
               ],
             },
             {
               title: "Our mission",
               paragraphs: [
-                "Help businesses, professionals, students, and teams transform ideas into maintainable digital experiences through architecture, software, AI, automation concepts, training, and consulting.",
+                "Make useful AI more approachable and accountable: connect the technology to a real task, make its limits understandable, and leave people equipped to review the outcome.",
               ],
             },
             {
               title: "Our approach",
               paragraphs: [
-                "We begin with context, make constraints visible, and prefer clear boundaries, documented trade-offs, and small improvements that teams can understand and maintain.",
+                "We begin with context, make constraints visible, and test assumptions early. A focused discovery, a small prototype, or a learning session can reveal what is valuable before a larger investment is considered.",
               ],
             },
             {
               title: "Technology and AI",
               paragraphs: [
-                "Our areas of focus include frontend architecture, accessible interfaces, application modernization, knowledge assistants, human approval, and responsible AI use-case discovery. A tool becomes useful when it fits a real need.",
+                "Our areas of focus include generative AI, task-specific assistants, knowledge experiences, workflow automation, accessible interfaces, and application architecture. A technology becomes useful when it fits a real need and can be operated responsibly.",
               ],
             },
             {
               title: "Training and learning",
               paragraphs: [
-                "Practical learning connects a concept to a decision. We support students, professionals, and teams through focused examples, discussion, and reflection.",
+                "Practical learning connects a concept to a decision. Learning topics include AI capabilities and limitations, safe use, evaluation, software architecture, and the human practices needed for adoption.",
               ],
             },
             {

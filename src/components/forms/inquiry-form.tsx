@@ -110,7 +110,7 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
     <div>
       <Alert warning>
         {site.contactEmail.includes("REPLACE_WITH") &&
-          "This learning site still uses a placeholder contact address. Replace it with a verified email before attempting real contact. "}
+          "The contact email is not configured yet. A verified address must be added before real inquiries can be received. "}
         No information is automatically sent or stored.
       </Alert>
       {kind === "consultation" && (

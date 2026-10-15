@@ -6,7 +6,6 @@ import { solutions } from "@/data/solutions";
 import { portfolioProjects } from "@/data/portfolio";
 import { blogPosts } from "@/data/blogPosts";
 import { courses } from "@/data/courses";
-import { testimonials } from "@/data/profile";
 import { faqs } from "@/data/faqs";
 import {
   Section,
@@ -20,7 +19,6 @@ import { ExpertiseStrip, ProcessSteps } from "@/components/sections/shared";
 import {
   ContentCard,
   SolutionCard,
-  TestimonialCard,
 } from "@/components/cards/content-card";
 import { InteractiveHero } from "@/components/sections/interactive-hero";
 import { ServiceExplorer } from "@/components/sections/service-explorer";
@@ -33,7 +31,7 @@ export default function Home() {
       <Section className="perspective-section">
         <div className="split-section">
           <div>
-            <p className="eyebrow">A little perspective</p>
+            <p className="eyebrow">A practical point of view</p>
             <h2>
               Connecting the big picture
               <br />
@@ -47,12 +45,12 @@ export default function Home() {
               consulting, and learning.
             </p>
             <p className="muted">
-              Our approach combines maintainable software, thoughtful
-              architecture, and practical learning. Good solutions should be
-              useful today and understandable tomorrow.
+              We connect AI, software engineering, and business process design.
+              That means starting with the work people need to do, not starting
+              with a model or a promise that automation will solve everything.
             </p>
             <Link className="text-link" href="/about">
-              More about my approach
+              How we approach the work
               <ArrowUpRight size={16} />
             </Link>
           </div>
@@ -60,9 +58,9 @@ export default function Home() {
       </Section>
       <Section className="expertise-section" id="expertise">
         <SectionHeader
-          eyebrow="What I can help with"
-          title="Big-picture thinking. Hands-on expertise."
-          description="Technology, AI, digital growth, and learning. Connected by a practical, architecture-first approach."
+          eyebrow="What we work on"
+          title="Applied AI, grounded in real workflows."
+          description="We help teams examine a real task, decide whether AI belongs in the solution, and shape a responsible path from discovery to a testable experience."
           href="/services"
           linkLabel="All services"
         />
@@ -81,7 +79,7 @@ export default function Home() {
       <Section>
         <SectionHeader
           eyebrow="Built around your context"
-          title="Different ambitions. A thoughtful approach."
+          title="Different teams. Clearer next steps."
           href="/solutions"
           linkLabel="Explore solutions"
         />
@@ -97,8 +95,9 @@ export default function Home() {
       </Section>
       <Section className="section-tinted">
         <SectionHeader
-          eyebrow="Why work together"
-          title="Clarity is part of the deliverable."
+          eyebrow="How we think"
+          title="Good AI is designed around the whole system."
+          description="A useful experience depends on more than a model: task definition, trusted information, permissions, interface, evaluation, and the people responsible for the result."
         />
         <div className="grid-three">
           {principles.map(([title, description]) => (
@@ -112,7 +111,7 @@ export default function Home() {
       <Section>
         <SectionHeader
           eyebrow="The working approach"
-          title="A shared understanding, at every step."
+          title="Evidence at every step, not just at launch."
         />
         <ProcessSteps />
       </Section>
@@ -159,11 +158,11 @@ export default function Home() {
           <div>
             <BulletList
               items={[
-                "AI assistant and agent concepts",
-                "Knowledge assistants with visible source context",
-                "Workflow opportunities and process discovery",
-                "Human approvals and clear escalation",
-                "Responsible AI and business use-case exploration",
+                "Define what the system may and may not do",
+                "Decide which information it can use",
+                "Show sources, uncertainty, and missing context",
+                "Keep consequential actions with an accountable person",
+                "Test failure cases as deliberately as expected answers",
               ]}
             />
             <Link className="text-link" href="/services/workflow-consulting">
@@ -173,10 +172,43 @@ export default function Home() {
           </div>
         </div>
       </Section>
+      <Section>
+        <SectionHeader
+          eyebrow="Where to begin"
+          title="Choose a workflow, not an AI buzzword."
+          description="A useful starting point is a repeatable task with a clear owner, a measurable pain point, and information the team is permitted to use."
+          href="/services/ai-agents"
+          linkLabel="Explore applied AI"
+        />
+        <div className="grid-three">
+          {[
+            {
+              title: "Find the right information",
+              description:
+                "Explore knowledge experiences that help people locate relevant internal guidance and inspect the sources behind a response.",
+            },
+            {
+              title: "Reduce repetitive preparation",
+              description:
+                "Consider AI-assisted classification, summarization, or drafting when a person can verify the result before it is used.",
+            },
+            {
+              title: "Make handoffs easier to follow",
+              description:
+                "Map intake, routing, approvals, and exceptions so automation supports a process people can understand and control.",
+            },
+          ].map(({ title, description }) => (
+            <article className="principle" key={title}>
+              <h3>{title}</h3>
+              <p className="muted">{description}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
       <Section className="section-tinted">
         <SectionHeader
           eyebrow="Learn. Apply. Reflect."
-          title="Practical learning for the next step."
+          title="Give your team a shared AI vocabulary."
           href="/training"
           linkLabel="Explore training"
         />
@@ -193,18 +225,30 @@ export default function Home() {
       </Section>
       <Section>
         <SectionHeader
-          eyebrow="Feedback, with transparency"
-          title="A place for verified experiences."
+          eyebrow="Evidence before claims"
+          title="Clear concepts. Honest proof."
         />
-        {testimonials.map((testimonial) => (
-          <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-        ))}
+        <div className="split-section">
+          <p className="muted">
+            Our portfolio and case-study pages are illustrative concepts, not
+            customer engagements. We publish real outcomes only when they are
+            verified and approved for sharing.
+          </p>
+          <div className="button-row">
+            <ButtonLink href="/portfolio" secondary>
+              Explore concept work
+            </ButtonLink>
+            <ButtonLink href="/case-studies" secondary>
+              Read illustrative scenarios
+            </ButtonLink>
+          </div>
+        </div>
       </Section>
       <Section className="section-tinted">
         <SectionHeader
           eyebrow="The journal"
-          title="Notes from a curious mind."
-          description="Practical perspectives on building, learning, and making better technology decisions."
+          title="Practical thinking for an AI-enabled world."
+          description="Ideas on AI adoption, workflow design, evaluation, software foundations, and helping people work confidently with new tools."
           href="/blog"
           linkLabel="All articles"
         />

@@ -5,8 +5,8 @@ export const caseStudies: CaseStudy[] = portfolioProjects
   .map((project, index) => ({
     ...project,
     slug: `${project.slug}-study`,
-    label: "Anonymized Case Study · Demonstration",
-    projectType: "Anonymized Case Study",
+    label: "Illustrative Case Study · Concept",
+    projectType: "Illustrative Case Study",
     relatedServices: [
       ["application-modernization", "technology-consulting"],
       ["ai-agents", "workflow-consulting"],
@@ -78,9 +78,9 @@ export const caseStudies: CaseStudy[] = portfolioProjects
         ],
       },
       {
-        title: "Outcome",
+        title: "Concept outcome",
         paragraphs: [
-          "[Add verified project outcome]. No delivery metrics, customer feedback, or business improvement is asserted.",
+          `The proposed concept makes the main task and its decision context easier to inspect. It is a design direction only: no customer delivery, operational change, or measured business result is claimed. A real project would define its own acceptance criteria and evaluation evidence.`,
         ],
       },
       {

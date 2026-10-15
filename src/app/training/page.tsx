@@ -13,15 +13,15 @@ import { ContentCard } from "@/components/cards/content-card";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Training",
-  "Practical training and workshop concepts for students, professionals, teams, and technology leaders.",
+  "Practical AI literacy, responsible AI adoption, software architecture, and technology training for teams and learners.",
   "/training",
 );
 export default function TrainingPage() {
   return (
     <>
       <PageHero
-        title="Learn with context. Build with confidence."
-        description="Practical technology conversations and guided learning for people at different stages of their journey. Start with a sample outline and shape it around your goals."
+        title="Help people work confidently with AI."
+        description="Build practical understanding of AI capabilities, limitations, evaluation, and human review. Learning sessions can be shaped around your audience, current workflows, and real questions."
         eyebrow="Training & workshops"
         path="/training"
       />
@@ -51,16 +51,16 @@ export default function TrainingPage() {
         <div className="grid-three mt-9">
           {[
             [
-              "Individual learning",
-              "Focused mentoring and guided exercises shaped around a personal learning goal.",
+              "AI literacy",
+              "Give non-technical teams a grounded understanding of generative AI, assistants, agents, risk, and when not to use AI.",
             ],
             [
-              "Workshops",
-              "Collaborative, hands-on sessions that connect ideas to small practical examples.",
+              "Responsible adoption",
+              "Use realistic scenarios to discuss data boundaries, output review, evaluation, human ownership, and escalation.",
             ],
             [
-              "Corporate enablement",
-              "Shared foundations, architecture discussions, and audience-specific technical learning.",
+              "Technical enablement",
+              "Explore architecture, AI integration patterns, software foundations, and the questions teams should resolve before building.",
             ],
           ].map(([title, description]) => (
             <article key={title} className="principle">
@@ -82,7 +82,7 @@ export default function TrainingPage() {
           <div>
             <SectionHeader
               title="Bring learning to your community"
-              description="Online and in-person preferences can be discussed. No dates or locations are confirmed on this learning website."
+              description="Sessions can be discussed around your audience, goals, and preferred format. Course outlines are examples, not scheduled or accredited programs."
             />
             <div className="button-row">
               <ButtonLink href="/training/workshops">Workshops</ButtonLink>
