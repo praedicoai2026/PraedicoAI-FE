@@ -1,0 +1,48 @@
+AI EVALUATION PLAN
+Template for a bounded experiment. Not a guarantee of future performance.
+
+USE CASE
+Task and intended user: [Describe one bounded workflow]
+In-scope output: [What may the system produce?]
+Out-of-scope actions: [What may it not do?]
+Evaluation owner: [Who reviews the evidence?]
+Version under test: [Record model, prompt, source set, and date as appropriate]
+
+TEST CASE INVENTORY
+Case ID: [Unique reference; do not include sensitive data]
+Input scenario: [Representative, approved test input]
+Expected behavior: [What should happen and why?]
+Evidence or source: [Reference to approved, non-confidential evidence]
+Risk level: [What is the consequence if the system is wrong?]
+
+Include routine cases and:
+- Ambiguous or incomplete inputs
+- Missing, stale, or conflicting information
+- Out-of-scope requests
+- Attempts to obtain restricted information
+- Cases where the correct response is to ask, decline, or escalate
+
+REVIEW DIMENSIONS
+[ ] Factual correctness against an approved reference
+[ ] Source relevance, coverage, and faithful representation
+[ ] Important omissions and unsupported claims
+[ ] Appropriate uncertainty and refusal behavior
+[ ] Permission and access behavior
+[ ] Human review effort and time to correct
+[ ] Consistency across representative variations
+
+RESULTS
+Case ID: [Reference]
+Observed behavior: [Record what happened]
+Reviewer decision: [Accept / revise / reject / escalate]
+Issue and severity: [Describe without including confidential content]
+Follow-up: [Change, owner, and retest condition]
+
+DECISION
+Acceptance criteria: [Evidence required to proceed]
+Stop criteria: [Evidence that rules out or pauses the use case]
+Known limitations: [What remains untested or uncertain]
+Next review date/trigger: [When should this assessment be revisited?]
+
+Keep test data approved and non-sensitive. Re-evaluate after meaningful changes
+to the model, prompt, source content, permissions, or workflow.

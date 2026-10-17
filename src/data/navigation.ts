@@ -11,9 +11,9 @@ export const navigation: NavigationItem[] = [
 ];
 export const aboutNavigation: NavigationItem[] = [
   { label: "Overview", href: "/about" },
-  { label: "Experience", href: "/about/experience" },
-  { label: "Education", href: "/about/education" },
-  { label: "Certifications", href: "/about/certifications" },
+  { label: "How We Work", href: "/about/experience" },
+  { label: "Learning", href: "/about/education" },
+  { label: "Responsible AI", href: "/about/certifications" },
   { label: "Speaking", href: "/about/speaking" },
 ];
 export const socialLinks: SocialLink[] = [

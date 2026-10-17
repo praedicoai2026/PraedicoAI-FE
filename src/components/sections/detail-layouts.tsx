@@ -84,9 +84,10 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             <SectionHeader title="Possible deliverables" />
             <BulletList items={service.deliverables} />
             <Alert>
-              Scope, timing, and deliverables are discussed individually. This
-              website demonstrates services; it does not run AI agents, video
-              generation, or workflow automation.
+              These service areas describe potential project scope; this website
+              itself does not run an AI agent or automated workflow. Data
+              access, model selection, security, evaluation, and implementation
+              boundaries must be agreed for each project.
             </Alert>
           </div>
         </div>
@@ -211,7 +212,7 @@ export function CourseDetailLayout({ course }: { course: TrainingCourse }) {
             ["Format", course.format],
             ["Approximate duration", course.duration],
             ["Language", course.language],
-            ["Instructor", site.name],
+            ["Organization", site.name],
           ].map(([label, value]) => (
             <div key={label}>
               <dt>{label}</dt>
@@ -275,7 +276,7 @@ export function EventDetailLayout({ event }: { event: Event }) {
             ["Time", event.time],
             ["Time zone", event.timeZone],
             ["Format", event.mode],
-            ["Speaker", site.name],
+            ["Organization", site.name],
             ["Event type", event.type],
           ].map(([label, value]) => (
             <div key={label}>

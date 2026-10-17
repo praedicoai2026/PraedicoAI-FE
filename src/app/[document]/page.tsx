@@ -28,7 +28,7 @@ export default async function LegalPage({
       <PageHero
         title={page.title}
         description={page.description}
-        eyebrow="Learning project / Draft"
+        eyebrow="PraedicoAI / Policy draft"
         path={`/${document}`}
       />
       <Section>

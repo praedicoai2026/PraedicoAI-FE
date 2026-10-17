@@ -4,15 +4,18 @@ import { learningAudiences } from "./site";
 import { trainingTopics } from "./courses";
 export const inquiryTypes = [
   "General Inquiry",
+  "AI Readiness & Use-case Discovery",
+  "AI Knowledge Assistant",
   "Software Development",
   "Web Application Development",
-  "AI Agent Consulting",
-  "Workflow Consulting",
+  "AI Agent & Copilot Design",
+  "AI Evaluation & Responsible Adoption",
+  "Workflow Automation",
+  "Technology Consulting",
+  "Application Modernization",
   "Digital Marketing",
   "AI Video",
   "Social Media Growth",
-  "Technology Consulting",
-  "Application Modernization",
   "Training",
   "Speaking Invitation",
   "Partnership",
@@ -64,7 +67,7 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
   contact: {
     title: "Start a conversation.",
     description:
-      "Tell me a little about your context and what you would like to explore.",
+      "Tell us about the challenge you are exploring, the people it affects, and what a useful next step might look like. Please omit sensitive information.",
     path: "/contact",
     subjectPrefix: "Website Inquiry",
     fields: [
@@ -105,13 +108,13 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
       field("expectedStartDate", "Expected start date", "date"),
       field("preferredContactTime", "Preferred contact time"),
       timeZone,
-      field("referral", "How did you hear about me?"),
+      field("referral", "How did you hear about PraedicoAI?"),
     ],
   },
   proposal: {
-    title: "Give your idea a clear starting point.",
+    title: "Shape a practical project brief.",
     description:
-      "Describe the project, the people it serves, and the constraints that matter.",
+      "Describe the problem, intended users, current workflow, and constraints. An inquiry is a starting point for discussion, not a commitment or confirmed proposal.",
     path: "/request-proposal",
     subjectPrefix: "Proposal Request",
     fields: [
@@ -140,7 +143,7 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
     ],
   },
   consultation: {
-    title: "A focused conversation. A clearer direction.",
+    title: "Request a focused discovery conversation.",
     description:
       "Request a consultation about a technology decision, an application challenge, or a learning goal.",
     path: "/book-consultation",

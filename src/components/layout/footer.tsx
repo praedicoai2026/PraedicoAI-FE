@@ -96,7 +96,7 @@ const groups = [
       ["Portfolio", "/portfolio"],
       ["Case studies", "/case-studies"],
       ["Speaking", "/about/speaking"],
-      ["Sample feedback", "/testimonials"],
+      ["Customer stories", "/testimonials"],
       ["Contact", "/contact"],
       ["FAQ", "/faq"],
     ],
@@ -139,7 +139,7 @@ export function Footer() {
         </div>
         <div className="footer-bottom">
           <span>
-            © {new Date().getFullYear()} {site.name}. Learning & demonstration.
+            © {new Date().getFullYear()} {site.name}. Applied AI, thoughtfully.
           </span>
           <nav aria-label="Legal">
             {["Privacy", "Terms", "Cookies", "Accessibility"].map((label) => (

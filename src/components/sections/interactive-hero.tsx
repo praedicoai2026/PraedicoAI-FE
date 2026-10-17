@@ -21,7 +21,7 @@ import { focusAreas } from "@/data/home";
 import { site } from "@/data/site";
 import { Container } from "@/components/ui/primitives";
 
-const focusIcons = [Layers3, BrainCircuit, GraduationCap];
+const focusIcons = [BrainCircuit, Layers3, GraduationCap];
 
 export function InteractiveHero() {
   const [active, setActive] = useState(0);
@@ -107,7 +107,7 @@ export function InteractiveHero() {
           <div
             className="focus-tabs"
             role="tablist"
-            aria-label="Explore my focus areas"
+            aria-label="Explore our focus areas"
           >
             {focusAreas.map((area, index) => {
               const Icon = focusIcons[index];
@@ -167,13 +167,11 @@ export function InteractiveHero() {
             </Link>
           </div>
           <div className="hero-experience">
-            <strong>
-              14<span>+</span>
-            </strong>
+            <strong>AI</strong>
             <span>
-              Years in IT.
+              Made practical.
               <br />
-              Always looking forward.
+              Kept accountable.
             </span>
           </div>
           <a

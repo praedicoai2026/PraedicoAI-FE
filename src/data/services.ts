@@ -19,7 +19,7 @@ const seeds: ServiceSeed[] = [
     icon: "code",
     category: "Engineering",
     summary:
-      "Purpose-built business applications with a maintainable foundation.",
+      "Build the web interfaces, product foundations, and integrations that turn a validated idea into dependable software.",
     audience: ["Startups", "Enterprise teams"],
     capabilities: [
       "Custom software concepts",
@@ -47,7 +47,7 @@ const seeds: ServiceSeed[] = [
     icon: "globe",
     category: "Engineering",
     summary:
-      "Thoughtful web experiences that work across devices and grow with your ideas.",
+      "Design and develop accessible web products that make complex services, workflows, and AI capabilities clear to their users.",
     audience: ["Businesses", "Founders", "Professionals"],
     capabilities: [
       "Business websites and portfolios",
@@ -71,30 +71,35 @@ const seeds: ServiceSeed[] = [
   },
   {
     slug: "ai-agents",
-    title: "AI Agent Consulting",
+    title: "Applied AI & Agent Design",
     icon: "brain",
     category: "AI & Automation",
     summary:
-      "Explore useful AI opportunities with clear boundaries and human oversight.",
+      "Move from AI curiosity to a bounded, testable use case with clear data boundaries, evaluation criteria, and human accountability.",
     audience: ["Business leaders", "Product teams"],
     capabilities: [
-      "AI use-case discovery",
-      "Task-based assistants",
-      "Knowledge assistants",
-      "Process-based and goal-based agents",
-      "Human approval concepts",
-      "Responsible AI considerations",
-      "AI agent design",
-      "Future integration planning",
+      "AI opportunity and readiness discovery",
+      "Task-specific assistant and agent design",
+      "Knowledge retrieval and source-grounded response concepts",
+      "Tool-use boundaries and permission planning",
+      "Human review, escalation, and override design",
+      "Evaluation scenarios and acceptance criteria",
+      "Privacy, security, and responsible-use questions",
+      "Integration and operational-readiness planning",
     ],
     challenges: [
-      "AI experiments are disconnected from business needs",
-      "Unclear ownership and approval create risk",
+      "AI experiments do not have a clear user, workflow, or measurable purpose",
+      "Teams cannot tell what information shaped a response",
+      "An assistant may suggest an action without clear ownership or review",
+      "Promising demonstrations have not been evaluated against real failure cases",
     ],
     deliverables: [
-      "Use-case prioritization worksheet",
-      "Agent responsibility and approval map",
-      "Evaluation and future integration plan",
+      "Prioritized use-case and feasibility brief",
+      "Task, data-source, permission, and responsibility map",
+      "Prototype scope with measurable acceptance criteria",
+      "Evaluation scenarios, including uncertainty and failure cases",
+      "Human-review and escalation model",
+      "Integration and operational-readiness recommendations",
     ],
     tags: ["Responsible AI", "Agent Design", "Architecture"],
   },
@@ -103,26 +108,30 @@ const seeds: ServiceSeed[] = [
     title: "Workflow Consulting",
     icon: "workflow",
     category: "AI & Automation",
-    summary: "Make information, handoffs, and decisions easier to understand.",
+    summary:
+      "Redesign information flow and handoffs so AI assistance supports a process people can understand, review, and own.",
     audience: ["Operations teams", "Growing businesses"],
     capabilities: [
       "Business process understanding",
       "Repetitive task identification",
-      "Notification-flow concepts",
-      "Approval-flow concepts",
-      "Information-flow design",
-      "Human checkpoints",
-      "Error-handling concepts",
-      "Future workflow planning",
+      "Current-state and future-state process mapping",
+      "AI-assisted intake, triage, and drafting concepts",
+      "Notification, routing, and approval design",
+      "Information ownership and access review",
+      "Human checkpoints and exception handling",
+      "Automation boundaries and fallback paths",
+      "Workflow measurement and improvement planning",
     ],
     challenges: [
       "Work gets lost between teams",
       "Exceptions and approvals are difficult to trace",
     ],
     deliverables: [
-      "Current and proposed process maps",
-      "Human checkpoint inventory",
-      "Exception-handling recommendations",
+      "Current-state process and handoff map",
+      "Prioritized automation opportunities",
+      "Human checkpoint and exception inventory",
+      "Proposed workflow with ownership and fallback paths",
+      "Pilot measures and review questions",
     ],
     tags: ["Process Mapping", "Human Approval", "Architecture"],
   },
@@ -219,26 +228,27 @@ const seeds: ServiceSeed[] = [
     icon: "layers",
     category: "Strategy",
     summary:
-      "Make technology decisions with an understanding of business and technical trade-offs.",
+      "Turn an AI or software ambition into an architecture direction grounded in business goals, system constraints, and operational reality.",
     audience: ["Technology leaders", "Startups", "Enterprises"],
     capabilities: [
-      "Solution architecture",
-      "Technical discovery",
-      "Technology assessment",
-      "Architecture review",
-      "Integration planning",
-      "Application roadmap",
-      "Scalability planning",
-      "Technical risk identification",
+      "Product and technical discovery",
+      "AI and software architecture assessment",
+      "Build, buy, or partner decision support",
+      "Data and system integration planning",
+      "Security, privacy, and operational risk discovery",
+      "Architecture review and decision records",
+      "Incremental modernization and delivery roadmap",
+      "Scale, reliability, and ownership planning",
     ],
     challenges: [
       "Too many technology options obscure priorities",
       "Architecture decisions are undocumented",
     ],
     deliverables: [
-      "Architecture assessment",
-      "Decision records",
-      "Incremental technical roadmap",
+      "Current-state architecture and constraint summary",
+      "Options analysis with documented trade-offs",
+      "AI/data integration and risk questions",
+      "Decision records and incremental technical roadmap",
     ],
     tags: ["Architecture", "Technical Strategy", "Integration Design"],
   },
@@ -248,7 +258,7 @@ const seeds: ServiceSeed[] = [
     icon: "refresh",
     category: "Engineering",
     summary:
-      "Plan practical improvements to existing interfaces, one well-defined step at a time.",
+      "Improve existing applications incrementally so new digital and AI-assisted workflows fit the systems and teams already in place.",
     audience: ["Enterprises", "Operations teams"],
     capabilities: [
       "Existing application review",
@@ -301,19 +311,26 @@ const seeds: ServiceSeed[] = [
     tags: ["Next.js", "TypeScript", "AI Fundamentals"],
   },
 ];
-export const services: Service[] = seeds.map((seed) => ({
-  ...seed,
-  image: "/images/services/architecture.png",
-  imageAlt: "Abstract layered technology architecture",
-  label: "Consulting & services",
-  sections: [],
-  benefits: [seed.deliverables[0], "Clear scope and practical next steps"],
-  faqs:
-    seed.slug === "ai-agents"
-      ? [faqs[5], faqs[0]]
-      : seed.category === "Digital Growth"
-        ? [faqs[7], faqs[0]]
-        : [faqs[1], faqs[0]],
-}));
+export const services: Service[] = seeds
+  .map((seed) => ({
+    ...seed,
+    image: "/images/services/architecture.png",
+    imageAlt: "Abstract layered technology architecture",
+    label: "Consulting & services",
+    sections: [],
+    benefits: [seed.deliverables[0], "Clear scope and practical next steps"],
+    faqs:
+      seed.slug === "ai-agents"
+        ? [faqs[8], faqs[9], faqs[10], faqs[11], faqs[12], faqs[13]]
+        : seed.slug === "workflow-consulting"
+          ? [faqs[8], faqs[9], faqs[0]]
+          : seed.category === "Digital Growth"
+            ? [faqs[7], faqs[0]]
+            : [faqs[1], faqs[0]],
+  }))
+  .sort(
+    (left, right) =>
+      Number(right.slug === "ai-agents") - Number(left.slug === "ai-agents"),
+  );
 export const getServiceBySlug = (slug: string) =>
   services.find((service) => service.slug === slug);

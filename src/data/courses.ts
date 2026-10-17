@@ -9,11 +9,14 @@ export const trainingTopics = [
   "AI fundamentals",
   "Generative AI awareness",
   "AI-agent concepts",
+  "AI evaluation and quality",
+  "Responsible AI adoption",
+  "AI data and governance fundamentals",
   "Workflow concepts",
   "Digital transformation",
-  "Personal branding",
-  "Digital marketing foundations",
-  "Social media fundamentals",
+  "AI product discovery",
+  "Human-centered AI design",
+  "AI-assisted workflow fundamentals",
 ];
 const seeds = [
   {
@@ -72,7 +75,7 @@ const seeds = [
     slug: "responsible-ai-awareness",
     title: "AI opportunities, responsibly explored",
     summary:
-      "Understand assistants, agents, human oversight, and the questions to ask before adopting AI.",
+      "A practical introduction to generative AI, assistants, agents, common failure modes, and the questions teams should answer before adoption.",
     audience: "Corporate teams",
     level: "Beginner",
     topic: "AI fundamentals",
@@ -82,13 +85,17 @@ const seeds = [
     objectives: [
       "Distinguish assistants from agents",
       "Identify a bounded business use case",
-      "Map human approval and information risks",
+      "Recognize hallucination, source, privacy, and security risks",
+      "Map human review, escalation, and stopping conditions",
+      "Draft a small evaluation set and success criteria",
     ],
     modules: [
       "Generative AI and its limitations",
-      "Knowledge, task, and process assistants",
-      "Human approval and responsible use",
-      "Use-case worksheet and group discussion",
+      "Assistants, agents, and workflow patterns",
+      "Information boundaries and responsible use",
+      "Human review, escalation, and oversight",
+      "Evaluate a use case with realistic examples",
+      "Use-case worksheet and team discussion",
     ],
   },
   {
@@ -105,7 +112,8 @@ const seeds = [
     objectives: [
       "Describe system boundaries",
       "Record a technical trade-off",
-      "Plan an incremental improvement",
+      "Identify integration and operational constraints",
+      "Plan an incremental, testable improvement",
     ],
     modules: [
       "Problem framing and constraints",
@@ -123,7 +131,7 @@ export const courses: TrainingCourse[] = seeds.map((seed, index) => ({
   imageAlt: "Illustrative modular learning-path diagram",
   label: "Sample course outline",
   featured: index < 3,
-  language: "[Confirm delivery language]",
+  language: "To be agreed",
   resources: [
     "Guided exercise outline",
     "Topic reference notes",
@@ -133,7 +141,12 @@ export const courses: TrainingCourse[] = seeds.map((seed, index) => ({
   sections: seed.modules.map((title, moduleIndex) => ({
     title: `Module ${moduleIndex + 1}: ${title}`,
     paragraphs: [
-      `Explore ${title.toLowerCase()} through a guided example, a discussion of trade-offs, and a short reflection. Depth and pacing will be adapted to the audience.`,
+      `Explore ${title.toLowerCase()} through a guided example, a discussion of trade-offs, and a short reflection. Participants connect the topic to a realistic scenario without using confidential business data.`,
+    ],
+    bullets: [
+      `Key question: what should a participant be able to explain about ${title.toLowerCase()}?`,
+      "Guided activity: examine a scenario, identify assumptions, and compare possible approaches.",
+      "Review: discuss limitations, risks, and one practical next step.",
     ],
   })),
 }));

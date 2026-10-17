@@ -13,12 +13,17 @@ export default function ResourcesPage() {
   return (
     <>
       <PageHero
-        title="Useful starting points."
-        description="A small library of prompts, templates, and learning resources. Available files are local samples; unfinished materials are clearly marked."
+        title="Tools for asking better questions."
+        description="Use these practical worksheets to frame AI opportunities, review workflows, record technical decisions, and plan evaluation. They are starting points for discussion, not compliance advice or a substitute for domain review."
         eyebrow="Resource library"
         path="/resources"
       />
       <Section>
+        <p className="muted mb-7">
+          Download a resource, adapt it to your context, and record assumptions
+          separately from verified facts. Do not put confidential or personal
+          information into these sample files.
+        </p>
         <div className="grid-three">
           {resources.map((resource) => (
             <article className="info-card resource-card" key={resource.slug}>

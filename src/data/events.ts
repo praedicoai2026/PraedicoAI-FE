@@ -67,9 +67,9 @@ export const events: Event[] = [
 ].map((seed) => ({
   ...seed,
   status: seed.status as Event["status"],
-  date: "[Add verified event date]",
-  time: "[Add event time]",
-  timeZone: "[Confirm time zone]",
+  date: "Not scheduled",
+  time: "To be announced",
+  timeZone: "To be confirmed",
   category: seed.topic,
   tags: [seed.type, seed.mode],
   label: "Sample event · Not scheduled",

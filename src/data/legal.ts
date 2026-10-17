@@ -1,13 +1,14 @@
 import type { ContentSection } from "@/types/content";
 export const legalNote =
-  "This is sample content for a learning project and should be professionally reviewed before being used on a production website.";
+  "Draft policy text for PraedicoAI Services Private Limited. Have a qualified professional review it against the company's actual services, operations, and applicable law before publication.";
 export const legalPages: Record<
   string,
   { title: string; description: string; sections: ContentSection[] }
 > = {
   privacy: {
     title: "Privacy",
-    description: "How this frontend-only learning project handles information.",
+    description:
+      "How this website currently handles information and what to consider before contacting PraedicoAI.",
     sections: [
       {
         title: "Forms stay in your browser",
@@ -30,7 +31,7 @@ export const legalPages: Record<
       {
         title: "What is not connected",
         paragraphs: [
-          "This learning version does not use a database, email API, analytics provider, newsletter provider, user accounts, or authentication. It does not accept payments or register attendees.",
+          "This website currently has no database, email API, analytics provider, newsletter provider, user accounts, or authentication. It does not accept payments or register attendees. This description must be updated if those services are introduced.",
         ],
       },
       {
@@ -48,7 +49,7 @@ export const legalPages: Record<
       {
         title: "Questions",
         paragraphs: [
-          "Use the contact page after the placeholder email address has been replaced with a verified address. This draft does not describe any future backend or production service.",
+          "The contact address displayed on this site is a placeholder and must be replaced and verified before use. This draft describes only the current website behavior, not any future service or data-processing activity.",
         ],
       },
     ],
@@ -60,13 +61,13 @@ export const legalPages: Record<
       {
         title: "Learning purpose",
         paragraphs: [
-          "This application is intended for local development, frontend experimentation, and portfolio demonstration. It is not a production service agreement.",
+          "These draft terms describe a public company website and do not form a project proposal, service agreement, or statement of availability.",
         ],
       },
       {
         title: "Sample content",
         paragraphs: [
-          "Concept projects, course outlines, event entries, credentials, and feedback placeholders are not evidence of customer engagements, qualifications, available events, or verified results. Details must be confirmed separately.",
+          "Portfolio items and case studies are illustrative concepts, not client engagements or measured results. Course outlines and event examples are not confirmed schedules or accredited programs. No customer endorsements, certifications, or outcomes are claimed unless explicitly verified and published.",
         ],
       },
       {
@@ -86,12 +87,12 @@ export const legalPages: Record<
   cookies: {
     title: "Cookies & local preferences",
     description:
-      "A simple explanation of browser storage in this learning version.",
+      "A simple explanation of browser storage currently used by this website.",
     sections: [
       {
         title: "No application tracking cookies",
         paragraphs: [
-          "This learning application does not intentionally set advertising or analytics cookies and has no third-party tracking provider configured.",
+          "This website does not intentionally set advertising or analytics cookies and has no third-party tracking provider configured. This statement must be reviewed if the site's tools change.",
         ],
       },
       {
@@ -134,7 +135,7 @@ export const legalPages: Record<
       {
         title: "Known limitations",
         paragraphs: [
-          "This is a learning project, not an independently audited accessibility conformance claim. External email applications, clipboard permissions, and social sharing services may have their own limitations. A full assistive-technology and device review is still needed.",
+          "The website has not been independently audited for accessibility conformance. External email applications, clipboard permissions, and social sharing services may have their own limitations. A full assistive-technology and device review is still needed.",
         ],
       },
       {

@@ -51,7 +51,7 @@ export function formatInquiry(values: InquiryValues): {
       ? ["Requested dates are preferences only and are not confirmed."]
       : []),
     "",
-    "Prepared on the learning website. The visitor must review and send this email manually.",
+    "Prepared from the PraedicoAI website. The visitor must review and send this email manually.",
   ].join("\r\n");
   return { subject, body };
 }

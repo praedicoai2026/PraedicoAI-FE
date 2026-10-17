@@ -1,13 +1,40 @@
 AI USE-CASE DISCOVERY WORKSHEET
-Local sample for discussion only. No agent or automation is implemented.
+Discussion aid. Not a technical, legal, security, or compliance assessment.
 
-Purpose: [One bounded task]
-People: [Who benefits and who reviews]
-Information: [Permitted sources and known limitations]
-Output: [What a useful response would contain]
-Uncertainty: [How missing or conflicting evidence should appear]
-Approval: [What requires explicit human judgment]
-Stopping conditions: [When the assistant should decline or escalate]
-Evaluation: [Representative, non-confidential example situations]
-Ownership: [Who maintains the knowledge and reviews the design]
-Next step: [A small discussion or prototype, not an automated action]
+1. THE WORK
+Task: [One specific task, described as it happens today]
+Current process: [Steps, tools, handoffs, and known delays or rework]
+Frequency and impact: [How often the task occurs and why it matters]
+Current alternative: [Could a rule, search, interface, or process change help?]
+
+2. PEOPLE AND ACCOUNTABILITY
+Primary user: [Who performs or benefits from this task?]
+Decision owner: [Who is accountable for the final result?]
+Reviewer: [Who checks a generated suggestion before it is used?]
+Affected people: [Who could be affected by an error or delay?]
+
+3. INFORMATION AND BOUNDARIES
+Required information: [What evidence is needed to perform the task?]
+Approved sources: [Which sources may be used, and who owns them?]
+Access rules: [Whose permissions must remain in force?]
+Excluded information: [What must not be supplied or retained?]
+Known gaps: [What is outdated, inconsistent, missing, or unverified?]
+
+4. AI RESPONSIBILITY
+Allowed output: [What may the system draft, summarize, classify, or suggest?]
+Prohibited actions: [What must it never decide or do on its own?]
+Uncertainty: [How should missing, conflicting, or weak evidence appear?]
+Human review: [What must a person verify, approve, correct, or reject?]
+Escalation: [Who handles an exception or an out-of-scope request?]
+Stop conditions: [When should the system decline or hand work to a person?]
+
+5. EVALUATION AND OPERATIONS
+Representative examples: [Use non-confidential test scenarios]
+Expected behavior: [What makes an answer acceptable for this task?]
+Failure cases: [What incorrect, incomplete, or unsupported output is plausible?]
+Measures: [Quality, review effort, task time, error cost, or other evidence]
+Operational owner: [Who maintains sources, permissions, and review rules?]
+Next decision: [What evidence is needed before a wider pilot is considered?]
+
+Do not use confidential, personal, regulated, or production data in this sample.
+This worksheet does not implement an AI agent or automate a business process.
