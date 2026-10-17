@@ -1,6 +1,6 @@
 import type { SiteConfiguration } from "@/types/content";
 export const site: SiteConfiguration = {
-  name: "PPPraedicoAI Services Private Limited",
+  name: "PraedicoAI Services Private Limited",
   title: "Applied AI & Intelligent Software",
   description:
     "PraedicoAI helps organizations explore, validate, and build practical AI-enabled software and workflows with people, business context, and responsible use at the center.",
