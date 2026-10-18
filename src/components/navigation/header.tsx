@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -60,9 +61,14 @@ export function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label={`${site.name}, home`}>
-          <span className="brand-mark">
-            PAI<span>.</span>
-          </span>
+          <Image
+            className="brand-logo"
+            src="/images/PAI.png"
+            alt=""
+            width={502}
+            height={198}
+            priority
+          />
           <span className="brand-name">
             {site.name}
             <small>{site.title}</small>

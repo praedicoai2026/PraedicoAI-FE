@@ -3,8 +3,9 @@ export interface SiteConfiguration {
   title: string;
   description: string;
   contactEmail: string;
+  contactEmailConfigured: boolean;
   url: string;
-  availability: string;
+  canonicalUrlConfigured: boolean;
 }
 export interface NavigationItem {
   label: string;

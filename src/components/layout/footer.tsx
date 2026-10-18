@@ -1,29 +1,27 @@
 import Link from "next/link";
-import { ArrowUp, Globe2, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { site } from "@/data/site";
 import { socialLinks } from "@/data/navigation";
 import { Container, ButtonLink } from "@/components/ui/primitives";
 
 export function SocialLinks() {
+  const verifiedLinks = socialLinks.filter((social) => social.href);
+  if (!verifiedLinks.length) return null;
+
   return (
     <div className="social-links">
-      {socialLinks.map((social) =>
-        social.href ? (
-          <a
-            key={social.label}
-            href={social.href}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {social.label}
-            <ArrowUpRight size={14} />
-          </a>
-        ) : (
-          <span key={social.label} title="Add verified profile URL">
-            {social.label} <small>(coming soon)</small>
-          </span>
-        ),
-      )}
+      {verifiedLinks.map((social) => (
+        <a
+          key={social.label}
+          href={social.href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {social.label}
+          <ArrowUpRight size={14} />
+        </a>
+      ))}
     </div>
   );
 }
@@ -108,23 +106,29 @@ export function Footer() {
       <Container>
         <div className="footer-top">
           <div>
-            <Link href="/" className="footer-brand">
-              {site.name}
-              <span>.</span>
+            <Link
+              href="/"
+              className="footer-brand"
+              aria-label={`${site.name}, home`}
+            >
+              <Image
+                className="footer-brand-logo"
+                src="/images/PAI.png"
+                alt={site.name}
+                width={502}
+                height={198}
+              />
             </Link>
-            <p className="muted">
-              Architecture with perspective.
-              <br />
-              Technology with purpose.
-            </p>
+            <p className="muted">{site.title}</p>
             <p className="global-note">
-              <Globe2 size={16} aria-hidden="true" />
-              Worldwide remote services
+              Project scope and timing are agreed individually.
             </p>
             <SocialLinks />
-            <p className="text-sm break-anywhere">
-              Contact: {site.contactEmail}
-            </p>
+            {site.contactEmailConfigured && (
+              <p className="text-sm break-anywhere">
+                Contact: {site.contactEmail}
+              </p>
+            )}
           </div>
           {groups.map((group) => (
             <nav key={group.title} aria-label={group.title}>
@@ -139,7 +143,7 @@ export function Footer() {
         </div>
         <div className="footer-bottom">
           <span>
-            © {new Date().getFullYear()} {site.name}. Applied AI, thoughtfully.
+            © {new Date().getFullYear()} {site.name}. {site.title}
           </span>
           <nav aria-label="Legal">
             {["Privacy", "Terms", "Cookies", "Accessibility"].map((label) => (

@@ -20,9 +20,11 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${site.name} | ${site.title}`,
     description: site.description,
+    url: "/",
     images: [
       {
         url: "/images/og/cover.png",
@@ -33,8 +35,11 @@ export const metadata: Metadata = {
     ],
     type: "website",
   },
-  icons: { icon: "/images/logo/mark.png" },
-  robots: { index: false, follow: true },
+  icons: {
+    icon: "/images/PAI.png",
+    apple: "/images/PAI.png",
+  },
+  robots: { index: site.canonicalUrlConfigured, follow: true },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

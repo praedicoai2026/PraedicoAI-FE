@@ -51,11 +51,18 @@ export function formatInquiry(values: InquiryValues): {
       ? ["Requested dates are preferences only and are not confirmed."]
       : []),
     "",
-    "Prepared from the PraedicoAI website. The visitor must review and send this email manually.",
+    kind === "contact"
+      ? "Submitted through the PraedicoAI website contact form."
+      : "Prepared from the PraedicoAI website. The visitor must review and send this email manually.",
   ].join("\r\n");
   return { subject, body };
 }
 export function createMailtoUrl(values: InquiryValues): string {
+  if (!site.contactEmailConfigured) {
+    throw new Error(
+      "Contact email is not configured. Set NEXT_PUBLIC_CONTACT_EMAIL before creating a mailto URL.",
+    );
+  }
   const { subject, body } = formatInquiry(values);
   return `mailto:${encodeURIComponent(site.contactEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

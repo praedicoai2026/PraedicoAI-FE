@@ -58,7 +58,7 @@ export const resources: Resource[] = [
   ...resource,
   slug: `resource-${index + 1}`,
   tags: [resource.type],
-  label: resource.download ? "Local sample resource" : "Coming Soon",
+  label: resource.download ? "Local sample resource" : "Resource outline",
   image: "/images/training/learning.png",
   imageAlt: "Abstract document and learning modules",
   sections: [],

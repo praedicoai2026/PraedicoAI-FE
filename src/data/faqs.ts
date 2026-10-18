@@ -3,7 +3,7 @@ export const faqs: FAQ[] = [
   {
     question: "Can we work together remotely?",
     answer:
-      "Yes. Conversations can start from anywhere in the world. Scope, time-zone overlap, communication preferences, and availability would be discussed before an engagement.",
+      "Remote collaboration may suit some projects. Scope, time-zone overlap, communication preferences, and availability are discussed individually before any engagement.",
   },
   {
     question: "What should I bring to an initial conversation?",
@@ -18,7 +18,7 @@ export const faqs: FAQ[] = [
   {
     question: "Does this website send my inquiry?",
     answer:
-      "No. The form prepares an email in your email application. You must review and send it manually. Nothing is submitted to an application server or saved by this website.",
+      "The contact form first verifies your email address with a one-time code, then emails your inquiry to PraedicoAI and sends a receipt confirmation. Proposal, consultation, and training forms prepare an email in your email application for you to review and send manually.",
   },
   {
     question: "Can training be tailored to a team?",
@@ -73,6 +73,6 @@ export const faqs: FAQ[] = [
   {
     question: "What happens to a proposal or contact form?",
     answer:
-      "The form validates information in your browser and prepares an email draft. It does not send data to PraedicoAI. You choose whether to open your email application and manually send the draft.",
+      "The contact form verifies your email address with a one-time code before emailing its validated details to PraedicoAI and sending a confirmation. Proposal, consultation, and training forms prepare an email draft for you to review and send manually.",
   },
 ];

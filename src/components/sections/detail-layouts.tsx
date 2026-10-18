@@ -310,8 +310,7 @@ export function EventDetailLayout({ event }: { event: Event }) {
           ))}
         </div>
         <Alert>
-          Recording: Coming Soon. No recording is available for this
-          demonstration event.
+          No recording is available for this demonstration event.
         </Alert>
       </Section>
       <Section>
@@ -322,7 +321,9 @@ export function EventDetailLayout({ event }: { event: Event }) {
   );
 }
 export function BlogDetailLayout({ post }: { post: BlogPost }) {
-  const url = encodeURIComponent(`${site.url}/blog/${post.slug}`);
+  const url = site.canonicalUrlConfigured
+    ? encodeURIComponent(`${site.url}/blog/${post.slug}`)
+    : null;
   return (
     <>
       <PageHero
@@ -345,34 +346,37 @@ export function BlogDetailLayout({ post }: { post: BlogPost }) {
           <div>
             <ContentSections sections={post.sections} />
             <AuthorCard />
-            <nav className="button-row" aria-label="Share article">
-              <a
-                className="text-link"
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Share on LinkedIn
-              </a>
-              <a
-                className="text-link"
-                href={`https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(post.title)}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Share on X
-              </a>
-              <a
-                className="text-link"
-                href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${url}`}
-              >
-                Share by email
-              </a>
-            </nav>
-            <p className="muted text-sm mt-3">
-              Sharing uses this local demonstration URL until the site URL is
-              configured.
-            </p>
+            {url ? (
+              <nav className="button-row" aria-label="Share article">
+                <a
+                  className="text-link"
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Share on LinkedIn
+                </a>
+                <a
+                  className="text-link"
+                  href={`https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(post.title)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Share on X
+                </a>
+                <a
+                  className="text-link"
+                  href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${url}`}
+                >
+                  Share by email
+                </a>
+              </nav>
+            ) : (
+              <p className="muted text-sm mt-3">
+                Sharing links are unavailable until NEXT_PUBLIC_SITE_URL is
+                configured.
+              </p>
+            )}
           </div>
           <TableOfContents sections={post.sections} />
         </div>

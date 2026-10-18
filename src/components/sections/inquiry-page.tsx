@@ -52,9 +52,9 @@ export function InquiryPage({ kind }: { kind: FormKind }) {
         <SectionHeader title="Before you send" />
         <FAQList items={[faqs[3], faqs[0], faqs[6]]} />
         <p className="muted text-sm mt-7">
-          Forms are processed only in your browser. Your email application
-          handles the information after you choose to open or send an email. See
-          the{" "}
+          {kind === "contact"
+            ? "Contact details are sent through the configured email service when you submit. Other inquiry forms prepare an email in your email application. See the "
+            : "This form is processed in your browser. Your email application handles the information after you choose to open or send an email. See the "}
           <Link className="text-link" href="/privacy">
             privacy notice
           </Link>

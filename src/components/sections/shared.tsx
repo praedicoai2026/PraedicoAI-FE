@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Globe2 } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { processSteps, expertise, site } from "@/data/site";
 import { Container, Badge, ButtonLink } from "@/components/ui/primitives";
 import type { ContentSection } from "@/types/content";
@@ -167,14 +167,13 @@ export function ContactAside() {
         Share your context, your audience, and what you would like to explore.
         Please leave out credentials and confidential information.
       </p>
-      <p className="global-note">
-        <Globe2 size={18} />
-        Worldwide remote collaboration
-      </p>
       <p className="muted">
-        Time-zone overlap and availability are agreed individually.
+        Project scope, timing, and collaboration details are agreed
+        individually.
       </p>
-      <p className="text-sm break-anywhere">{site.contactEmail}</p>
+      {site.contactEmailConfigured && (
+        <p className="text-sm break-anywhere">{site.contactEmail}</p>
+      )}
       <ButtonLink href="/faq" secondary>
         Common questions
       </ButtonLink>

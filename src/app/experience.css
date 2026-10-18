@@ -201,6 +201,14 @@ h3 {
   border-radius: 4px;
   padding-bottom: 4px;
 }
+.brand-logo {
+  display: block;
+  width: 100px;
+  height: 40px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 3px;
+}
 .brand-mark span {
   color: var(--highlight);
 }
@@ -909,7 +917,17 @@ h3 {
   padding-top: 24px;
 }
 .footer-brand {
+  display: inline-flex;
+  align-items: center;
   font-size: 26px;
+}
+.footer-brand-logo {
+  display: block;
+  width: 126px;
+  height: 50px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 3px;
 }
 .footer-top nav a {
   padding-block: 6px;
@@ -1565,10 +1583,9 @@ textarea {
   .header-actions {
     flex-shrink: 0;
   }
-  .brand-mark {
-    width: 37px;
-    height: 37px;
-    font-size: 22px;
+  .brand-logo {
+    width: 83px;
+    height: 33px;
   }
   .brand-name {
     font-size: 13px;

@@ -51,9 +51,9 @@ export default function ResourcesPage() {
                   Download sample
                 </a>
               ) : (
-                <button className="button button-secondary" disabled>
-                  Coming Soon
-                </button>
+                <p className="muted text-sm">
+                  A downloadable file is not available for this resource.
+                </p>
               )}
             </article>
           ))}

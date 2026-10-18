@@ -1,13 +1,18 @@
 import type { SiteConfiguration } from "@/types/content";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ?? "";
+
 export const site: SiteConfiguration = {
   name: "PraedicoAI Services Private Limited",
-  title: "Applied AI & Intelligent Software",
+  title: "Applied AI. Powering Intelligent Solutions.",
   description:
     "PraedicoAI helps organizations explore, validate, and build practical AI-enabled software and workflows with people, business context, and responsible use at the center.",
-  // TODO: Replace this placeholder with the actual contact email address.
-  contactEmail: "REPLACE_WITH_YOUR_EMAIL@example.com",
-  url: "http://localhost:3000",
-  availability: "Available for remote conversations worldwide",
+  contactEmail,
+  contactEmailConfigured: contactEmail.length > 0,
+  url: configuredSiteUrl
+    ? new URL(configuredSiteUrl).origin
+    : "http://localhost:3000",
+  canonicalUrlConfigured: Boolean(configuredSiteUrl),
 };
 export const expertise = [
   "Applied AI discovery",

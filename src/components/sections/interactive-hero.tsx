@@ -13,12 +13,10 @@ import {
   ArrowDown,
   ArrowUpRight,
   BrainCircuit,
-  Globe2,
   GraduationCap,
   Layers3,
 } from "lucide-react";
 import { focusAreas } from "@/data/home";
-import { site } from "@/data/site";
 import { Container } from "@/components/ui/primitives";
 
 const focusIcons = [BrainCircuit, Layers3, GraduationCap];
@@ -84,22 +82,20 @@ export function InteractiveHero() {
       </motion.div>
       <Container>
         <div className="hero-topline">
-          <p className="availability">Open to meaningful collaborations</p>
-          <span className="hero-location">
-            <Globe2 size={14} /> Worldwide / Remote
-          </span>
+          <p className="availability">AI, software &amp; technology services</p>
+          <span className="hero-location">Scope and timing agreed individually</span>
         </div>
         <div className="hero-main">
-          <p className="hero-kicker">
-            Independent thinking. Connected solutions.
-          </p>
-          <h1 id="hero-heading">{site.name}</h1>
+          <p className="hero-kicker">Independent thinking. Connected solutions.</p>
+          <h1 id="hero-heading">
+            Turn complex business problems into practical AI and software
+            solutions.
+          </h1>
           <div className="hero-intro">
             <span className="hero-intro-line" aria-hidden="true" />
             <p>
-              {site.title}
-              <br />
-              <span>Technology. Strategy. Learning.</span>
+              PraedicoAI helps teams plan, build, and improve digital products
+              and workflows, and make informed technology decisions.
             </p>
           </div>
         </div>
@@ -158,11 +154,11 @@ export function InteractiveHero() {
         <div className="hero-bottom">
           <div className="hero-actions">
             <Link className="button button-primary" href="/contact">
-              Let&apos;s talk
+              Discuss a project
               <ArrowUpRight size={18} />
             </Link>
             <Link className="hero-work-link" href="/portfolio">
-              Selected work
+              Explore our work
               <ArrowUpRight size={18} />
             </Link>
           </div>

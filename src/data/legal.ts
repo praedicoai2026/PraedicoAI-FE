@@ -11,15 +11,15 @@ export const legalPages: Record<
       "How this website currently handles information and what to consider before contacting PraedicoAI.",
     sections: [
       {
-        title: "Forms stay in your browser",
+        title: "Contact form submissions",
         paragraphs: [
-          "Forms are not submitted to a server. Form data is not stored by this application. The values remain in the current page only while you prepare your inquiry; the application does not save them to localStorage, a database, or an account.",
+          "Before a contact inquiry can be sent, a six-digit verification code is emailed to the address you provide. The code expires after the period configured by the website operator; temporary verification state is held in server memory and removed when used or expired. After verification, the inquiry is emailed to PraedicoAI over an encrypted SMTP connection, and a receipt containing the inquiry type and subject is sent to that verified address. Contact submissions are not stored in a database or user account. The email provider and recipient mailboxes may process and retain these messages under their own terms and settings.",
         ],
       },
       {
-        title: "Email is sent by you",
+        title: "Other inquiry forms",
         paragraphs: [
-          "The application uses mailto links to ask your browser to open your email application with a prepared message. You must review and manually send that email. Your email application and its provider may handle, store, or transmit that information according to their own terms and settings.",
+          "Proposal, consultation, and training forms currently prepare a message in your email application. You must review and manually send those messages. Your email application and its provider may handle, store, or transmit that information according to their own terms and settings.",
         ],
       },
       {
@@ -31,7 +31,7 @@ export const legalPages: Record<
       {
         title: "What is not connected",
         paragraphs: [
-          "This website currently has no database, email API, analytics provider, newsletter provider, user accounts, or authentication. It does not accept payments or register attendees. This description must be updated if those services are introduced.",
+          "This website currently has no database, analytics provider, newsletter provider, user accounts, CRM, or authentication. Contact-form email is delivered through the configured SMTP provider. The site does not accept payments or register attendees. This description must be updated if those services are introduced.",
         ],
       },
       {
@@ -49,7 +49,7 @@ export const legalPages: Record<
       {
         title: "Questions",
         paragraphs: [
-          "The contact address displayed on this site is a placeholder and must be replaced and verified before use. This draft describes only the current website behavior, not any future service or data-processing activity.",
+          "Any contact address displayed on this site must be verified before use. This draft describes only the current website behavior, not any future service or data-processing activity.",
         ],
       },
     ],
@@ -79,7 +79,7 @@ export const legalPages: Record<
       {
         title: "Responsible use",
         paragraphs: [
-          "Do not provide passwords, secrets, confidential employer or customer information, or sensitive personal records. No guaranteed technical, marketing, ranking, or business outcome is offered.",
+          "Do not provide passwords, secrets, confidential employer or customer information, or sensitive personal records through an inquiry. Contact-form details are emailed to PraedicoAI; other inquiry forms currently prepare email drafts for you to send. No guaranteed technical, marketing, ranking, or business outcome is offered.",
         ],
       },
     ],
