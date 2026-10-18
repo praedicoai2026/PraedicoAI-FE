@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export type Theme = "light" | "dark" | "system";
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>("system");
+  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const update = () => {
@@ -14,13 +15,15 @@ export function useTheme() {
       }
       const preference: Theme =
         stored === "light" || stored === "dark" ? stored : "system";
-      setTheme(preference);
-      document.documentElement.dataset.theme =
+      const resolved =
         preference === "system"
           ? media.matches
             ? "dark"
             : "light"
           : preference;
+      setTheme(preference);
+      setResolvedTheme(resolved);
+      document.documentElement.dataset.theme = resolved;
     };
     update();
     media.addEventListener("change", update);
@@ -31,18 +34,23 @@ export function useTheme() {
     };
   }, []);
   function changeTheme(value: Theme) {
-    setTheme(value);
-    document.documentElement.dataset.theme =
+    const resolved =
       value === "system"
         ? window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light"
         : value;
+    setTheme(value);
+    setResolvedTheme(resolved);
+    document.documentElement.dataset.theme = resolved;
     try {
       localStorage.setItem("pg-theme", value);
     } catch {
       /* Storage is optional. */
     }
   }
-  return { theme, changeTheme };
+  function toggleTheme() {
+    changeTheme(resolvedTheme === "dark" ? "light" : "dark");
+  }
+  return { theme, resolvedTheme, changeTheme, toggleTheme };
 }

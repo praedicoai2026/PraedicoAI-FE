@@ -343,18 +343,6 @@ main:focus {
   color: var(--background);
   border-radius: 4px;
 }
-.theme-toggle {
-  display: flex;
-}
-.theme-toggle .icon-button {
-  border: 0;
-  width: 28px;
-  height: 38px;
-}
-.theme-toggle [aria-pressed="true"] {
-  background: var(--secondary);
-  color: var(--primary);
-}
 .nav-dropdown {
   position: relative;
 }
@@ -1261,9 +1249,6 @@ textarea::placeholder {
   .brand-name {
     display: block;
   }
-  .theme-toggle .icon-button {
-    width: 36px;
-  }
   .header-inner {
     height: 74px;
   }
@@ -1397,9 +1382,6 @@ textarea::placeholder {
   .header-inner,
   .header-actions {
     gap: 8px;
-  }
-  .theme-toggle .icon-button {
-    width: 28px;
   }
   .header-inner {
     padding-inline: 16px;

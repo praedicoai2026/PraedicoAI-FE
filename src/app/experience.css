@@ -269,14 +269,18 @@ h3 {
   gap: 10px;
 }
 .theme-toggle {
-  border-left: 1px solid var(--border);
-  padding-left: 10px;
-  gap: 2px;
+  background: var(--surface-card);
+  color: var(--muted);
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
 }
-.theme-toggle .icon-button {
-  width: 32px;
-  height: 36px;
-  border-radius: 3px;
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: var(--primary);
+  color: var(--primary);
+  outline: none;
 }
 .dropdown-content {
   top: 100%;
@@ -1295,9 +1299,6 @@ textarea {
   .header-inner {
     height: 64px;
   }
-  .theme-toggle .icon-button {
-    width: 30px;
-  }
   .home-hero h1 {
     font-size: 48px;
   }
@@ -1595,13 +1596,6 @@ textarea {
   }
   .header-actions {
     gap: 8px;
-  }
-  .theme-toggle {
-    padding-left: 7px;
-    gap: 0;
-  }
-  .theme-toggle .icon-button {
-    width: 24px;
   }
   .home-hero h1 {
     font-size: 38px;

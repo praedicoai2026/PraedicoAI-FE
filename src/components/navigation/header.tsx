@@ -3,33 +3,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { Menu, X, Sun, Moon, Monitor, ArrowUpRight } from "lucide-react";
+import { Menu, X, Sun, Moon, ArrowUpRight } from "lucide-react";
 import { navigation } from "@/data/navigation";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
-import { useTheme, type Theme } from "@/hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 import { IconButton } from "@/components/ui/primitives";
 
 function ThemeToggle() {
-  const { theme, changeTheme } = useTheme();
-  const options = [
-    { value: "light", label: "Light theme", icon: Sun },
-    { value: "dark", label: "Dark theme", icon: Moon },
-    { value: "system", label: "System theme", icon: Monitor },
-  ];
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+  const NextThemeIcon = nextTheme === "dark" ? Moon : Sun;
   return (
-    <div className="theme-toggle" role="group" aria-label="Color theme">
-      {options.map(({ value, label, icon: Icon }) => (
-        <IconButton
-          key={value}
-          label={label}
-          aria-pressed={theme === value}
-          onClick={() => changeTheme(value as Theme)}
-        >
-          <Icon size={15} aria-hidden="true" />
-        </IconButton>
-      ))}
-    </div>
+    <IconButton
+      className="theme-toggle"
+      label="Dark theme"
+      title={`Switch to ${nextTheme} theme`}
+      aria-pressed={resolvedTheme === "dark"}
+      onClick={toggleTheme}
+    >
+      <NextThemeIcon size={18} aria-hidden="true" />
+    </IconButton>
   );
 }
 export function Header() {
