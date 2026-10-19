@@ -34,7 +34,7 @@ The visual system uses white surfaces, dark ink typography, blue/cyan accents, a
 
 ## Scope And Honest Content
 
-The application has no database, authentication, admin, CMS, CRM, analytics, payment system, booking integration, or event registration. The `/contact` form sends inquiries through a server-side Next.js route and the configured SMTP account. Proposal, consultation, and training forms still prepare drafts in the visitor's email application. SMTP credentials belong only in `.env` or deployment secrets; do not expose them through `NEXT_PUBLIC_` variables. There is no cloud, Docker, or CI/CD configuration.
+The application has no database, production authentication, CMS, CRM, analytics, payment system, booking integration, or event registration. The Admin and Demo portals are front-end prototypes with static sample data and browser-session-only navigation markers; they do not provide access control or connect to real users or projects. The `/contact` form sends inquiries through a server-side Next.js route and the configured SMTP account. Proposal, consultation, and training forms still prepare drafts in the visitor's email application. SMTP credentials belong only in `.env` or deployment secrets; do not expose them through `NEXT_PUBLIC_` variables. There is no cloud, Docker, or CI/CD configuration.
 
 The site presents PraedicoAI as focused on applied AI, intelligent software, and workflow design. Portfolio and case-study entries are illustrative concepts, not client engagements or measured results. Course outlines and event examples are not confirmed schedules or accredited programs. No testimonials or certifications are published without verification. The website does not run an AI model. Contact inquiries are emailed to the configured recipient; the app does not save them in a database. Images are abstract illustrations, not customer evidence. Legal pages are drafts requiring review against actual company operations.
 
@@ -52,6 +52,7 @@ src/
 		forms/         Shared fields and four inquiry forms
 		layout/        Footer and pre-footer CTA
 		navigation/    Header, theme controls, mobile dialog
+		portals/       Static Admin and Demo portal experiences
 		sections/      Heroes, interactive services, catalogs, detail layouts
 		ui/            Buttons, alerts, FAQs, filters, empty states, motion
 	data/            Typed local content and field definitions
@@ -74,6 +75,7 @@ src/
 | Blog         | `/blog`, `/blog/[slug]`, `/blog/category/[slug]`                                                                                                  |
 | Information  | `/resources`, `/testimonials`, `/faq`                                                                                                             |
 | Inquiries    | `/contact`, `/request-proposal`, `/book-consultation`                                                                                             |
+| Portals      | `/admin/login`, `/admin/dashboard`, `/demo/login`, `/demo/dashboard`                                                                              |
 | Legal drafts | `/privacy`, `/terms`, `/cookies`, `/accessibility`                                                                                                |
 | Metadata     | `/sitemap.xml`, `/robots.txt`                                                                                                                     |
 
@@ -86,6 +88,8 @@ Detail routes derive from local data through `generateStaticParams`; unknown slu
 ## Customize Content
 
 - Set `NEXT_PUBLIC_SITE_URL` to the verified HTTPS production origin in the deployment environment before launch. Optionally set `NEXT_PUBLIC_CONTACT_EMAIL` for manual email fallbacks on proposal, consultation, and training forms. Both values are public and included in the client bundle; never use `NEXT_PUBLIC_` variables for secrets.
+- The main navigation links to `/admin/login` and `/demo/login` by default. To point them at separately deployed portal applications, set `NEXT_PUBLIC_ADMIN_PORTAL_URL` and/or `NEXT_PUBLIC_DEMO_PORTAL_URL` to the intended public URLs before building/deploying. These are public destinations, not secrets.
+- Admin and Demo sign-in validate `ADMIN_PORTAL_EMAIL`, `ADMIN_PORTAL_PASSWORD`, `DEMO_PORTAL_EMAIL`, and `DEMO_PORTAL_PASSWORD` on the server. A separate signed, HTTP-only session cookie is issued for each portal; dashboard pages also validate their session server-side. Set `PORTAL_SESSION_SECRET` to a unique random value of at least 32 characters. Keep all five values server-only in `.env` locally and deployment secrets in Vercel; never add them to `NEXT_PUBLIC_` variables or commit them. These static portals still do not connect to real users or business records. Before using for production administration, integrate a proper identity provider, rate limiting, role-based authorization, and protected APIs; the supplied simple passwords should be considered demo credentials and changed before any public deployment.
 - Copy the SMTP variable names from `.env.example` into `.env` for local development, or configure them as server-only deployment variables. `SMTP_PASSWORD` must be a Gmail app password for the configured account (with 2-Step Verification enabled), not its normal login password. Port 587 uses STARTTLS; the server strips spaces from the app password before authentication. Never commit `.env` or expose SMTP variables with a `NEXT_PUBLIC_` prefix.
 - Start with [src/data/site.ts](src/data/site.ts) for identity, title, expertise, process, and the local fallback URL.
 - Add verified social URLs in [src/data/navigation.ts](src/data/navigation.ts). Social profiles without verified URLs are omitted from the public interface.

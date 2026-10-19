@@ -117,6 +117,22 @@ export function Header() {
           )}
         </nav>
         <div className="header-actions">
+          <a
+            className="portal-nav-link"
+            href={process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || "/admin/login"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Admin
+          </a>
+          <a
+            className="portal-nav-link"
+            href={process.env.NEXT_PUBLIC_DEMO_PORTAL_URL || "/demo/login"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Demo
+          </a>
           <ThemeToggle />
           <Link className="header-cta" href="/request-proposal">
             Let&apos;s work together
@@ -162,6 +178,24 @@ export function Header() {
                   <ArrowUpRight size={18} />
                 </Link>
               ))}
+              <a
+                href={
+                  process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || "/admin/login"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeNavigation}
+              >
+                Admin <ArrowUpRight size={18} />
+              </a>
+              <a
+                href={process.env.NEXT_PUBLIC_DEMO_PORTAL_URL || "/demo/login"}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeNavigation}
+              >
+                Demo <ArrowUpRight size={18} />
+              </a>
             </nav>
             <Link
               href="/request-proposal"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/navigation/header";
 import { Footer, PreFooterCTA } from "@/components/layout/footer";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { site } from "@/data/site";
 import "./globals.css";
 import "./experience.css";
@@ -56,12 +57,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <Header />
-        <main id="main-content" tabIndex={-1}>
+        <SiteChrome
+          header={<Header />}
+          footer={
+            <>
+              <PreFooterCTA />
+              <Footer />
+            </>
+          }
+        >
           {children}
-        </main>
-        <PreFooterCTA />
-        <Footer />
+        </SiteChrome>
       </body>
     </html>
   );
