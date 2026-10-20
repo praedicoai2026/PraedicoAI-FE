@@ -53,10 +53,10 @@ const seeds = [
     title: "A learning path with purpose",
     summary:
       "A course-discovery frontend that helps learners choose topics by audience, level, and available time.",
-    category: "Training",
+    category: "Learning Experience",
     tags: ["Next.js", "TypeScript", "Accessibility"],
     projectType: "Learning Project",
-    service: "Training & Workshops",
+    service: "Learning Experience Design",
     industry: "Education",
     challenge: "Content discovery",
     image: "/images/portfolio/learning.png",

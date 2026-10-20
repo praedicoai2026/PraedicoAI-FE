@@ -3,7 +3,6 @@ import { formDefinitions } from "@/data/forms";
 import type {
   ContactFormData,
   ProposalFormData,
-  TrainingRequestData,
   ConsultationRequestData,
   FormKind,
   InquiryValues,
@@ -12,7 +11,6 @@ import type {
 function kindOf(values: InquiryValues): FormKind {
   if ("firstName" in values) return "contact";
   if ("projectSummary" in values) return "proposal";
-  if ("learningGoals" in values) return "training";
   return "consultation";
 }
 export function formatInquiry(values: InquiryValues): {
@@ -24,17 +22,13 @@ export function formatInquiry(values: InquiryValues): {
   const name =
     "firstName" in values
       ? `${values.firstName} ${values.lastName}`
-      : "fullName" in values
-        ? values.fullName
-        : values.name;
+      : values.name;
   const topic =
     "inquiryType" in values
       ? values.inquiryType
-      : "trainingTopic" in values
-        ? values.trainingTopic
-        : "consultationTopic" in values
-          ? values.consultationTopic
-          : values.requiredServices;
+      : "consultationTopic" in values
+        ? values.consultationTopic
+        : values.requiredServices;
   const subject = `${definition.subjectPrefix} - ${topic.replace(/[\r\n]+/g, " ")} - ${name.replace(/[\r\n]+/g, " ")}`;
   const entries = new Map(Object.entries(values));
   const details = definition.fields.map(
@@ -100,14 +94,6 @@ export function readInquiryValues(
         requiredServices: fields.requiredServices,
         projectSummary: fields.projectSummary,
       } satisfies ProposalFormData;
-    case "training":
-      return {
-        ...common,
-        fullName: fields.fullName,
-        audienceCategory: fields.audienceCategory,
-        trainingTopic: fields.trainingTopic,
-        learningGoals: fields.learningGoals,
-      } satisfies TrainingRequestData;
     case "consultation":
       return {
         ...common,

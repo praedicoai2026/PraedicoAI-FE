@@ -83,18 +83,6 @@ export interface Certification {
   skills: string[];
   image: string;
 }
-export interface TrainingCourse extends CatalogItem {
-  audience: string;
-  level: string;
-  topic: string;
-  format: string;
-  duration: string;
-  prerequisites: string[];
-  objectives: string[];
-  language: string;
-  resources: string[];
-  faqs: FAQ[];
-}
 export interface Event extends CatalogItem {
   type: string;
   topic: string;

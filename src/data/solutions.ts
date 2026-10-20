@@ -37,11 +37,7 @@ const audiences = [
       "Evaluation, risk, and operational ownership",
       "AI literacy and team enablement",
     ],
-    serviceSlugs: [
-      "application-modernization",
-      "workflow-consulting",
-      "training",
-    ],
+    serviceSlugs: ["application-modernization", "workflow-consulting"],
   },
   {
     slug: "professionals",
@@ -60,11 +56,7 @@ const audiences = [
       "Professional content strategy",
       "Social media positioning",
     ],
-    serviceSlugs: [
-      "web-application-development",
-      "social-media-growth",
-      "training",
-    ],
+    serviceSlugs: ["web-application-development", "social-media-growth"],
   },
   {
     slug: "students",
@@ -83,7 +75,7 @@ const audiences = [
       "Hands-on frontend projects",
       "Portfolio creation",
     ],
-    serviceSlugs: ["training", "web-application-development"],
+    serviceSlugs: ["web-application-development"],
   },
   {
     slug: "educational-institutions",
@@ -101,7 +93,7 @@ const audiences = [
       "Career-development programs",
       "Customized learning sessions",
     ],
-    serviceSlugs: ["training", "ai-agents"],
+    serviceSlugs: ["ai-agents"],
   },
   {
     slug: "manufacturing",

@@ -2,6 +2,7 @@ import { PageHero, ContentSections } from "@/components/sections/shared";
 import { Section, SectionHeader, ButtonLink } from "@/components/ui/primitives";
 import { principles } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Linkedin } from "lucide-react";
 export const metadata = pageMetadata(
   "About PraedicoAI Services",
   "Learn about PraedicoAI Services Private Limited and its approach to software, AI, architecture, and practical learning.",
@@ -58,6 +59,22 @@ export default function AboutPage() {
             },
           ]}
         />
+      </Section>
+      <Section className="section-lined">
+        <SectionHeader
+          eyebrow="Professional profile"
+          title="Connect with Priyank Gupta."
+          description="View the professional LinkedIn profile for background and career details."
+        />
+        <a
+          className="text-link"
+          href="https://www.linkedin.com/in/priyank-gupta-586764244/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Linkedin size={18} aria-hidden="true" />
+          View LinkedIn profile
+        </a>
       </Section>
       <Section className="section-tinted">
         <SectionHeader

@@ -1,9 +1,16 @@
 "use client";
-import { useRef, useState, useSyncExternalStore, type FormEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type FormEvent,
+} from "react";
 import Link from "next/link";
 import { Copy, Mail, FileText } from "lucide-react";
 import type { FormKind } from "@/types/contact";
 import { formDefinitions } from "@/data/forms";
+import { programTitles } from "@/data/program-options";
 import { site } from "@/data/site";
 import {
   createMailtoUrl,
@@ -59,6 +66,51 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
     () => true,
     () => false,
   );
+
+  useEffect(() => {
+    if (kind !== "contact") return;
+    const searchParams = new URLSearchParams(window.location.search);
+    const programSlug = searchParams.get("program");
+    const requestedFormat = searchParams.get("format");
+    const inquiryType = searchParams.get("inquiryType");
+    const inquiryTypeField = form.current?.elements.namedItem("inquiryType");
+    if (
+      inquiryType &&
+      inquiryTypeField instanceof HTMLSelectElement &&
+      Array.from(inquiryTypeField.options).some(
+        (option) => option.value === inquiryType,
+      )
+    ) {
+      inquiryTypeField.value = inquiryType;
+    }
+    const programTitle = programSlug ? programTitles[programSlug] : undefined;
+    if (!programTitle) return;
+    const formatLabels = new Map([
+      ["seminar", "Seminar · 2 hours"],
+      ["webinar", "Webinar · 2 hours"],
+      ["workshop", "Workshop · duration to discuss"],
+      ["training", "7- or 15-day program"],
+      ["corporate", "Customized group program"],
+    ]);
+    const formatLabel = requestedFormat
+      ? formatLabels.get(requestedFormat)
+      : undefined;
+    if (
+      inquiryTypeField instanceof HTMLSelectElement &&
+      Array.from(inquiryTypeField.options).some(
+        (option) => option.value === "Programs and learning",
+      )
+    )
+      inquiryTypeField.value = "Programs and learning";
+    const subjectField = form.current?.elements.namedItem("subject");
+    if (subjectField instanceof HTMLInputElement) {
+      subjectField.value = `Program enquiry: ${programTitle}`;
+    }
+    const messageField = form.current?.elements.namedItem("message");
+    if (messageField instanceof HTMLTextAreaElement) {
+      messageField.value = `I would like to enquire about ${programTitle}${formatLabel ? ` (${formatLabel})` : ""}. Please share availability and scope.`;
+    }
+  }, [kind]);
 
   function prepare(): PreparedInquiry | null {
     if (!form.current) return null;
@@ -606,9 +658,6 @@ export function ContactForm() {
 }
 export function ProposalForm() {
   return <InquiryForm kind="proposal" />;
-}
-export function TrainingRequestForm() {
-  return <InquiryForm kind="training" />;
 }
 export function ConsultationForm() {
   return <InquiryForm kind="consultation" />;

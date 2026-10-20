@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUp, ArrowUpRight } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Linkedin } from "lucide-react";
 import { site } from "@/data/site";
 import { socialLinks } from "@/data/navigation";
 import { Container, ButtonLink } from "@/components/ui/primitives";
@@ -18,6 +18,9 @@ export function SocialLinks() {
           target="_blank"
           rel="noreferrer"
         >
+          {social.label === "LinkedIn" && (
+            <Linkedin size={15} aria-hidden="true" />
+          )}
           {social.label}
           <ArrowUpRight size={14} />
         </a>
@@ -43,8 +46,8 @@ export function PreFooterCTA() {
         </div>
         <div className="cta-stack">
           <ButtonLink href="/contact">Start a conversation</ButtonLink>
-          <ButtonLink href="/training/request-training" secondary>
-            Request training
+          <ButtonLink href="/programs" secondary>
+            Browse programs
           </ButtonLink>
           <ButtonLink href="/portfolio" secondary>
             View portfolio
@@ -79,9 +82,7 @@ const groups = [
   {
     title: "Learn & explore",
     links: [
-      ["Course outlines", "/training/courses"],
-      ["Workshops", "/training/workshops"],
-      ["Corporate training", "/training/corporate-training"],
+      ["Programs", "/programs"],
       ["Journal", "/blog"],
       ["Resources", "/resources"],
       ["Events", "/events"],

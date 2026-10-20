@@ -281,35 +281,6 @@ const seeds: ServiceSeed[] = [
     ],
     tags: ["React", "TypeScript", "Accessibility"],
   },
-  {
-    slug: "training",
-    title: "Training & Workshops",
-    icon: "graduation",
-    category: "Learning",
-    summary:
-      "Practical learning that connects technology concepts to real design decisions.",
-    audience: ["Students", "Professionals", "Corporate teams"],
-    capabilities: [
-      "Individual training",
-      "Student workshops",
-      "Corporate training",
-      "Architecture learning",
-      "Next.js and TypeScript learning",
-      "AI awareness and agent concepts",
-      "Workflow concepts",
-      "Digital transformation",
-    ],
-    challenges: [
-      "Tutorial knowledge is hard to apply",
-      "Teams need a shared technical vocabulary",
-    ],
-    deliverables: [
-      "Audience-specific learning plan",
-      "Guided exercises and reference materials",
-      "Reflection and next-step recommendations",
-    ],
-    tags: ["Next.js", "TypeScript", "AI Fundamentals"],
-  },
 ];
 export const services: Service[] = seeds
   .map((seed) => ({
@@ -332,5 +303,8 @@ export const services: Service[] = seeds
     (left, right) =>
       Number(right.slug === "ai-agents") - Number(left.slug === "ai-agents"),
   );
+export const serviceCategories = [
+  ...new Set(services.map((service) => service.category)),
+].sort();
 export const getServiceBySlug = (slug: string) =>
   services.find((service) => service.slug === slug);

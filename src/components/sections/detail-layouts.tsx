@@ -20,14 +20,8 @@ import {
   AuthorCard,
 } from "./shared";
 import { ContentCard, ServiceCard } from "@/components/cards/content-card";
-import type {
-  CatalogItem,
-  Service,
-  TrainingCourse,
-  Event,
-  BlogPost,
-} from "@/types/content";
-import { calculateReadingTime, formatDate } from "@/lib/formatting";
+import type { CatalogItem, Service, Event, BlogPost } from "@/types/content";
+import { calculateReadingTime, formatDate, slugify } from "@/lib/formatting";
 import { getRelatedBlogPosts } from "@/data/blogPosts";
 
 export function ServiceDetailLayout({ service }: { service: Service }) {
@@ -45,6 +39,14 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
         description={service.summary}
         eyebrow={service.category}
         path={`/services/${service.slug}`}
+        breadcrumbs={[
+          { label: "Services", href: "/services" },
+          {
+            label: service.category,
+            href: `/services/category/${slugify(service.category)}`,
+          },
+          { label: service.title },
+        ]}
       />
       <Section>
         <div className="split-section">
@@ -189,71 +191,6 @@ export function ProjectDetailLayout({
     </>
   );
 }
-export function CourseDetailLayout({ course }: { course: TrainingCourse }) {
-  return (
-    <>
-      <PageHero
-        title={course.title}
-        description={course.summary}
-        eyebrow={course.label}
-        path={`/training/courses/${course.slug}`}
-        image={course.image}
-        imageAlt={course.imageAlt}
-      />
-      <Section>
-        <Alert>
-          Sample outline and approximate duration. Delivery language, dates,
-          format, and learning scope require confirmation.
-        </Alert>
-        <dl className="facts">
-          {[
-            ["Audience", course.audience],
-            ["Skill level", course.level],
-            ["Format", course.format],
-            ["Approximate duration", course.duration],
-            ["Language", course.language],
-            ["Organization", site.name],
-          ].map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{value}</dd>
-            </div>
-          ))}
-        </dl>
-        <div className="grid-two">
-          <div>
-            <SectionHeader title="Prerequisites" />
-            <BulletList items={course.prerequisites} />
-          </div>
-          <div>
-            <SectionHeader title="Learning objectives" />
-            <BulletList items={course.objectives} />
-          </div>
-        </div>
-      </Section>
-      <Section className="section-tinted">
-        <SectionHeader title="Curriculum" />
-        <ContentSections sections={course.sections} />
-      </Section>
-      <Section>
-        <div className="grid-two">
-          <div>
-            <SectionHeader title="Included learning resources" />
-            <BulletList items={course.resources} />
-            <ButtonLink href="/training/request-training">
-              Request this training
-            </ButtonLink>
-          </div>
-          <div>
-            <SectionHeader title="Questions before we start" />
-            <FAQList items={course.faqs} />
-          </div>
-        </div>
-        <AuthorCard />
-      </Section>
-    </>
-  );
-}
 export function EventDetailLayout({ event }: { event: Event }) {
   return (
     <>
@@ -309,9 +246,7 @@ export function EventDetailLayout({ event }: { event: Event }) {
             </Link>
           ))}
         </div>
-        <Alert>
-          No recording is available for this demonstration event.
-        </Alert>
+        <Alert>No recording is available for this demonstration event.</Alert>
       </Section>
       <Section>
         <SectionHeader title="Event questions" />
@@ -331,6 +266,14 @@ export function BlogDetailLayout({ post }: { post: BlogPost }) {
         description={post.summary}
         eyebrow={`${post.label} · ${post.category}`}
         path={`/blog/${post.slug}`}
+        breadcrumbs={[
+          { label: "Blog", href: "/blog" },
+          {
+            label: post.category,
+            href: `/blog/category/${slugify(post.category)}`,
+          },
+          { label: post.title },
+        ]}
         image={post.image}
         imageAlt={post.imageAlt}
       />

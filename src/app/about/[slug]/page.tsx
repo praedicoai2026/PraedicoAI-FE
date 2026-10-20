@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/primitives";
 import { processSteps, principles, learningAudiences } from "@/data/site";
 import { faqs } from "@/data/faqs";
-import { courses } from "@/data/courses";
-import { ContentCard } from "@/components/cards/content-card";
 import { pageMetadata } from "@/lib/metadata";
 const pages = {
   experience: [
@@ -97,20 +95,15 @@ export default async function AboutDetailPage({
               description="Sessions can help participants understand new concepts, practice review skills, and apply ideas to work they recognize. The content and level are agreed for each audience."
             />
             <TechnologyTags tags={learningAudiences} />
-            <div className="grid-three mt-8">
-              {courses
-                .filter((course) => course.topic.toLowerCase().includes("ai"))
-                .map((course) => (
-                  <ContentCard
-                    key={course.slug}
-                    item={course}
-                    basePath="/training/courses"
-                  />
-                ))}
-            </div>
             <div className="button-row">
-              <ButtonLink href="/training/request-training">
-                Discuss a learning session
+              <ButtonLink href="/programs/education">
+                Explore education programs
+              </ButtonLink>
+              <ButtonLink
+                href="/contact?inquiryType=Programs%20and%20learning"
+                secondary
+              >
+                Discuss a learning program
               </ButtonLink>
             </div>
           </>

@@ -7,14 +7,12 @@ import { Section, SectionHeader, FAQList } from "@/components/ui/primitives";
 import {
   ContactForm,
   ProposalForm,
-  TrainingRequestForm,
   ConsultationForm,
 } from "@/components/forms/inquiry-form";
 import { SocialLinks } from "@/components/layout/footer";
 const forms = {
   contact: ContactForm,
   proposal: ProposalForm,
-  training: TrainingRequestForm,
   consultation: ConsultationForm,
 };
 export function InquiryPage({ kind }: { kind: FormKind }) {
@@ -39,9 +37,6 @@ export function InquiryPage({ kind }: { kind: FormKind }) {
               </Link>
               <Link href="/book-consultation" className="text-link">
                 Request a consultation
-              </Link>
-              <Link href="/training/request-training" className="text-link">
-                Request training
               </Link>
             </nav>
           </div>

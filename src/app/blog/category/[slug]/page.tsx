@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import { blogPosts, blogCategories } from "@/data/blogPosts";
+import { BlogExplorer } from "@/components/sections/blog-explorer";
 import { PageHero } from "@/components/sections/shared";
-import { Section, EmptyState, ButtonLink } from "@/components/ui/primitives";
-import { Catalog } from "@/components/ui/catalog";
-import { optionsFor } from "@/components/sections/catalog-page";
 import { slugify } from "@/lib/formatting";
 import { pageMetadata } from "@/lib/metadata";
 export const dynamicParams = false;
@@ -32,7 +30,6 @@ export default async function BlogCategoryPage({
   const { slug } = await params;
   const category = blogCategories.find((item) => slugify(item) === slug);
   if (!category) notFound();
-  const posts = blogPosts.filter((post) => post.category === category);
   return (
     <>
       <PageHero
@@ -41,24 +38,13 @@ export default async function BlogCategoryPage({
         eyebrow="Journal topic"
         path={`/blog/category/${slug}`}
       />
-      <Section>
-        {posts.length ? (
-          <Catalog
-            items={posts}
-            basePath="/blog"
-            filters={[
-              { key: "tag", label: "Tags", options: optionsFor(posts, "tag") },
-            ]}
-          />
-        ) : (
-          <EmptyState
-            title="More perspectives to come"
-            description="There are no articles in this topic yet. Browse the journal for related perspectives."
-          >
-            <ButtonLink href="/blog">Explore all articles</ButtonLink>
-          </EmptyState>
-        )}
-      </Section>
+      <BlogExplorer
+        posts={blogPosts}
+        categories={blogCategories}
+        initialCategory={category}
+        heading={`Explore ${category}`}
+        description={`Browse ${category.toLowerCase()} articles, then narrow the list by topic or search term.`}
+      />
     </>
   );
 }

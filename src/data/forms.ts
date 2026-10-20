@@ -1,7 +1,5 @@
 import type { FieldDefinition, FormKind } from "@/types/contact";
 import { services } from "./services";
-import { learningAudiences } from "./site";
-import { trainingTopics } from "./courses";
 export const inquiryTypes = [
   "General Inquiry",
   "AI Readiness & Use-case Discovery",
@@ -16,7 +14,7 @@ export const inquiryTypes = [
   "Digital Marketing",
   "AI Video",
   "Social Media Growth",
-  "Training",
+  "Programs and learning",
   "Speaking Invitation",
   "Partnership",
   "Other",
@@ -172,52 +170,6 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
         ["Online video conversation", "Phone", "To discuss"],
       ),
       field("additionalInformation", "Additional information", "textarea"),
-    ],
-  },
-  training: {
-    title: "Shape a learning experience.",
-    description:
-      "Share your audience, their starting point, and what you want them to take away.",
-    path: "/training/request-training",
-    subjectPrefix: "Training Request",
-    fields: [
-      { ...field("fullName", "Full name", "text", true), autoComplete: "name" },
-      email,
-      phone,
-      field("organization", "Organization"),
-      field("jobTitle", "Job title"),
-      country,
-      field("city", "City"),
-      field(
-        "audienceCategory",
-        "Audience category",
-        "select",
-        true,
-        learningAudiences,
-      ),
-      field("trainingTopic", "Training topic", "select", true, [
-        ...trainingTopics,
-        "Customized topic",
-      ]),
-      field("skillLevel", "Skill level", "select", false, [
-        "Beginner",
-        "Intermediate",
-        "Advanced",
-        "Mixed group",
-      ]),
-      field("numberOfParticipants", "Number of participants", "number"),
-      field(
-        "deliveryPreference",
-        "Online or in-person preference",
-        "select",
-        false,
-        ["Online", "In-person", "To discuss"],
-      ),
-      field("preferredDates", "Preferred dates"),
-      field("preferredDuration", "Preferred duration"),
-      budget,
-      field("learningGoals", "Learning goals", "textarea", true),
-      field("additionalRequirements", "Additional requirements", "textarea"),
     ],
   },
 };

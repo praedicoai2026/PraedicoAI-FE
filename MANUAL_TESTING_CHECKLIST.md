@@ -30,7 +30,7 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Objective:** Navigate using the sticky header.
 
-**Steps:** Open every main link and Services menu. Close with Escape and by tabbing away. Scroll a detail page.
+**Steps:** Open every main link and the Services, Programs, and Blog menus. Follow category links and close menus with Escape and by tabbing away. Scroll a detail page.
 
 **Expected:** Valid destinations, visible active/focus states, no obscured content or trapped focus.
 
@@ -40,7 +40,7 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Objective:** Review the small-screen modal drawer.
 
-**Steps:** At 390px and 320px, open navigation, Tab/Shift+Tab, press Escape, reopen, dismiss through the close icon/backdrop, and follow a link.
+**Steps:** At 390px and 320px, open navigation, expand Services, Programs, and Blog, follow a category link, then Tab/Shift+Tab, press Escape, reopen, and dismiss through the close icon/backdrop.
 
 **Expected:** Contained focus, blocked background interaction, reachable links, restored trigger focus, and dismissal after navigation.
 
@@ -68,11 +68,11 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 ## 7. Services
 
-**Objective:** Review all ten services and category browsing.
+**Objective:** Review all nine services, categories, and subcategory filters.
 
-**Steps:** Switch each home service tab using pointer, arrow keys, Home, and End. Visit all service details from home and Services.
+**Steps:** Switch each home service tab using pointer, arrow keys, Home, and End. Use the Services menu to visit each category, follow its subcategory links, and verify nested breadcrumbs. Search and filter by subcategory, audience, and technology, then visit service details.
 
-**Expected:** Selected panels match their category, all ten services remain reachable, focus is visible, and content does not overlap or shift excessively.
+**Expected:** Selected panels match their category, all nine services remain reachable, category pages show matching services, combined filters narrow results, focus is visible, and content does not overlap or shift excessively.
 
 **Status:** Not Tested. **Notes:** [Result]
 
@@ -116,13 +116,13 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Status:** Not Tested. **Notes:** [Result]
 
-## 12. Training
+## 12. Programs
 
-**Objective:** Review course and workshop journeys.
+**Objective:** Review sector-based program discovery and subject syllabi.
 
-**Steps:** Visit training, course filters/details, workshops, and corporate training. Inspect curriculum, prerequisites, resources, FAQs, and inquiry links.
+**Steps:** Open a sector from the Programs menu, follow a learning-topic link, and verify nested breadcrumbs. Search and filter its programs by learning subcategory, format, duration, and audience. Open a subject and inspect all seven formats, learning outcomes, safeguards, and the program enquiry flow.
 
-**Expected:** Complete sample outlines, no invented certification, enrollment, payment, or availability guarantee.
+**Expected:** Sector and subject routes work; subcategory filters match subject learning focus; proposed availability is clear; no invented certification, enrollment, payment, or schedule guarantee.
 
 **Status:** Not Tested. **Notes:** [Result]
 
@@ -140,7 +140,7 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Objective:** Explore writing by search/category/tag.
 
-**Steps:** Combine filters, reset, and visit populated and empty category pages. Follow breadcrumbs.
+**Steps:** Combine filters, reset, and visit populated and empty category pages. Follow category-to-topic links and verify breadcrumbs and topic-specific results.
 
 **Expected:** Correct matches and useful empty states; no missing intermediate category breadcrumb link.
 
@@ -196,13 +196,13 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Status:** Not Tested. **Notes:** [Result]
 
-## 20. Training Request
+## 20. Program Enquiry
 
-**Objective:** Validate international training inquiries.
+**Objective:** Validate program enquiries through the contact form.
 
-**Steps:** Fill topic, audience, format, participant count, goals, dates, country/time zone. Try zero/fractional counts.
+**Steps:** Open a subject enquiry from the Programs catalog. Verify the subject, requested format, and Programs and learning inquiry type are prefilled, then complete the contact form.
 
-**Expected:** Required fields and positive whole counts are validated; all details retained; no enrollment or confirmed availability.
+**Expected:** Program details are prefilled, contact verification is required before submission, and availability is not implied.
 
 **Status:** Not Tested. **Notes:** [Result]
 

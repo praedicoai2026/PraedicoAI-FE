@@ -5,10 +5,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { Menu, X, Sun, Moon, ArrowUpRight } from "lucide-react";
 import { navigation } from "@/data/navigation";
-import { services } from "@/data/services";
+import { blogCategories } from "@/data/blogPosts";
+import { serviceCategories, services } from "@/data/services";
+import { sectors } from "@/data/sectors";
 import { site } from "@/data/site";
 import { useTheme } from "@/hooks/useTheme";
 import { IconButton } from "@/components/ui/primitives";
+import { slugify } from "@/lib/formatting";
 
 function ThemeToggle() {
   const { resolvedTheme, toggleTheme } = useTheme();
@@ -30,7 +33,12 @@ export function Header() {
   const pathname = usePathname();
   const drawer = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
-  const dropdown = useRef<HTMLDetailsElement>(null);
+  const programsDropdown = useRef<HTMLDetailsElement>(null);
+  const servicesDropdown = useRef<HTMLDetailsElement>(null);
+  const blogDropdown = useRef<HTMLDetailsElement>(null);
+  const mobileProgramsDropdown = useRef<HTMLDetailsElement>(null);
+  const mobileServicesDropdown = useRef<HTMLDetailsElement>(null);
+  const mobileBlogDropdown = useRef<HTMLDetailsElement>(null);
   useEffect(() => {
     const dialog = drawer.current;
     const handleClose = () => {
@@ -45,7 +53,14 @@ export function Header() {
   }, []);
   function closeNavigation() {
     drawer.current?.close();
-    if (dropdown.current) dropdown.current.open = false;
+    if (programsDropdown.current) programsDropdown.current.open = false;
+    if (servicesDropdown.current) servicesDropdown.current.open = false;
+    if (blogDropdown.current) blogDropdown.current.open = false;
+    if (mobileProgramsDropdown.current)
+      mobileProgramsDropdown.current.open = false;
+    if (mobileServicesDropdown.current)
+      mobileServicesDropdown.current.open = false;
+    if (mobileBlogDropdown.current) mobileBlogDropdown.current.open = false;
   }
   const active = (href: string) =>
     href === "/"
@@ -70,10 +85,51 @@ export function Header() {
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {navigation.map((item) =>
-            item.href === "/services" ? (
+            item.href === "/programs" ? (
               <details
-                ref={dropdown}
-                className="nav-dropdown"
+                ref={programsDropdown}
+                className="nav-dropdown programs-nav-dropdown"
+                key={item.href}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.currentTarget.open = false;
+                    event.currentTarget.querySelector("summary")?.focus();
+                  }
+                }}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget))
+                    event.currentTarget.open = false;
+                }}
+              >
+                <summary className={active(item.href) ? "active" : ""}>
+                  Programs
+                </summary>
+                <div className="dropdown-content programs-mega-menu">
+                  <Link
+                    className="programs-mega-all"
+                    href="/programs"
+                    onClick={closeNavigation}
+                  >
+                    All Programs <ArrowUpRight size={14} aria-hidden="true" />
+                  </Link>
+                  <div className="programs-mega-grid">
+                    {sectors.map((sector) => (
+                      <Link
+                        href={`/programs/${sector.slug}`}
+                        key={sector.id}
+                        onClick={closeNavigation}
+                      >
+                        <span>{sector.name}</span>
+                        <small>{sector.subjects.length} subjects</small>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </details>
+            ) : item.href === "/services" ? (
+              <details
+                ref={servicesDropdown}
+                className="nav-dropdown services-nav-dropdown"
                 key={item.href}
                 onKeyDown={(event) => {
                   if (event.key === "Escape") {
@@ -89,19 +145,75 @@ export function Header() {
                 <summary className={active(item.href) ? "active" : ""}>
                   Services
                 </summary>
-                <div className="dropdown-content">
-                  <Link href="/services" onClick={closeNavigation}>
-                    All services <ArrowUpRight size={14} />
+                <div className="dropdown-content programs-mega-menu services-mega-menu">
+                  <Link
+                    className="programs-mega-all"
+                    href="/services"
+                    onClick={closeNavigation}
+                  >
+                    All Services <ArrowUpRight size={14} aria-hidden="true" />
                   </Link>
-                  {services.map((service) => (
-                    <Link
-                      key={service.slug}
-                      onClick={closeNavigation}
-                      href={`/services/${service.slug}`}
-                    >
-                      {service.title}
-                    </Link>
-                  ))}
+                  <div className="services-mega-grid">
+                    {serviceCategories.map((category) => (
+                      <Link
+                        key={category}
+                        onClick={closeNavigation}
+                        href={`/services/category/${slugify(category)}`}
+                      >
+                        <small>
+                          {
+                            services.filter(
+                              (service) => service.category === category,
+                            ).length
+                          }{" "}
+                          services
+                        </small>
+                        <span>{category}</span>
+                        <p>Explore services in {category.toLowerCase()}.</p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </details>
+            ) : item.href === "/blog" ? (
+              <details
+                ref={blogDropdown}
+                className="nav-dropdown blog-nav-dropdown"
+                key={item.href}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.currentTarget.open = false;
+                    event.currentTarget.querySelector("summary")?.focus();
+                  }
+                }}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget))
+                    event.currentTarget.open = false;
+                }}
+              >
+                <summary className={active(item.href) ? "active" : ""}>
+                  Blog
+                </summary>
+                <div className="dropdown-content programs-mega-menu blog-mega-menu">
+                  <Link
+                    className="programs-mega-all"
+                    href="/blog"
+                    onClick={closeNavigation}
+                  >
+                    All articles <ArrowUpRight size={14} aria-hidden="true" />
+                  </Link>
+                  <div className="blog-mega-grid">
+                    {blogCategories.map((category) => (
+                      <Link
+                        href={`/blog/category/${slugify(category)}`}
+                        key={category}
+                        onClick={closeNavigation}
+                      >
+                        <span>{category}</span>
+                        <small>Explore articles</small>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </details>
             ) : (
@@ -117,14 +229,6 @@ export function Header() {
           )}
         </nav>
         <div className="header-actions">
-          <a
-            className="portal-nav-link"
-            href={process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || "/admin/login"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Admin
-          </a>
           <a
             className="portal-nav-link"
             href={process.env.NEXT_PUBLIC_DEMO_PORTAL_URL || "/demo/login"}
@@ -167,27 +271,110 @@ export function Header() {
               </IconButton>
             </div>
             <nav aria-label="Mobile navigation">
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active(item.href) ? "page" : undefined}
-                  onClick={closeNavigation}
-                >
-                  {item.label}
-                  <ArrowUpRight size={18} />
-                </Link>
-              ))}
-              <a
-                href={
-                  process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || "/admin/login"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeNavigation}
-              >
-                Admin <ArrowUpRight size={18} />
-              </a>
+              {navigation.map((item) =>
+                item.href === "/programs" ? (
+                  <details
+                    className="mobile-sector-list"
+                    key={item.href}
+                    ref={mobileProgramsDropdown}
+                  >
+                    <summary
+                      aria-current={active(item.href) ? "page" : undefined}
+                    >
+                      {item.label}
+                    </summary>
+                    <div>
+                      <Link href="/programs" onClick={closeNavigation}>
+                        All Programs
+                        <ArrowUpRight size={16} aria-hidden="true" />
+                      </Link>
+                      {sectors.map((sector) => (
+                        <Link
+                          href={`/programs/${sector.slug}`}
+                          key={sector.id}
+                          onClick={closeNavigation}
+                        >
+                          {sector.name}
+                          <span>{sector.subjects.length} subjects</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                ) : item.href === "/services" ? (
+                  <details
+                    className="mobile-sector-list"
+                    key={item.href}
+                    ref={mobileServicesDropdown}
+                  >
+                    <summary
+                      aria-current={active(item.href) ? "page" : undefined}
+                    >
+                      {item.label}
+                    </summary>
+                    <div>
+                      <Link href="/services" onClick={closeNavigation}>
+                        All Services
+                        <ArrowUpRight size={16} aria-hidden="true" />
+                      </Link>
+                      {serviceCategories.map((category) => (
+                        <Link
+                          href={`/services/category/${slugify(category)}`}
+                          key={category}
+                          onClick={closeNavigation}
+                        >
+                          {category}
+                          <span>
+                            {
+                              services.filter(
+                                (service) => service.category === category,
+                              ).length
+                            }{" "}
+                            services
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                ) : item.href === "/blog" ? (
+                  <details
+                    className="mobile-sector-list"
+                    key={item.href}
+                    ref={mobileBlogDropdown}
+                  >
+                    <summary
+                      aria-current={active(item.href) ? "page" : undefined}
+                    >
+                      {item.label}
+                    </summary>
+                    <div>
+                      <Link href="/blog" onClick={closeNavigation}>
+                        All Articles
+                        <ArrowUpRight size={16} aria-hidden="true" />
+                      </Link>
+                      {blogCategories.map((category) => (
+                        <Link
+                          href={`/blog/category/${slugify(category)}`}
+                          key={category}
+                          onClick={closeNavigation}
+                        >
+                          {category}
+                          <span>Explore</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active(item.href) ? "page" : undefined}
+                    onClick={closeNavigation}
+                  >
+                    {item.label}
+                    <ArrowUpRight size={18} />
+                  </Link>
+                ),
+              )}
               <a
                 href={process.env.NEXT_PUBLIC_DEMO_PORTAL_URL || "/demo/login"}
                 target="_blank"

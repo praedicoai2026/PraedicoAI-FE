@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { principles, learningAudiences } from "@/data/site";
+import { principles } from "@/data/site";
 import { services } from "@/data/services";
 import { solutions } from "@/data/solutions";
 import { portfolioProjects } from "@/data/portfolio";
 import { blogPosts } from "@/data/blogPosts";
-import { courses } from "@/data/courses";
 import { faqs } from "@/data/faqs";
 import {
   Section,
@@ -13,7 +12,6 @@ import {
   ButtonLink,
   FAQList,
   BulletList,
-  TechnologyTags,
 } from "@/components/ui/primitives";
 import { ExpertiseStrip, ProcessSteps } from "@/components/sections/shared";
 import { ContentCard, SolutionCard } from "@/components/cards/content-card";
@@ -21,11 +19,6 @@ import { InteractiveHero } from "@/components/sections/interactive-hero";
 import { ServiceExplorer } from "@/components/sections/service-explorer";
 
 export default function Home() {
-  const featuredCourses = [
-    ...courses.filter((course) => course.topic.toLowerCase().includes("ai")),
-    ...courses.filter((course) => !course.topic.toLowerCase().includes("ai")),
-  ].slice(0, 3);
-
   return (
     <>
       <InteractiveHero />
@@ -212,19 +205,19 @@ export default function Home() {
       <Section className="section-tinted">
         <SectionHeader
           eyebrow="Learn. Apply. Reflect."
-          title="Give your team a shared AI vocabulary."
-          href="/training"
-          linkLabel="Explore training"
+          title="Explore practical AI programs for your sector."
+          description="Browse proposed subject outlines for technology, HR, sales, marketing, finance, education, operations, leadership, and data teams."
+          href="/programs"
+          linkLabel="Explore programs"
         />
-        <TechnologyTags tags={learningAudiences} />
-        <div className="grid-three mt-7">
-          {featuredCourses.map((course) => (
-            <ContentCard
-              key={course.slug}
-              item={course}
-              basePath="/training/courses"
-            />
-          ))}
+        <div className="button-row">
+          <ButtonLink href="/programs">Browse programs by sector</ButtonLink>
+          <ButtonLink
+            href="/contact?inquiryType=Programs%20and%20learning"
+            secondary
+          >
+            Discuss a program
+          </ButtonLink>
         </div>
       </Section>
       <Section>

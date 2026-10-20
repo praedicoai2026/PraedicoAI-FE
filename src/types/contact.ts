@@ -40,26 +40,6 @@ export interface ProposalFormData {
   preferredWorkingModel?: string;
   additionalInformation?: string;
 }
-export interface TrainingRequestData {
-  fullName: string;
-  email: string;
-  country: string;
-  audienceCategory: string;
-  trainingTopic: string;
-  learningGoals: string;
-  privacy: boolean;
-  phone?: string;
-  organization?: string;
-  jobTitle?: string;
-  city?: string;
-  skillLevel?: string;
-  numberOfParticipants?: string;
-  deliveryPreference?: string;
-  preferredDates?: string;
-  preferredDuration?: string;
-  budgetRange?: string;
-  additionalRequirements?: string;
-}
 export interface ConsultationRequestData {
   name: string;
   email: string;
@@ -76,11 +56,8 @@ export interface ConsultationRequestData {
   additionalInformation?: string;
 }
 export type InquiryValues =
-  | ContactFormData
-  | ProposalFormData
-  | TrainingRequestData
-  | ConsultationRequestData;
-export type FormKind = "contact" | "proposal" | "training" | "consultation";
+  ContactFormData | ProposalFormData | ConsultationRequestData;
+export type FormKind = "contact" | "proposal" | "consultation";
 export interface FieldDefinition {
   name: string;
   label: string;

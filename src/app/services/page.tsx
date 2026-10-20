@@ -1,7 +1,7 @@
-import { services } from "@/data/services";
+import { services, serviceCategories } from "@/data/services";
 import { faqs } from "@/data/faqs";
 import { PageHero, ProcessSteps } from "@/components/sections/shared";
-import { ServiceCard } from "@/components/cards/content-card";
+import { ServiceCatalog } from "@/components/sections/service-catalog";
 import {
   Section,
   SectionHeader,
@@ -30,14 +30,7 @@ export default function ServicesPage() {
           title="AI is a capability, not a strategy."
           description="The strongest starting point is a well-understood problem. We help teams connect business goals, people, information, and technology before committing to an implementation."
         />
-        <TechnologyTags
-          tags={[...new Set(services.map((service) => service.category))]}
-        />
-        <div className="grid-three mt-7">
-          {services.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
-          ))}
-        </div>
+        <ServiceCatalog services={services} categories={serviceCategories} />
       </Section>
       <Section className="section-tinted">
         <div className="grid-two">

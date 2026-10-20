@@ -6,7 +6,42 @@ import { Container, Badge, ButtonLink } from "@/components/ui/primitives";
 import type { ContentSection } from "@/types/content";
 import { slugify } from "@/lib/formatting";
 
-export function Breadcrumbs({ path, title }: { path: string; title: string }) {
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
+export function Breadcrumbs({
+  path,
+  title,
+  items,
+}: {
+  path: string;
+  title: string;
+  items?: BreadcrumbItem[];
+}) {
+  if (items) {
+    return (
+      <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          {items.map((item, index) => (
+            <li key={`${item.label}-${index}`}>
+              <ChevronRight size={12} aria-hidden="true" />
+              {item.href ? (
+                <Link href={item.href}>{item.label}</Link>
+              ) : (
+                <span aria-current="page">{item.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    );
+  }
+
   const segments = path.split("/").filter(Boolean);
   return (
     <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -19,8 +54,14 @@ export function Breadcrumbs({ path, title }: { path: string; title: string }) {
             <ChevronRight size={12} aria-hidden="true" />
             {index === segments.length - 1 ? (
               <span aria-current="page">{title}</span>
-            ) : segment === "category" ? (
-              <span>Category</span>
+            ) : ["category", "capability", "topic"].includes(segment) ? (
+              <span>
+                {segment === "category"
+                  ? "Category"
+                  : segment === "capability"
+                    ? "Subcategory"
+                    : "Topic"}
+              </span>
             ) : (
               <Link href={`/${segments.slice(0, index + 1).join("/")}`}>
                 {segment.replaceAll("-", " ")}
@@ -37,6 +78,7 @@ export function PageHero({
   description,
   eyebrow,
   path,
+  breadcrumbs,
   image,
   imageAlt = "Abstract technology composition",
 }: {
@@ -44,13 +86,14 @@ export function PageHero({
   description: string;
   eyebrow: string;
   path: string;
+  breadcrumbs?: BreadcrumbItem[];
   image?: string;
   imageAlt?: string;
 }) {
   return (
     <section className={`page-hero ${image ? "has-image" : ""}`}>
       <Container>
-        <Breadcrumbs path={path} title={title} />
+        <Breadcrumbs path={path} title={title} items={breadcrumbs} />
         <div className="page-hero-content">
           <div>
             <p className="eyebrow">{eyebrow}</p>

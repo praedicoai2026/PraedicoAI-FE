@@ -10,7 +10,7 @@ export const caseStudies: CaseStudy[] = portfolioProjects
     relatedServices: [
       ["application-modernization", "technology-consulting"],
       ["ai-agents", "workflow-consulting"],
-      ["training", "web-application-development"],
+      ["ai-agents", "web-application-development"],
     ][index],
     sections: [
       {

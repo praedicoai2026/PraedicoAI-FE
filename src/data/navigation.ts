@@ -5,7 +5,7 @@ export const navigation: NavigationItem[] = [
   { label: "Services", href: "/services" },
   { label: "Solutions", href: "/solutions" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Training", href: "/training" },
+  { label: "Programs", href: "/programs" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -17,7 +17,10 @@ export const aboutNavigation: NavigationItem[] = [
   { label: "Speaking", href: "/about/speaking" },
 ];
 export const socialLinks: SocialLink[] = [
-  { label: "LinkedIn" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/priyank-gupta-586764244/",
+  },
   { label: "YouTube" },
   { label: "Instagram" },
 ];

@@ -21,12 +21,12 @@ export const focusAreas = [
   },
   {
     id: "learning",
-    label: "Learning",
-    title: "Help teams adopt new capabilities.",
+    label: "Programs",
+    title: "Explore practical learning programs.",
     description:
-      "Build shared understanding of AI, software architecture, and emerging workflows through practical, audience-led learning.",
-    href: "/training",
-    action: "Explore learning",
+      "Explore sector-specific AI and software subjects with proposed outlines across seminars, webinars, workshops, and extended formats.",
+    href: "/programs",
+    action: "Explore programs",
     image: "/images/training/learning.png",
   },
 ];
@@ -56,9 +56,9 @@ export const serviceGroups = [
       "Shape clear digital experiences and content that help people understand an offer, navigate a product, and take an informed next step.",
   },
   {
-    category: "Learning",
-    title: "Give people the confidence to use AI well.",
+    category: "Programs",
+    title: "Give people a practical path to explore AI.",
     description:
-      "Build practical literacy around AI capabilities, limitations, review, and the work practices needed for responsible adoption.",
+      "Browse sector-focused AI and software topics with flexible proposed learning formats.",
   },
 ];
