@@ -4,14 +4,15 @@ A company website for PraedicoAI Services Private Limited, focused on applied AI
 
 ## Run Locally
 
-Use Node.js 20.9 or newer and npm. This workspace was developed with Node.js 22.16. Configure the SMTP values in the ignored `.env` file to enable contact-form delivery. Set `NEXT_PUBLIC_SITE_URL` for production canonical URLs and indexing.
+Use Node.js 20.9 or newer and npm. This workspace was developed with Node.js 22.16. Run the commands below from the `frontend` directory. Configure the SMTP values in the ignored `.env` file for contact-form delivery and password-reset emails. Set `NEXT_PUBLIC_SITE_URL` for production canonical URLs and indexing.
 
 ```powershell
+cd frontend
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000, or the free port printed by Next.js. To choose a port explicitly, use `npx next dev --port 3001` from the project root.
+Open http://localhost:3000, or the free port printed by Next.js. To choose a port explicitly, use `npx next dev --port 3001`.
 
 | Command                | Purpose                                             |
 | ---------------------- | --------------------------------------------------- |
@@ -24,21 +25,23 @@ Open http://localhost:3000, or the free port printed by Next.js. To choose a por
 | `npm run format`       | Format source and documentation with Prettier       |
 | `npm run format:check` | Check formatting without changes                    |
 
-For production review, stop the dev server, run `npm run build`, then `npm run start`. Alternatively run `npx next start --port 3001` after building. No automated tests, testing libraries, test files, or test scripts are included. Use [MANUAL_TESTING_CHECKLIST.md](MANUAL_TESTING_CHECKLIST.md).
+For production review, stop the dev server, run `npm run build`, then `npm run start`. Alternatively run `npx next start --port 3001` after building. No frontend automated tests are included. Use [MANUAL_TESTING_CHECKLIST.md](MANUAL_TESTING_CHECKLIST.md).
 
 ## Stack And Experience
 
-Next.js App Router, React, strict TypeScript, Tailwind CSS, ESLint, Prettier, Nodemailer, Lucide React, limited Framer Motion, `next/image`, and `next/font/local`. Static pages use Server Components; navigation, filtering, theme controls, inquiries, and interactive home sections use small Client Components. `/api/contact` runs on the Node.js runtime to deliver contact inquiries through SMTP.
+Next.js App Router, React, strict TypeScript, Tailwind CSS, ESLint, Prettier, Nodemailer, Lucide React, limited Framer Motion, `next/image`, and `next/font/local`. Static pages use Server Components; navigation, filtering, theme controls, inquiries, account registration, and interactive home sections use small Client Components. `/api/contact` runs on the Node.js runtime to deliver contact inquiries through SMTP. The account modal proxies registration and sign-in requests to the TypeScript API in the repository's `backend` directory; `/api/auth/password-reset` sends expiring reset links using the existing SMTP settings. Set `BACKEND_API_URL` when the API is hosted somewhere other than `http://localhost:4000`.
 
 The visual system uses white surfaces, dark ink typography, blue/cyan accents, and responsive section layouts. It includes a pointer-responsive abstract hero with focus tabs, a category-based service explorer, subtle scroll reveals, native FAQ disclosures, a mobile navigation dialog, light/dark/system themes, and visible keyboard focus. Cards also respond to keyboard focus. Tab controls support arrow keys, Home, and End. Reduced-motion preferences disable optional movement.
 
 ## Scope And Honest Content
 
-The application has no database, production authentication, CMS, CRM, analytics, payment system, booking integration, or event registration. The Admin and Demo portals are front-end prototypes with static sample data and browser-session-only navigation markers; they do not provide access control or connect to real users or projects. The `/contact` form sends inquiries through a server-side Next.js route and the configured SMTP account. Proposal and consultation forms prepare drafts in the visitor's email application. Program enquiries use the contact form. SMTP credentials belong only in `.env` or deployment secrets; do not expose them through `NEXT_PUBLIC_` variables. There is no cloud, Docker, or CI/CD configuration.
+The separate backend stores registered user details, password hashes, and session records in MongoDB. The account modal supports individual and business registration, sign-in, sign-out, and email-based password reset. Password reset uses the existing SMTP settings; the one-time link expires after 30 minutes. Account access does not confirm course enrollment or scheduling. The Admin and Demo portals remain front-end prototypes with static sample data and separate browser-session-only navigation markers; they do not provide access control or connect to registered users or real projects. The `/contact` form sends inquiries through a server-side Next.js route and the configured SMTP account. Proposal and consultation forms prepare drafts in the visitor's email application. Program enquiries use the contact form. SMTP credentials and `AUTH_INTERNAL_SECRET` belong only in `.env` or deployment secrets; do not expose them through `NEXT_PUBLIC_` variables. The backend includes a Docker Compose file for local MongoDB development; production hosting and CI/CD are not configured.
 
 The site presents PraedicoAI as focused on applied AI, intelligent software, and workflow design. Portfolio and case-study entries are illustrative concepts, not client engagements or measured results. Program outlines and event examples are proposed, not confirmed schedules or accredited programs. No testimonials or certifications are published without verification. The website does not run an AI model. Contact inquiries are emailed to the configured recipient; the app does not save them in a database. Images are abstract illustrations, not customer evidence. Legal pages are drafts requiring review against actual company operations.
 
 ## Structure
+
+Paths below are relative to the `frontend` directory.
 
 ```text
 public/
@@ -75,6 +78,7 @@ src/
 | Blog         | `/blog`, `/blog/[slug]`, `/blog/category/[slug]`                                              |
 | Information  | `/resources`, `/testimonials`, `/faq`                                                         |
 | Inquiries    | `/contact`, `/request-proposal`, `/book-consultation`                                         |
+| Accounts     | `/register`                                                                                   |
 | Portals      | `/admin/login`, `/admin/dashboard`, `/demo/login`, `/demo/dashboard`                          |
 | Legal drafts | `/privacy`, `/terms`, `/cookies`, `/accessibility`                                            |
 | Metadata     | `/sitemap.xml`, `/robots.txt`                                                                 |
@@ -90,7 +94,7 @@ Detail routes derive from local data through `generateStaticParams`; unknown slu
 - Set `NEXT_PUBLIC_SITE_URL` to the verified HTTPS production origin in the deployment environment before launch. Optionally set `NEXT_PUBLIC_CONTACT_EMAIL` for manual email fallbacks on proposal and consultation forms. Both values are public and included in the client bundle; never use `NEXT_PUBLIC_` variables for secrets.
 - The main navigation links to `/admin/login` and `/demo/login` by default. To point them at separately deployed portal applications, set `NEXT_PUBLIC_ADMIN_PORTAL_URL` and/or `NEXT_PUBLIC_DEMO_PORTAL_URL` to the intended public URLs before building/deploying. These are public destinations, not secrets.
 - Admin and Demo sign-in validate `ADMIN_PORTAL_EMAIL`, `ADMIN_PORTAL_PASSWORD`, `DEMO_PORTAL_EMAIL`, and `DEMO_PORTAL_PASSWORD` on the server. A separate signed, HTTP-only session cookie is issued for each portal; dashboard pages also validate their session server-side. Set `PORTAL_SESSION_SECRET` to a unique random value of at least 32 characters. Keep all five values server-only in `.env` locally and deployment secrets in Vercel; never add them to `NEXT_PUBLIC_` variables or commit them. These static portals still do not connect to real users or business records. Before using for production administration, integrate a proper identity provider, rate limiting, role-based authorization, and protected APIs; the supplied simple passwords should be considered demo credentials and changed before any public deployment.
-- Copy the SMTP variable names from `.env.example` into `.env` for local development, or configure them as server-only deployment variables. `SMTP_PASSWORD` must be a Gmail app password for the configured account (with 2-Step Verification enabled), not its normal login password. Port 587 uses STARTTLS; the server strips spaces from the app password before authentication. Never commit `.env` or expose SMTP variables with a `NEXT_PUBLIC_` prefix.
+- Copy the SMTP variable names from `.env.example` into `.env` for local development, or configure them as server-only deployment variables. Set `AUTH_INTERNAL_SECRET` to the same random value in both frontend and backend environments; it must be at least 32 characters. `SMTP_PASSWORD` must be a Gmail app password for the configured account (with 2-Step Verification enabled), not its normal login password. Port 587 uses STARTTLS; the server strips spaces from the app password before authentication. Never commit `.env` or expose SMTP variables with a `NEXT_PUBLIC_` prefix.
 - Start with [src/data/site.ts](src/data/site.ts) for identity, title, expertise, process, and the local fallback URL.
 - Add verified social URLs in [src/data/navigation.ts](src/data/navigation.ts). Social profiles without verified URLs are omitted from the public interface.
 - Add verified speaking details and permission-based customer feedback in [src/data/profile.ts](src/data/profile.ts). Do not invent dates, qualifications, achievements, or endorsements.
@@ -114,7 +118,7 @@ Only after successful verification does the contact form email the configured `M
 
 Copy inquiry details is available as a fallback. Manual mailto options for proposal and consultation forms are shown only when `NEXT_PUBLIC_CONTACT_EMAIL` is set. Clipboard denial produces manual-copy guidance rather than false success. Clipboard writes occur only after explicit actions.
 
-The app does not save submissions to localStorage, sessionStorage, cookies, or a database. Contact details are sent to the SMTP provider and the configured recipient mailbox, which may retain them under their own policies. Do not submit secrets, confidential records, or sensitive personal information.
+Inquiry submissions are not saved to localStorage, sessionStorage, cookies, or the application database. Contact details are sent to the SMTP provider and the configured recipient mailbox, which may retain them under their own policies. Registered account records are stored separately by the backend. Do not submit secrets, confidential records, or sensitive personal information.
 
 ## Theme And Assets
 
@@ -136,4 +140,4 @@ Replace images under `public/images` with assets you own or may use. Update data
 
 ## Future Dynamic Application Possibilities
 
-A separately scoped future version could add a database, CMS/admin tools, authentication, durable rate limiting, event registration, calendar availability, and payments. These require an explicit security/privacy design, verified content, operational ownership, and their own validation strategy.
+The account-registration backend could be extended with sign-in, verified email, password reset, and authenticated sessions. CMS/admin tools, event registration, calendar availability, and payments require separate security/privacy design, verified content, operational ownership, and validation.

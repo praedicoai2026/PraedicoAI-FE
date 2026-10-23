@@ -1,6 +1,6 @@
 # Manual Testing Checklist
 
-Use fictitious, non-sensitive input. Do not send mail to the placeholder address. No automated testing framework or test script is used.
+Use fictitious, non-sensitive input. Do not send mail to the placeholder address. The frontend has no automated browser-test suite; backend API tests are in the `backend` project.
 
 Reviewer: [Name] | Date: [Date] | Browser: [Version] | OS: [OS] | Viewport: [Dimensions] | Mode: [Development / Local production]
 
@@ -8,11 +8,11 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 ## 1. Startup
 
-**Objective:** Run locally without services or credentials.
+**Objective:** Run the website locally and verify that it remains usable without the registration API.
 
-**Steps:** Run `npm install`, then `npm run dev`. Open the printed URL and inspect browser/terminal messages.
+**Steps:** From `frontend`, run `npm install`, then `npm run dev`. Open the printed URL and inspect browser/terminal messages.
 
-**Expected:** Home, local font, and images render without application errors.
+**Expected:** Home, local font, and images render without application errors. The registration page explains if its backend is unavailable.
 
 **Status:** Not Tested. **Notes:** [Result]
 
@@ -43,6 +43,16 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 **Steps:** At 390px and 320px, open navigation, expand Services, Programs, and Blog, follow a category link, then Tab/Shift+Tab, press Escape, reopen, and dismiss through the close icon/backdrop.
 
 **Expected:** Contained focus, blocked background interaction, reachable links, restored trigger focus, and dismissal after navigation.
+
+**Status:** Not Tested. **Notes:** [Result]
+
+## User Accounts
+
+**Objective:** Verify registration, login, and password-reset flows.
+
+**Steps:** Start MongoDB, backend, and frontend using the repository-root README. Open the header sign-in modal and switch between sign-in and registration. Create an individual account; verify the course list follows its selected category, and test required fields, password confirmation, terms consent, and duplicate email. Create a business account and verify organization fields appear and are required. Sign in, sign out, and request a password-reset email using an address you control. Follow the one-time link, change the password, and verify the old password no longer works.
+
+**Expected:** The modal is keyboard accessible and responsive; browser and API validation reject invalid data; individual/business details are saved correctly; duplicate email is reported; login sets a session cookie; reset emails do not disclose whether an account exists; reset tokens expire and cannot be reused; passwords never appear in API responses or logs.
 
 **Status:** Not Tested. **Notes:** [Result]
 

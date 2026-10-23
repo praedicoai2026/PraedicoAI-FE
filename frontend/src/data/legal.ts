@@ -29,9 +29,9 @@ export const legalPages: Record<
         ],
       },
       {
-        title: "What is not connected",
+        title: "Account information and email",
         paragraphs: [
-          "This website currently has no database, analytics provider, newsletter provider, user accounts, CRM, or authentication. Contact-form email is delivered through the configured SMTP provider. The site does not accept payments or register attendees. This description must be updated if those services are introduced.",
+          "When you create an account, the service stores your name, email address, phone number, account type, selected course category and course, optional organization details, and a password hash in its MongoDB account database. Active sign-in sessions are stored to keep you signed in and can be removed by signing out or resetting your password. The raw password is not stored. If you request a password reset, a one-time link is emailed through the configured SMTP provider and expires after 30 minutes. Contact-form email is handled separately. The site does not currently provide a CRM or accept payments.",
         ],
       },
       {
@@ -80,6 +80,12 @@ export const legalPages: Record<
         title: "Responsible use",
         paragraphs: [
           "Do not provide passwords, secrets, confidential employer or customer information, or sensitive personal records through an inquiry. Contact-form details are emailed to PraedicoAI; other inquiry forms currently prepare email drafts for you to send. No guaranteed technical, marketing, ranking, or business outcome is offered.",
+        ],
+      },
+      {
+        title: "Accounts",
+        paragraphs: [
+          "Keep your sign-in credentials private and use accurate information when creating an account. You are responsible for activity performed through your account. Password reset links are single-use and expire after 30 minutes. Account functionality and program choices do not confirm enrollment, course availability, or a scheduled training engagement.",
         ],
       },
     ],

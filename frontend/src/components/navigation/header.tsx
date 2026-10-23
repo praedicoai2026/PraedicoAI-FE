@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, Sun, Moon, ArrowUpRight } from "lucide-react";
 import { navigation } from "@/data/navigation";
 import { blogCategories } from "@/data/blogPosts";
@@ -12,6 +12,7 @@ import { site } from "@/data/site";
 import { useTheme } from "@/hooks/useTheme";
 import { IconButton } from "@/components/ui/primitives";
 import { slugify } from "@/lib/formatting";
+import { AuthModal } from "@/components/auth/auth-modal";
 
 function ThemeToggle() {
   const { resolvedTheme, toggleTheme } = useTheme();
@@ -31,6 +32,7 @@ function ThemeToggle() {
 }
 export function Header() {
   const pathname = usePathname();
+  const [authView, setAuthView] = useState<"login" | "register" | null>(null);
   const drawer = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const programsDropdown = useRef<HTMLDetailsElement>(null);
@@ -238,6 +240,13 @@ export function Header() {
             Demo
           </a>
           <ThemeToggle />
+          <button
+            className="auth-header-link"
+            type="button"
+            onClick={() => setAuthView("login")}
+          >
+            Sign in
+          </button>
           <Link className="header-cta" href="/request-proposal">
             Let&apos;s work together
             <ArrowUpRight size={16} aria-hidden="true" />
@@ -392,12 +401,41 @@ export function Header() {
               Let&apos;s work together
               <ArrowUpRight size={16} />
             </Link>
+            <div className="auth-mobile-actions">
+              <button
+                className="button button-secondary"
+                type="button"
+                onClick={() => {
+                  closeNavigation();
+                  setAuthView("login");
+                }}
+              >
+                Sign in
+              </button>
+              <button
+                className="button button-primary"
+                type="button"
+                onClick={() => {
+                  closeNavigation();
+                  setAuthView("register");
+                }}
+              >
+                Create account
+              </button>
+            </div>
             <p className="muted text-sm">
               Global perspective. Personal collaboration.
             </p>
           </div>
         </dialog>
       </div>
+      {authView && (
+        <AuthModal
+          open
+          initialView={authView}
+          onClose={() => setAuthView(null)}
+        />
+      )}
     </header>
   );
 }
