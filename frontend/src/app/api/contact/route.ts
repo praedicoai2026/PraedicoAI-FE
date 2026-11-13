@@ -139,7 +139,7 @@ function renderBrandedEmail({
             </tr>
             <tr>
               <td style="padding:16px 32px;background-color:#edf3fa;color:#4c6078;font-size:11px;line-height:1.6;">
-                PraedicoAI Services Private Limited<br>
+                PraedicoAI Private Limited<br>
                 This is an automatically generated message from the PraedicoAI website.
               </td>
             </tr>

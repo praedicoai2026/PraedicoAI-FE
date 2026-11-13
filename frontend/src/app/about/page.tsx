@@ -4,15 +4,15 @@ import { principles } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Linkedin } from "lucide-react";
 export const metadata = pageMetadata(
-  "About PraedicoAI Services",
-  "Learn about PraedicoAI Services Private Limited and its approach to software, AI, architecture, and practical learning.",
+  "About PraedicoAI",
+  "Learn about PraedicoAI Private Limited and its approach to software, AI, architecture, and practical learning.",
   "/about",
 );
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="PraedicoAI Services Private Limited"
+        title="PraedicoAI Private Limited"
         description="Technology services connecting software, AI, architecture, consulting, and practical learning."
         eyebrow="About the company"
         path="/about"
@@ -23,7 +23,7 @@ export default function AboutPage() {
             {
               title: "Our company",
               paragraphs: [
-                "PraedicoAI Services Private Limited is an AI-focused technology company working at the intersection of applied AI, software engineering, and business workflows.",
+                "PraedicoAI Private Limited is an AI-focused technology company working at the intersection of applied AI, software engineering, and business workflows.",
                 "The company focuses on helping organizations identify meaningful opportunities, validate the information and operating conditions they depend on, and shape a responsible path to an AI-enabled product or process.",
               ],
             },

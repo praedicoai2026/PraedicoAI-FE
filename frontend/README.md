@@ -1,6 +1,6 @@
-# PraedicoAI Services Private Limited
+# PraedicoAI Private Limited
 
-A company website for PraedicoAI Services Private Limited, focused on applied AI, intelligent software, workflow design, and practical enablement.
+A company website for PraedicoAI Private Limited, focused on applied AI, intelligent software, workflow design, and practical enablement.
 
 ## Run Locally
 

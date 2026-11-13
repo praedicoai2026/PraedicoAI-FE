@@ -1,6 +1,6 @@
 import type { ContentSection } from "@/types/content";
 export const legalNote =
-  "Draft policy text for PraedicoAI Services Private Limited. Have a qualified professional review it against the company's actual services, operations, and applicable law before publication.";
+  "Draft policy text for PraedicoAI Private Limited. Have a qualified professional review it against the company's actual services, operations, and applicable law before publication.";
 export const legalPages: Record<
   string,
   { title: string; description: string; sections: ContentSection[] }

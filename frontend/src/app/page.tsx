@@ -35,7 +35,7 @@ export default function Home() {
           </div>
           <div>
             <p className="muted">
-              PraedicoAI Services Private Limited is an AI-focused technology
+              PraedicoAI Private Limited is an AI-focused technology
               company connecting business questions with practical software,
               workflow, and AI design.
             </p>

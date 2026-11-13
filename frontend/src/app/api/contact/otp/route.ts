@@ -197,7 +197,7 @@ export async function POST(request: NextRequest) {
             <p style="margin:22px 0;padding:18px;background-color:#edf3fa;border-left:3px solid #2563eb;color:#112039;font-size:30px;font-weight:700;letter-spacing:8px;text-align:center;">${otp.code}</p>
             <p style="margin:0;color:#4c6078;font-size:13px;line-height:1.7;">This code expires in ${otpSettings.expiryMilliseconds / 60_000} minutes. If you did not request it, you can ignore this message.</p>
           </td></tr>
-          <tr><td style="padding:16px 32px;background-color:#edf3fa;color:#4c6078;font-size:11px;">PraedicoAI Services Private Limited</td></tr>
+          <tr><td style="padding:16px 32px;background-color:#edf3fa;color:#4c6078;font-size:11px;">PraedicoAI Private Limited</td></tr>
         </table>
       </td></tr>
     </table>

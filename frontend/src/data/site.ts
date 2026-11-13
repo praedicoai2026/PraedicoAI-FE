@@ -3,7 +3,7 @@ const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ?? "";
 
 export const site: SiteConfiguration = {
-  name: "PraedicoAI Services Private Limited",
+  name: "PraedicoAI Private Limited",
   title: "Applied AI. Powering Intelligent Solutions.",
   description:
     "PraedicoAI helps organizations explore, validate, and build practical AI-enabled software and workflows with people, business context, and responsible use at the center.",
