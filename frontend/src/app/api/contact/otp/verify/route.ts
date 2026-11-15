@@ -1,8 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import {
-  getContactEmailOtpSettings,
-  verifyContactEmailOtp,
-} from "@/lib/server/contact-email-otp";
+import { callContactOtpBackend } from "@/lib/server/contact-otp-backend";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -103,13 +100,17 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let otpSettings;
+  let verification: { verified: boolean };
   try {
-    otpSettings = getContactEmailOtpSettings();
+    verification = await callContactOtpBackend({
+      action: "verify",
+      challengeId: body.challengeId,
+      code: body.code,
+    });
   } catch (error) {
     console.error(
-      "Contact email verification configuration is invalid:",
-      error instanceof Error ? error.message : "Unknown configuration error",
+      "Contact email verification backend request failed:",
+      error instanceof Error ? error.message : "Unknown backend error",
     );
     return NextResponse.json(
       {
@@ -120,7 +121,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!verifyContactEmailOtp(body.challengeId, body.code, otpSettings)) {
+  if (!verification.verified) {
     return NextResponse.json(
       {
         error:

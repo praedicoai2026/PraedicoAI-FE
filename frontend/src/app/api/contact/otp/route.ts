@@ -1,10 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import {
-  createContactEmailOtp,
-  discardContactEmailOtp,
-  getContactEmailOtpSettings,
-} from "@/lib/server/contact-email-otp";
+  callContactOtpBackend,
+  ContactOtpBackendError,
+  settleContactOtp,
+} from "@/lib/server/contact-otp-backend";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -136,12 +136,23 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let otpSettings;
+  let otp;
   try {
-    otpSettings = getContactEmailOtpSettings();
+    otp = await callContactOtpBackend({
+      action: "request",
+      email: body.email.trim().toLowerCase(),
+    });
   } catch (error) {
+    if (error instanceof ContactOtpBackendError && error.status === 429) {
+      return NextResponse.json(
+        {
+          error: `Please wait ${error.retryAfterSeconds ?? 60} seconds before requesting another code.`,
+        },
+        { status: 429 },
+      );
+    }
     console.error(
-      "Contact email verification configuration is invalid:",
+      "Contact email verification challenge could not be created:",
       error instanceof Error ? error.message : "Unknown configuration error",
     );
     return NextResponse.json(
@@ -150,16 +161,6 @@ export async function POST(request: NextRequest) {
           "Email verification is temporarily unavailable. Please try again later.",
       },
       { status: 503 },
-    );
-  }
-
-  const otp = createContactEmailOtp(body.email.trim(), otpSettings);
-  if ("retryAfterSeconds" in otp) {
-    return NextResponse.json(
-      {
-        error: `Please wait ${otp.retryAfterSeconds} seconds before requesting another code.`,
-      },
-      { status: 429 },
     );
   }
 
@@ -179,7 +180,7 @@ export async function POST(request: NextRequest) {
       from,
       to: body.email.trim(),
       subject: "Your PraedicoAI email verification code",
-      text: `Your PraedicoAI contact-form verification code is ${otp.code}.\n\nIt expires in ${otpSettings.expiryMilliseconds / 60_000} minutes. If you did not request this code, you can ignore this email.`,
+      text: `Your PraedicoAI contact-form verification code is ${otp.code}.\n\nIt expires in ${otp.expiryMinutes} minutes. If you did not request this code, you can ignore this email.`,
       html: `<!doctype html>
 <html lang="en">
   <body style="margin:0;padding:24px 12px;background-color:#f8f9fc;font-family:Arial,Helvetica,sans-serif;color:#112039;">
@@ -195,7 +196,7 @@ export async function POST(request: NextRequest) {
             <h1 style="margin:0;color:#112039;font-size:25px;line-height:1.3;">Confirm your email address</h1>
             <p style="margin:14px 0;color:#4c6078;font-size:15px;line-height:1.7;">Enter this code on the contact form to verify your email before sending your inquiry.</p>
             <p style="margin:22px 0;padding:18px;background-color:#edf3fa;border-left:3px solid #2563eb;color:#112039;font-size:30px;font-weight:700;letter-spacing:8px;text-align:center;">${otp.code}</p>
-            <p style="margin:0;color:#4c6078;font-size:13px;line-height:1.7;">This code expires in ${otpSettings.expiryMilliseconds / 60_000} minutes. If you did not request it, you can ignore this message.</p>
+            <p style="margin:0;color:#4c6078;font-size:13px;line-height:1.7;">This code expires in ${otp.expiryMinutes} minutes. If you did not request it, you can ignore this message.</p>
           </td></tr>
           <tr><td style="padding:16px 32px;background-color:#edf3fa;color:#4c6078;font-size:11px;">PraedicoAI Private Limited</td></tr>
         </table>
@@ -206,11 +207,17 @@ export async function POST(request: NextRequest) {
     });
     return NextResponse.json({
       challengeId: otp.challengeId,
-      expiryMinutes: otpSettings.expiryMilliseconds / 60_000,
+      expiryMinutes: otp.expiryMinutes,
       message: "A verification code has been sent to your email address.",
     });
   } catch (error) {
-    discardContactEmailOtp(otp.challengeId);
+    await settleContactOtp(
+      {
+        action: "discard",
+        challengeId: otp.challengeId,
+      },
+      "Unsent contact email verification challenge could not be discarded:",
+    );
     console.error(
       "Contact email verification delivery failed:",
       error instanceof Error ? error.message : "Unknown SMTP error",

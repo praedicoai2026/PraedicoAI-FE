@@ -1,10 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import {
-  claimContactEmailVerification,
-  consumeContactEmailVerification,
-  releaseContactEmailVerification,
-} from "@/lib/server/contact-email-otp";
+  callContactOtpBackend,
+  settleContactOtp,
+} from "@/lib/server/contact-otp-backend";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -241,7 +240,24 @@ export async function POST(request: NextRequest) {
 
   const verificationId = body.verificationId;
   const email = body.lead.email;
-  if (!claimContactEmailVerification(verificationId, email)) {
+  let verificationClaim: { claimed: boolean };
+  try {
+    verificationClaim = await callContactOtpBackend({
+      action: "claim",
+      challengeId: verificationId,
+      email,
+    });
+  } catch (error) {
+    console.error(
+      "Lead verification claim could not be checked:",
+      error instanceof Error ? error.message : "Unknown backend error",
+    );
+    return NextResponse.json(
+      { error: "Email verification is temporarily unavailable." },
+      { status: 503 },
+    );
+  }
+  if (!verificationClaim.claimed) {
     return NextResponse.json(
       {
         error:
@@ -264,7 +280,10 @@ export async function POST(request: NextRequest) {
       signal: AbortSignal.timeout(15_000),
     });
   } catch (error) {
-    releaseContactEmailVerification(verificationId);
+    await settleContactOtp(
+      { action: "release", challengeId: verificationId, email },
+      "Lead verification claim could not be released after backend failure:",
+    );
     console.error(
       "Lead persistence request failed:",
       error instanceof Error ? error.message : "Unknown backend error",
@@ -276,7 +295,10 @@ export async function POST(request: NextRequest) {
   }
 
   if (!backendResponse.ok) {
-    releaseContactEmailVerification(verificationId);
+    await settleContactOtp(
+      { action: "release", challengeId: verificationId, email },
+      "Lead verification claim could not be released after rejected submission:",
+    );
     const result: unknown = await backendResponse.json().catch(() => null);
     const message =
       isRecord(result) &&
@@ -290,7 +312,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  consumeContactEmailVerification(verificationId);
+  await settleContactOtp(
+    { action: "consume", challengeId: verificationId, email },
+    "Lead verification could not be consumed after persistence:",
+  );
   const details = getLeadDetails(body.lead);
   const emailOutcome = await sendLeadEmails(body.lead, details);
   let message: string;
