@@ -40,7 +40,7 @@ export default async function SolutionPage({
       <Section>
         <ContentSections sections={solution.sections} />
         <div className="button-row">
-          <ButtonLink href="/contact">Explore your next step</ButtonLink>
+          <ButtonLink href="/enquiry/ai-business-solutions">Explore your next step</ButtonLink>
         </div>
       </Section>
       <Section className="section-tinted">

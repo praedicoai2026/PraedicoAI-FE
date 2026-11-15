@@ -19,7 +19,7 @@ export async function generateMetadata({
   const category = serviceCategories.find((item) => slugify(item) === slug);
   return category
     ? pageMetadata(
-        `${category} Services`,
+        `${category} AI Solutions`,
         `Explore services and practical support across ${category.toLowerCase()}.`,
         `/services/category/${slug}`,
       )
@@ -38,9 +38,9 @@ export default async function ServiceCategoryPage({
   return (
     <>
       <PageHero
-        title={`${category} Services`}
-        description={`Explore our ${category.toLowerCase()} services, then narrow the collection by capability or audience.`}
-        eyebrow="Services by category"
+        title={`${category} AI Solutions`}
+        description={`Explore our ${category.toLowerCase()} AI solutions, then narrow the collection by capability or audience.`}
+        eyebrow="AI Solutions by category"
         path={`/services/category/${slug}`}
       />
       <section className="section">

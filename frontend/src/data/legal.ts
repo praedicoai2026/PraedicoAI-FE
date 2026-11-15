@@ -19,7 +19,13 @@ export const legalPages: Record<
       {
         title: "Other inquiry forms",
         paragraphs: [
-          "Proposal, consultation, and training forms currently prepare a message in your email application. You must review and manually send those messages. Your email application and its provider may handle, store, or transmit that information according to their own terms and settings.",
+          "Business, training, internship, and institutional enquiries are submitted after email verification and consent. The submitted lead, its category, contact details, source page, consent time, status history, and any authorized team notes or follow-ups are stored in the website's MongoDB database until deleted by an authorized operator; automatic lead deletion is not configured. Team and confirmation emails may also be sent through the configured SMTP provider and recipient mailboxes. Proposal and consultation forms currently prepare a draft in your email application, which you must review and send yourself.",
+        ],
+      },
+      {
+        title: "Interactive AI demos",
+        paragraphs: [
+          "When interactive demo access is enabled, text you submit is sent to Google's Gemini API to generate a response. These demos use Google's unpaid API tier: Google may review submitted inputs and outputs and use them to improve its services. Do not submit personal, confidential, customer, employer, or other sensitive information. PraedicoAI does not store demo prompts or generated responses in its database, but retains aggregate event metadata such as demo identifier, event type, character and token counts, and duration for up to 180 days. Demo use is limited to people aged 18 or older and is blocked in the EEA, UK, and Switzerland while unpaid-tier access is used. See Google's current terms and privacy information before using an enabled demo.",
         ],
       },
       {
@@ -31,7 +37,7 @@ export const legalPages: Record<
       {
         title: "Account information and email",
         paragraphs: [
-          "When you create an account, the service stores your name, email address, phone number, account type, selected course category and course, optional organization details, and a password hash in its MongoDB account database. Active sign-in sessions are stored to keep you signed in and can be removed by signing out or resetting your password. The raw password is not stored. If you request a password reset, a one-time link is emailed through the configured SMTP provider and expires after 30 minutes. Contact-form email is handled separately. The site does not currently provide a CRM or accept payments.",
+          "When you create an account, the service stores your name, email address, phone number, account type, selected course category and course, optional organization details, and a password hash in its MongoDB account database. Active sign-in sessions are stored to keep you signed in and can be removed by signing out or resetting your password. The raw password is not stored. If you request a password reset, a one-time link is emailed through the configured SMTP provider and expires after 30 minutes. Contact-form email is handled separately. The site does not accept payments.",
         ],
       },
       {
@@ -43,7 +49,7 @@ export const legalPages: Record<
       {
         title: "Local development and external links",
         paragraphs: [
-          "Next.js development tooling can produce local request logs. Do not enter real sensitive information while experimenting. Following a social sharing link or opening an email application takes you to a separate service, with its own practices.",
+          "The site records first-party demo usage metrics on the server without using advertising or analytics cookies. Next.js development tooling can produce local request logs. Do not enter real sensitive information while experimenting. Following a social sharing link or opening an email application takes you to a separate service, with its own practices.",
         ],
       },
       {
@@ -79,7 +85,7 @@ export const legalPages: Record<
       {
         title: "Responsible use",
         paragraphs: [
-          "Do not provide passwords, secrets, confidential employer or customer information, or sensitive personal records through an inquiry. Contact-form details are emailed to PraedicoAI; other inquiry forms currently prepare email drafts for you to send. No guaranteed technical, marketing, ranking, or business outcome is offered.",
+          "Do not provide passwords, secrets, confidential employer or customer information, or sensitive personal records through an inquiry or AI demo. When enabled, demo text is sent to Google's Gemini API under its applicable terms; unpaid-tier data may be reviewed and used to improve Google's services. Demos are for adults aged 18 or older, are blocked in the EEA, UK, and Switzerland while using the unpaid tier, and provide drafts that require human review. No guaranteed technical, marketing, ranking, or business outcome is offered.",
         ],
       },
       {
@@ -98,7 +104,7 @@ export const legalPages: Record<
       {
         title: "No application tracking cookies",
         paragraphs: [
-          "This website does not intentionally set advertising or analytics cookies and has no third-party tracking provider configured. This statement must be reviewed if the site's tools change.",
+          "This website does not intentionally set advertising or analytics cookies and has no third-party tracking provider configured. The server does retain first-party aggregate AI demo usage metrics for up to 180 days; these metrics do not include demo prompts or generated responses. This statement must be reviewed if the site's tools change.",
         ],
       },
       {

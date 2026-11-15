@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUp, ArrowUpRight, Linkedin } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Linkedin, MessageCircle } from "lucide-react";
 import { site } from "@/data/site";
 import { socialLinks } from "@/data/navigation";
 import { Container, ButtonLink } from "@/components/ui/primitives";
@@ -45,13 +45,24 @@ export function PreFooterCTA() {
           </p>
         </div>
         <div className="cta-stack">
-          <ButtonLink href="/contact">Start a conversation</ButtonLink>
+          <ButtonLink href="/services">Explore AI solutions</ButtonLink>
           <ButtonLink href="/programs" secondary>
-            Browse programs
+            Explore AI learning
           </ButtonLink>
-          <ButtonLink href="/portfolio" secondary>
-            View portfolio
+          <ButtonLink href="/enquiry" secondary>
+            Start an enquiry
           </ButtonLink>
+          {site.whatsappConfigured && (
+            <a
+              className="button button-secondary"
+              href={site.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Message us on WhatsApp
+              <MessageCircle size={16} aria-hidden="true" />
+            </a>
+          )}
         </div>
       </Container>
     </section>
@@ -59,44 +70,48 @@ export function PreFooterCTA() {
 }
 const groups = [
   {
-    title: "Expertise",
+    title: "AI Solutions",
     links: [
-      ["All services", "/services"],
-      ["Software development", "/services/software-development"],
-      ["AI & workflows", "/services/ai-agents"],
-      ["Technology consulting", "/services/technology-consulting"],
-      ["Digital growth", "/services/digital-marketing"],
+      ["All AI solutions", "/services"],
+      ["Industries", "/industries"],
+      ["AI consulting", "/services/ai-consulting-strategy"],
+      ["AI agents", "/services/ai-agents"],
+      ["AI automation", "/services/workflow-automation-integration"],
     ],
   },
   {
-    title: "Solutions",
-    links: [
-      ["Startups", "/solutions/startups"],
-      ["Enterprises", "/solutions/enterprises"],
-      ["Professionals", "/solutions/professionals"],
-      ["Students", "/solutions/students"],
-      ["Institutions", "/solutions/educational-institutions"],
-      ["Manufacturing", "/solutions/manufacturing"],
-    ],
-  },
-  {
-    title: "Learn & explore",
+    title: "AI Learning",
     links: [
       ["Programs", "/programs"],
+      ["For students", "/learning/students"],
+      ["For professionals", "/learning/professionals"],
+      ["Generative AI training", "/programs/generative-ai-prompt-engineering"],
+      ["For organizations", "/learning/organizations"],
+      ["For colleges", "/learning/institutions"],
+      ["Internships", "/internships"],
+    ],
+  },
+  {
+    title: "Work & insights",
+    links: [
+      ["Portfolio", "/portfolio"],
+      ["Case studies", "/case-studies"],
       ["Journal", "/blog"],
       ["Resources", "/resources"],
       ["Events", "/events"],
+      ["AI products", "/products"],
+      ["AI demos", "/demos"],
+      ["Research", "/research"],
+      ["Community", "/community"],
     ],
   },
   {
-    title: "Connect",
+    title: "Company",
     links: [
       ["About PraedicoAI", "/about"],
-      ["Portfolio", "/portfolio"],
-      ["Case studies", "/case-studies"],
       ["Speaking", "/about/speaking"],
       ["Customer stories", "/testimonials"],
-      ["Contact", "/contact"],
+      ["Contact", "/enquiry"],
       ["FAQ", "/faq"],
     ],
   },

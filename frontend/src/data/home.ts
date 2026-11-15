@@ -1,32 +1,32 @@
 export const focusAreas = [
   {
     id: "intelligence",
-    label: "Applied AI",
-    title: "Put AI to work on a real problem.",
+    label: "AI Solutions",
+    title: "Turn a business challenge into a practical AI plan.",
     description:
-      "Find a bounded task where an assistant or agent could help, then define its evidence, limits, evaluation, and human review.",
+      "Explore AI strategy, applications, agents, and automation around real workflows, clear information boundaries, and accountable human decisions.",
     href: "/services/ai-agents",
-    action: "Explore applied AI",
+    action: "Explore AI solutions",
     image: "/images/portfolio/knowledge.png",
   },
   {
-    id: "architecture",
-    label: "Architecture",
-    title: "Build a foundation that can evolve.",
+    id: "learning",
+    label: "AI Learning",
+    title: "Build practical AI skills for work and what comes next.",
     description:
-      "Turn a product or process challenge into a clear technical direction, with the right boundaries for software, data, and AI.",
-    href: "/services/technology-consulting",
-    action: "Explore architecture",
-    image: "/images/hero/connected-architecture.png",
+      "Find learning pathways for college students, working professionals, organizations, and educational institutions.",
+    href: "/programs",
+    action: "Explore AI learning",
+    image: "/images/training/learning.png",
   },
   {
-    id: "learning",
-    label: "Programs",
-    title: "Explore practical learning programs.",
+    id: "internships",
+    label: "Internships",
+    title: "Connect learning with hands-on practice.",
     description:
-      "Explore sector-specific AI and software subjects with proposed outlines across seminars, webinars, workshops, and extended formats.",
-    href: "/programs",
-    action: "Explore programs",
+      "Learn about AI internship opportunities and share your interests. Availability, eligibility, and scope are discussed individually.",
+    href: "/internships",
+    action: "Explore internships",
     image: "/images/training/learning.png",
   },
 ];
@@ -54,11 +54,5 @@ export const serviceGroups = [
     title: "Explain your product with clarity.",
     description:
       "Shape clear digital experiences and content that help people understand an offer, navigate a product, and take an informed next step.",
-  },
-  {
-    category: "Programs",
-    title: "Give people a practical path to explore AI.",
-    description:
-      "Browse sector-focused AI and software topics with flexible proposed learning formats.",
   },
 ];

@@ -2,8 +2,8 @@ import { ProgramsLanding } from "@/components/sections/programs-landing";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
-  "AI Programs for Every Industry",
-  "Explore sector-specific AI seminars, webinars, workshops, and training for technology, HR, sales, marketing, finance, education, operations, leadership, and data teams.",
+  "AI Learning for Students, Professionals, and Teams",
+  "Explore practical AI learning for students, working professionals, organizations, and colleges, alongside proposed role-specific programs and training outlines.",
   "/programs",
 );
 

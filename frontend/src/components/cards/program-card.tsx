@@ -29,7 +29,7 @@ export function ProgramCard({ program }: { program: Program }) {
   const durations = [
     ...new Set(program.formats.map(({ duration }) => duration)),
   ];
-  const enquiryHref = `/contact?program=${program.slug}`;
+  const enquiryHref = `/enquiry?program=${program.slug}`;
 
   return (
     <article className="program-card">

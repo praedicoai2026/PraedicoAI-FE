@@ -40,7 +40,7 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
         eyebrow={service.category}
         path={`/services/${service.slug}`}
         breadcrumbs={[
-          { label: "Services", href: "/services" },
+          { label: "AI Solutions", href: "/services" },
           {
             label: service.category,
             href: `/services/category/${slugify(service.category)}`,
@@ -233,7 +233,7 @@ export function EventDetailLayout({ event }: { event: Event }) {
           <div>
             <SectionHeader title="Learning outcomes" />
             <BulletList items={event.outcomes} />
-            <ButtonLink href="/contact">Express interest</ButtonLink>
+            <ButtonLink href="/enquiry">Express interest</ButtonLink>
           </div>
         </div>
       </Section>

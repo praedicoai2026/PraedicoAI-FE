@@ -13,16 +13,11 @@ export function portalCookieName(portal: PortalKind) {
   return `praedicoai_${portal}_session`;
 }
 
-export function portalCredentials(portal: PortalKind) {
-  return portal === "admin"
-    ? {
-        email: process.env.ADMIN_PORTAL_EMAIL,
-        password: process.env.ADMIN_PORTAL_PASSWORD,
-      }
-    : {
-        email: process.env.DEMO_PORTAL_EMAIL,
-        password: process.env.DEMO_PORTAL_PASSWORD,
-      };
+export function demoPortalCredentials() {
+  return {
+    email: process.env.DEMO_PORTAL_EMAIL,
+    password: process.env.DEMO_PORTAL_PASSWORD,
+  };
 }
 
 export function portalSessionSecret() {

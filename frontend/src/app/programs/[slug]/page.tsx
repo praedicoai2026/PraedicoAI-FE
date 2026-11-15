@@ -84,9 +84,21 @@ export default async function ProgramDetailPage({
   const durationLabels = program.formats.map(
     ({ category, duration }) => `${category} · ${duration}`,
   );
-  const enquiryHref = `/contact?program=${program.slug}`;
-  const formatEnquiryHref = (format: string) =>
-    `${enquiryHref}&format=${format}`;
+  const enquiryHref = `/enquiry?program=${encodeURIComponent(program.title)}`;
+  const formatEnquiryHref = (format: string) => {
+    const params = new URLSearchParams({
+      program: program.title,
+    });
+    if (format === "corporate") {
+      params.set("solution", "AI skills training for organizational teams");
+      params.set(
+        "problem",
+        `Our organization is exploring ${program.title} training for a team.`,
+      );
+      return `/enquiry/corporate-training?${params.toString()}`;
+    }
+    return `/enquiry?${params.toString()}`;
+  };
 
   return (
     <div className="program-detail-page">
@@ -163,6 +175,30 @@ export default async function ProgramDetailPage({
             Availability status: proposed; confirm delivery and schedule through
             an enquiry.
           </p>
+          <div className="program-registration-details">
+            <h3>Fees, delivery, and completion details</h3>
+            <ul className="program-info-list">
+              <li>
+                <strong>Delivery:</strong> Seminar outlines are in person and
+                webinar outlines are online. Delivery for workshops and
+                training is confirmed through an enquiry.
+              </li>
+              <li>
+                <strong>Fees:</strong> Enquiry-based; no fee is published.
+              </li>
+              <li>
+                <strong>Certificate:</strong> No certificate or accreditation
+                is stated as part of this outline. Confirm any applicable
+                completion terms before enrolling.
+              </li>
+              <li>
+                <strong>Internship or placement support:</strong> Not stated
+                as included in this program. Any cohort-specific support must
+                be confirmed separately; no placement or employment outcome is
+                promised.
+              </li>
+            </ul>
+          </div>
         </div>
       </Section>
       <Section id="program-syllabus">
@@ -221,13 +257,13 @@ export default async function ProgramDetailPage({
           <div>
             <SectionHeader
               eyebrow="Enquiries"
-              title="Discuss this program"
-              description="Choose a program format to open the contact form with this subject and format outlined. Add your audience and goals before sending the enquiry."
+              title="Register your interest"
+              description="Use the enquiry form to share your audience and goals. It starts a conversation and does not confirm registration, a scheduled cohort, or a place."
             />
           </div>
           <div className="button-row">
             <ButtonLink href={enquiryHref}>
-              Enquire about this program
+              Enroll Now
             </ButtonLink>
             <ButtonLink href={formatEnquiryHref("seminar")} secondary>
               Request a Seminar
@@ -242,9 +278,9 @@ export default async function ProgramDetailPage({
               Request a 7- or 15-day program
             </ButtonLink>
             <ButtonLink href={formatEnquiryHref("corporate")} secondary>
-              Discuss a customized group program
+              Request Corporate Training
             </ButtonLink>
-            <ButtonLink href="/contact" secondary>
+            <ButtonLink href="/enquiry" secondary>
               Contact PraedicoAI
             </ButtonLink>
           </div>

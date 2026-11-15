@@ -32,6 +32,9 @@ export function InquiryPage({ kind }: { kind: FormKind }) {
             <ContactAside />
             <SocialLinks />
             <nav className="grid gap-3 mt-7" aria-label="Other inquiry options">
+              <Link href="/enquiry" className="text-link">
+                Choose an enquiry type
+              </Link>
               <Link href="/request-proposal" className="text-link">
                 Request a proposal
               </Link>

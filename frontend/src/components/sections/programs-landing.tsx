@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { sectors, sectorPrograms } from "@/data/sectors";
 import { ProgramCatalog } from "@/components/sections/program-catalog";
+import { LearningAudienceCards } from "@/components/sections/learning-audience-pages";
 import { PageHero } from "@/components/sections/shared";
 import {
   ButtonLink,
@@ -51,11 +52,31 @@ export function ProgramsLanding() {
   return (
     <div className="programs-portal-page">
       <PageHero
-        title="Bring AI Into the Way You Work"
-        description="Practical AI learning programs designed for IT professionals, HR teams, sales and marketing professionals, educators, business leaders, and organizations preparing for the future of work."
-        eyebrow="Programs by PraedicoAI"
+        title="Build practical AI skills for what comes next"
+        description="Explore hands-on AI learning for students, working professionals, organizations, and colleges—from AI fundamentals and generative AI to automation and applied projects."
+        eyebrow="AI learning by PraedicoAI"
         path="/programs"
       />
+      <Section>
+        <SectionHeader
+          eyebrow="Learn for your goals"
+          title="AI learning for every stage"
+          description="Start with the audience and goals that fit you, then explore relevant subjects and discuss a suitable format."
+        />
+        <LearningAudienceCards />
+      </Section>
+      <Section className="section-tinted">
+        <div className="programs-enquiry">
+          <div>
+            <SectionHeader
+              eyebrow="For students and early-career learners"
+              title="Interested in an AI internship?"
+              description="Discuss your learning interests, project goals, and questions about availability and eligibility."
+            />
+          </div>
+          <ButtonLink href="/internships">Explore AI internships</ButtonLink>
+        </div>
+      </Section>
       <Section>
         <div className="programs-introduction">
           <SectionHeader
@@ -264,10 +285,10 @@ export function ProgramsLanding() {
             />
           </div>
           <div className="button-row">
-            <ButtonLink href="/contact?inquiryType=Programs%20and%20learning">
+            <ButtonLink href="/enquiry">
               Discuss a program
             </ButtonLink>
-            <ButtonLink href="/contact" secondary>
+            <ButtonLink href="/enquiry" secondary>
               Contact PraedicoAI
             </ButtonLink>
           </div>

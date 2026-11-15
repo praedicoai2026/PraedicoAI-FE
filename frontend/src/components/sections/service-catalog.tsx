@@ -86,7 +86,7 @@ export function ServiceCatalog({
           href="/services"
           aria-current={!initialCategory ? "page" : undefined}
         >
-          All services
+          All AI solutions
         </Link>
         {categories.map((category) => (
           <Link

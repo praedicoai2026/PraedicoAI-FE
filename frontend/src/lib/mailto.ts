@@ -83,6 +83,9 @@ export function readInquiryValues(
         ...common,
         firstName: fields.firstName,
         lastName: fields.lastName,
+        company: fields.company,
+        phone: fields.phone,
+        industry: fields.industry,
         inquiryType: fields.inquiryType,
         subject: fields.subject,
         message: fields.message,
@@ -91,6 +94,9 @@ export function readInquiryValues(
       return {
         ...common,
         name: fields.name,
+        company: fields.company,
+        phone: fields.phone,
+        industry: fields.industry,
         requiredServices: fields.requiredServices,
         projectSummary: fields.projectSummary,
       } satisfies ProposalFormData;
@@ -98,6 +104,9 @@ export function readInquiryValues(
       return {
         ...common,
         name: fields.name,
+        company: fields.company,
+        phone: fields.phone,
+        industry: fields.industry,
         consultationTopic: fields.consultationTopic,
         problemSummary: fields.problemSummary,
         timeZone: fields.timeZone,

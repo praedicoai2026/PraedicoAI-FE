@@ -100,7 +100,7 @@ export default async function AboutDetailPage({
                 Explore education programs
               </ButtonLink>
               <ButtonLink
-                href="/contact?inquiryType=Programs%20and%20learning"
+                href="/enquiry/student-ai-training"
                 secondary
               >
                 Discuss a learning program
@@ -150,7 +150,7 @@ export default async function AboutDetailPage({
               ))}
             </div>
             <div className="button-row">
-              <ButtonLink href="/contact">
+              <ButtonLink href="/enquiry">
                 Discuss a speaking session
               </ButtonLink>
               <ButtonLink href="/events" secondary>

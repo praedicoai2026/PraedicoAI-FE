@@ -90,7 +90,7 @@ export default function AboutPage() {
           ))}
         </div>
         <div className="button-row">
-          <ButtonLink href="/contact">Start a conversation</ButtonLink>
+          <ButtonLink href="/enquiry">Start a conversation</ButtonLink>
         </div>
       </Section>
     </>

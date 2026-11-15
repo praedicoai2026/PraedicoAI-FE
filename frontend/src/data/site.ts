@@ -1,18 +1,22 @@
 import type { SiteConfiguration } from "@/types/content";
+import { whatsapp } from "@/data/whatsapp";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const productionSiteUrl =
+  process.env.VERCEL_ENV === "production" ? "https://praedicoai.com" : "";
+const siteUrl = configuredSiteUrl || productionSiteUrl;
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ?? "";
 
 export const site: SiteConfiguration = {
   name: "PraedicoAI Private Limited",
-  title: "Applied AI. Powering Intelligent Solutions.",
+  title: "AI Solutions & Practical AI Learning.",
   description:
-    "PraedicoAI helps organizations explore, validate, and build practical AI-enabled software and workflows with people, business context, and responsible use at the center.",
+    "PraedicoAI is an AI transformation partner for businesses, professionals, and the next generation—through practical AI solutions, learning, and responsible implementation.",
   contactEmail,
   contactEmailConfigured: contactEmail.length > 0,
-  url: configuredSiteUrl
-    ? new URL(configuredSiteUrl).origin
-    : "http://localhost:3000",
-  canonicalUrlConfigured: Boolean(configuredSiteUrl),
+  url: siteUrl ? new URL(siteUrl).origin : "http://localhost:3000",
+  canonicalUrlConfigured: Boolean(siteUrl),
+  whatsappUrl: whatsapp.url,
+  whatsappConfigured: whatsapp.configured,
 };
 export const expertise = [
   "Applied AI discovery",

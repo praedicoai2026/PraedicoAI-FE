@@ -154,7 +154,7 @@ export function SectorDetailContent({ sector }: { sector: ProgramSector }) {
               description="Share your audience, workflow, learning goals, and preferred format through the contact form."
             />
           </div>
-          <ButtonLink href="/contact?inquiryType=Programs%20and%20learning">
+          <ButtonLink href="/enquiry/corporate-training">
             Discuss a program
           </ButtonLink>
         </div>
@@ -190,7 +190,18 @@ export function SectorSubjectContent({ item }: { item: SectorProgram }) {
     `Complete a guided exercise applying ${subject.focusAreas[1].toLowerCase()}.`,
     "Review an output against criteria for accuracy, privacy, and usefulness.",
   ];
-  const enquiryHref = `/contact?program=${subject.slug}`;
+  const enquiryParams = new URLSearchParams({
+    program: subject.title,
+    industry: sector.name,
+    objectives: `I am interested in applying ${subject.title} to ${sector.name.toLowerCase()} work.`,
+  });
+  const enquiryHref = `/enquiry/professional-ai-training?${enquiryParams.toString()}`;
+  const corporateEnquiryParams = new URLSearchParams({
+    program: subject.title,
+    problem: `Our organization is exploring ${subject.title} training for a ${sector.name.toLowerCase()} team.`,
+    solution: "AI skills training for organizational teams",
+  });
+  const corporateEnquiryHref = `/enquiry/corporate-training?${corporateEnquiryParams.toString()}`;
 
   return (
     <div className="program-detail-page">
@@ -272,6 +283,30 @@ export function SectorSubjectContent({ item }: { item: SectorProgram }) {
           <p className="program-curriculum-note">
             Confirm delivery and schedule through an enquiry.
           </p>
+          <div className="program-registration-details">
+            <h3>Fees, delivery, and completion details</h3>
+            <ul className="program-info-list">
+              <li>
+                <strong>Delivery:</strong> Seminar outlines are in person and
+                webinar outlines are online. Delivery for workshops and
+                training is confirmed through an enquiry.
+              </li>
+              <li>
+                <strong>Fees:</strong> Enquiry-based; no fee is published.
+              </li>
+              <li>
+                <strong>Certificate:</strong> No certificate or accreditation
+                is stated as part of this outline. Confirm any applicable
+                completion terms before enrolling.
+              </li>
+              <li>
+                <strong>Internship or placement support:</strong> Not stated
+                as included in this program. Any cohort-specific support must
+                be confirmed separately; no placement or employment outcome is
+                promised.
+              </li>
+            </ul>
+          </div>
         </div>
       </Section>
       <Section id="program-syllabus">
@@ -359,13 +394,13 @@ export function SectorSubjectContent({ item }: { item: SectorProgram }) {
           <div>
             <SectionHeader
               eyebrow="Enquiries"
-              title="Discuss this program"
-              description="Use the existing training enquiry form to share your audience, goals, and preferred format."
+              title="Register your interest"
+              description="Use the enquiry form to share your audience and goals. It starts a conversation and does not confirm registration, a scheduled cohort, or a place."
             />
           </div>
           <div className="button-row">
             <ButtonLink href={enquiryHref}>
-              Enquire about this program
+              Enroll Now
             </ButtonLink>
             <ButtonLink href={`${enquiryHref}&format=seminar`} secondary>
               Request a Seminar
@@ -379,10 +414,10 @@ export function SectorSubjectContent({ item }: { item: SectorProgram }) {
             <ButtonLink href={`${enquiryHref}&format=training`} secondary>
               Request Training
             </ButtonLink>
-            <ButtonLink href={`${enquiryHref}&format=corporate`} secondary>
+            <ButtonLink href={corporateEnquiryHref} secondary>
               Request Corporate Training
             </ButtonLink>
-            <ButtonLink href="/contact" secondary>
+            <ButtonLink href="/enquiry" secondary>
               Contact PraedicoAI
             </ButtonLink>
           </div>

@@ -56,6 +56,36 @@ Record Pass, Fail, or Blocked with notes after completing each section. The init
 
 **Status:** Not Tested. **Notes:** [Result]
 
+## Lead Management
+
+**Objective:** Verify verified, categorized enquiry intake and protected admin workflows.
+
+**Steps:** With MongoDB, backend, frontend, and SMTP configured, provision a test admin and a separate staff account using the backend operator commands. Submit each of the nine enquiry categories with fictitious details; try invalid fields, missing consent, unverified email, and a filled honeypot. Sign in as a regular account and confirm it cannot access admin APIs. Sign in as the provisioned admin; search/filter leads, inspect analytics, update status, assign/unassign a provisioned teammate, add a note and follow-up date, and export a filtered CSV.
+
+**Expected:** Valid leads are stored with server-derived vertical/category classification and initial status history; invalid or unverified submissions are rejected; role changes are unavailable through public registration; only admins can view/update/export; only authorized staff/admin accounts can be assigned; exports quote values safely and clearly indicate the 10,000-row cap. If SMTP fails after storage, the page reports that the enquiry was saved and email notifications were unavailable.
+
+**Status:** Not Tested. **Notes:** [Result]
+
+## Workforce and Role-Based Administration
+
+**Objective:** Verify employee privacy, role-scoped project access, and real workspace reports.
+
+**Steps:** Create a Super Admin using the one-time backend setup command. Assign separate test accounts the HR Manager, Project Manager, Employee, and inactive roles. Add a work profile for an employee, create a project, and assign that employee. Sign in as each role; inspect the directory, own profile, project list, and reports. Try accessing another employee's profile, the full directory, admin account management, and aggregate reports without the required permission. Deactivate an account while signed in and retry its API session.
+
+**Expected:** Employee self-service is read-only; employees see only projects they own or are assigned to; managers see only features granted by role/permission; deactivation revokes sessions. Workforce responses contain work details only and never expose phone, password, salary, health, or identity data. Reports reflect saved MongoDB records and label product/community counts as enquiries.
+
+**Status:** Not Tested. **Notes:** [Result]
+
+## Content Publishing Workflow
+
+**Objective:** Verify draft/review/publish permissions and published-only public pages.
+
+**Steps:** Sign in as a Content Manager and create a draft, submit an entry for review, try publishing it, and attempt to archive it. Sign in as an authorized reviewer to publish and archive entries. Try duplicate slugs. Open `/updates`, a published detail page, a draft URL, and `/sitemap.xml`.
+
+**Expected:** Content Managers can create drafts and request review but cannot publish/archive. Authorized reviewers can publish/archive. Duplicate slugs report a clear conflict. Public pages and the sitemap contain only published entries, and page content is rendered as text rather than HTML.
+
+**Status:** Not Tested. **Notes:** [Result]
+
 ## 5. Theme Switching
 
 **Objective:** Verify light/dark/system preferences.

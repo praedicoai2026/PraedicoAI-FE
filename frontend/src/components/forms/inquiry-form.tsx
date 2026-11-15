@@ -73,7 +73,20 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
     const programSlug = searchParams.get("program");
     const requestedFormat = searchParams.get("format");
     const inquiryType = searchParams.get("inquiryType");
+    const industry = searchParams.get("industry");
+    const requestedSubject = searchParams.get("subject")?.trim().slice(0, 200);
+    const requestedMessage = searchParams.get("message")?.trim().slice(0, 2000);
     const inquiryTypeField = form.current?.elements.namedItem("inquiryType");
+    const industryField = form.current?.elements.namedItem("industry");
+    if (
+      industry &&
+      industryField instanceof HTMLSelectElement &&
+      Array.from(industryField.options).some(
+        (option) => option.value === industry,
+      )
+    ) {
+      industryField.value = industry;
+    }
     if (
       inquiryType &&
       inquiryTypeField instanceof HTMLSelectElement &&
@@ -84,7 +97,6 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
       inquiryTypeField.value = inquiryType;
     }
     const programTitle = programSlug ? programTitles[programSlug] : undefined;
-    if (!programTitle) return;
     const formatLabels = new Map([
       ["seminar", "Seminar · 2 hours"],
       ["webinar", "Webinar · 2 hours"],
@@ -96,19 +108,28 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
       ? formatLabels.get(requestedFormat)
       : undefined;
     if (
+      programTitle &&
+      !inquiryType &&
       inquiryTypeField instanceof HTMLSelectElement &&
       Array.from(inquiryTypeField.options).some(
         (option) => option.value === "Programs and learning",
       )
-    )
+    ) {
       inquiryTypeField.value = "Programs and learning";
+    }
     const subjectField = form.current?.elements.namedItem("subject");
-    if (subjectField instanceof HTMLInputElement) {
+    if (programTitle && subjectField instanceof HTMLInputElement) {
       subjectField.value = `Program enquiry: ${programTitle}`;
     }
     const messageField = form.current?.elements.namedItem("message");
-    if (messageField instanceof HTMLTextAreaElement) {
+    if (programTitle && messageField instanceof HTMLTextAreaElement) {
       messageField.value = `I would like to enquire about ${programTitle}${formatLabel ? ` (${formatLabel})` : ""}. Please share availability and scope.`;
+    }
+    if (requestedSubject && subjectField instanceof HTMLInputElement) {
+      subjectField.value = requestedSubject;
+    }
+    if (requestedMessage && messageField instanceof HTMLTextAreaElement) {
+      messageField.value = requestedMessage;
     }
   }, [kind]);
 

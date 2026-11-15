@@ -146,6 +146,52 @@ const sectorsBase: Omit<ProgramSector, "subjects">[] = [
     ],
   },
   {
+    id: "legal",
+    name: "Legal and Compliance",
+    slug: "legal",
+    description:
+      "Explore practical AI support for legal research, document workflows, and compliance administration while keeping professional review and confidentiality central.",
+    audience: [
+      "Legal professionals",
+      "Compliance teams",
+      "Contract administrators",
+      "Legal operations",
+    ],
+    challenges: [
+      "Reviewing large volumes of documents and policies",
+      "Keeping research, summaries, and references accurate and traceable",
+      "Protecting privileged, confidential, and regulated information",
+    ],
+    useCases: [
+      "Search and summarize approved legal materials",
+      "Extract contract terms and route exceptions for review",
+      "Organize compliance evidence and draft internal reports",
+    ],
+  },
+  {
+    id: "retail",
+    name: "Retail and E-commerce",
+    slug: "retail",
+    description:
+      "Apply practical AI tools to retail research, product content, customer support, and operations without replacing human decisions.",
+    audience: [
+      "Retail professionals",
+      "E-commerce teams",
+      "Merchandising and marketing",
+      "Store and operations managers",
+    ],
+    challenges: [
+      "Maintaining consistent product and customer information across channels",
+      "Making sense of customer feedback, demand, and operational data",
+      "Coordinating service and routine workflows across teams",
+    ],
+    useCases: [
+      "Product content drafts and catalog organization",
+      "Customer feedback and support summaries",
+      "Demand, inventory, and sales reporting for human review",
+    ],
+  },
+  {
     id: "education",
     name: "Education and Academia",
     slug: "education",
@@ -263,7 +309,12 @@ const sectorsBase: Omit<ProgramSector, "subjects">[] = [
 ];
 
 const subjectsBySector: Record<string, string> = {
-  "it-software": `ai-future-it-professionals|AI and the Future of IT Professionals|Understand how AI is changing IT roles, workflows, and professional skills.|AI adoption across developer, tester, support, analyst, and operations roles;Prompting and verification for technical tasks;Human judgment, career readiness, and responsible workflow design
+  "it-software": `ai-fundamentals|Artificial Intelligence Fundamentals|Build a clear foundation in AI concepts, common capabilities, limitations, and responsible use.|Core AI and machine-learning concepts;Common AI capabilities and practical examples;Limitations, verification, privacy, and responsible use
+python-for-ai|Python for AI|Learn Python programming concepts through beginner-friendly examples related to data and AI.|Python syntax, variables, collections, and control flow;Functions, files, and working with data;Small AI-related exercises and code review
+machine-learning-fundamentals|Machine Learning Fundamentals|Explore core machine-learning ideas, common task types, and responsible model evaluation.|Supervised and unsupervised learning concepts;Training, validation, and evaluation basics;Data quality, limitations, and responsible interpretation
+ai-tools-for-professionals|AI Tools for Professionals|Practice evaluating and using AI tools for common knowledge-work tasks.|Selecting tools for research, writing, analysis, and planning;Prompting, context, and output verification;Privacy, approved use, and workflow fit
+no-code-ai-automation|No-Code and Low-Code AI Automation|Explore visual automation concepts and AI-assisted workflows using bounded, reviewable examples.|Workflow mapping, triggers, and actions;Connecting approved tools and AI steps;Testing, permissions, exception handling, and human approval
+ai-future-it-professionals|AI and the Future of IT Professionals|Understand how AI is changing IT roles, workflows, and professional skills.|AI adoption across developer, tester, support, analyst, and operations roles;Prompting and verification for technical tasks;Human judgment, career readiness, and responsible workflow design
 ai-powered-software-development|AI-Powered Software Development|Use coding assistants to support implementation, debugging, testing, and maintenance with human review.|AI-assisted requirements and code generation;Debugging, refactoring, tests, and documentation;Code quality, dependency review, and secure development
 generative-ai-application-development|Generative AI Application Development|Build useful application features with model APIs, structured outputs, retrieval, and evaluation.|LLM APIs, prompt design, and structured responses;Secure backend integration and application reliability;Embeddings, document retrieval, and RAG
 ai-agents-intelligent-automation|AI Agents and Intelligent Automation|Design controlled AI workflows with tools, retrieval, validation, and human approval.|Agent patterns, tool calling, and task decomposition;API integration, data retrieval, and workflow state;Permissions, recovery, monitoring, and human oversight
@@ -289,6 +340,15 @@ ai-financial-reporting|AI-Assisted Reporting and Analysis|Use AI to help prepare
 ai-invoice-document-processing|AI for Invoice and Document Processing|Explore document extraction and exception workflows with validation and human approval.|Invoice fields and document classification;Extraction, validation, and exception routing;Secure document workflows and audit trails|Use synthetic or approved documents and retain human approval for exceptions
 ai-financial-risk-analysis|AI for Risk Analysis|Understand AI-supported anomaly and scenario analysis with explainability and human-led review.|Data quality and anomaly detection concepts;Risk summaries and scenario analysis;Explainability, limitations, and human-led review|AI-generated risk assessments do not replace authorized professional decisions
 responsible-ai-finance|Responsible AI in Finance|Assess privacy, reliability, governance, and oversight in financial AI workflows.|Sensitive data handling and access controls;Fairness, reliability, and explainability;Governance, accountability, and review|Use synthetic data; AI output must not be presented as financial advice`,
+  legal: `ai-legal-research|AI for Legal Research and Knowledge Work|Use AI tools to organize and summarize approved legal sources while verifying authorities and protecting confidential information.|Approved legal research;Citation and source verification;Confidentiality and qualified legal review|Verify authorities and citations independently. Keep privileged information out of unapproved tools.
+ai-contract-review|AI-Assisted Contract Review|Explore document extraction and contract summaries as aids to qualified legal review.|Contract term extraction and comparison;Approved exception checklists;Confidentiality and counsel review|Use synthetic or approved sample contracts. AI does not provide legal advice or replace counsel.
+ai-compliance-workflows|AI for Compliance Workflows|Apply AI assistance to organize compliance evidence, policies, and recurring reports with accountable review.|Compliance evidence organization;Policy and obligation tracking;Accountable human escalation|Use approved information and retain accountable human review
+responsible-ai-legal|Responsible AI for Legal Professionals|Assess confidentiality, accuracy, accountability, and safe boundaries for legal AI use.|Professional confidentiality and data boundaries;Citation and factual verification;Disclosure, governance, and qualified oversight|Do not present generated legal analysis as authoritative without qualified review`,
+  retail: `ai-retail-productivity|AI Tools for Retail Professionals|Use practical AI tools to support retail communication, product information, research, and everyday planning.|Product content organization;Catalog quality and channel consistency;Fact-checking and brand review
+ai-ecommerce-content|AI for E-commerce Content and Catalogs|Organize and improve product content with reviewable AI-assisted workflows.|Product-data cleanup;Description drafting and channel adaptation;Product claim validation and approval|Verify product specifications and claims against approved source data
+ai-retail-customer-insights|AI for Retail Customer Insights|Summarize customer feedback and business data to support human-led retail planning.|Customer-feedback summaries;Inventory and sales-report interpretation;Data quality and responsible recommendations|Use aggregated or approved sample data. Do not infer sensitive traits.
+ai-retail-automation|AI for Retail Workflow Automation|Map routine retail processes and explore bounded automation with approval and exception handling.|Workflow mapping and task automation;AI-assisted handoffs and exception routing;Permissions, testing, and human approval|Use sandboxed or sample workflows. Require approval before consequential actions.
+responsible-ai-retail|Responsible AI in Retail|Apply privacy, transparency, and oversight to customer and operational AI use.|Customer privacy and consent;Recommendation and content review;Transparency, accessibility, and accountable oversight|Do not use AI to make consequential customer decisions without appropriate governance`,
   education: `ai-teachers-faculty|AI for Teachers and Faculty|Use AI to support teaching preparation and resource creation while maintaining educator review.|Lesson planning and teaching materials;Quiz generation, rubrics, and differentiated resources;Verification and academic integrity
 ai-students-graduates|AI for Students and Fresh Graduates|Build AI literacy and use AI responsibly for learning, research, coding, and career preparation.|AI literacy, prompts, and study planning;Research and coding assistance;Portfolio development, career readiness, and academic integrity
 ai-assisted-research|AI-Assisted Research|Use AI to organize research while verifying sources, citations, and summaries.|Literature discovery and research questions;Paper summaries, notes, and knowledge organization;Citation verification, ethics, and summary limitations
@@ -332,6 +392,8 @@ function modulesForSubject(
       "synthetic or approved sample financial data; validate all calculations independently",
     education: "a classroom, research, or student-learning scenario",
     "customer-support": "a support workflow and approved knowledge source",
+    legal: "synthetic or approved sample legal materials with citation and confidentiality checks",
+    retail: "an approved sample product catalog or retail workflow",
     operations: "a documented business workflow and its exception path",
     "data-analytics":
       "an approved sample dataset and a practical reporting question",
@@ -352,6 +414,8 @@ function modulesForSubject(
     "sales-business-development": "sales workflow project",
     marketing: "campaign or content project",
     "business-leadership": "AI adoption roadmap",
+    legal: "legal research or contract workflow review",
+    retail: "retail content or workflow prototype",
   };
   const capstoneName = capstone[sector.slug] ?? `${subject.title} project`;
   const area = (index: number) =>

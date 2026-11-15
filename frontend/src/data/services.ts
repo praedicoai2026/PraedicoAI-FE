@@ -24,6 +24,7 @@ const seeds: ServiceSeed[] = [
     capabilities: [
       "Custom software concepts",
       "Business applications and internal tools",
+      "Custom AI-enabled application development",
       "Application modernization",
       "API-ready frontend design",
       "Maintainable architecture",
@@ -71,7 +72,7 @@ const seeds: ServiceSeed[] = [
   },
   {
     slug: "ai-agents",
-    title: "Applied AI & Agent Design",
+    title: "AI Agents & Multi-Agent Systems",
     icon: "brain",
     category: "AI & Automation",
     summary:
@@ -80,6 +81,7 @@ const seeds: ServiceSeed[] = [
     capabilities: [
       "AI opportunity and readiness discovery",
       "Task-specific assistant and agent design",
+      "Multi-agent workflow concepts",
       "Knowledge retrieval and source-grounded response concepts",
       "Tool-use boundaries and permission planning",
       "Human review, escalation, and override design",
@@ -115,6 +117,7 @@ const seeds: ServiceSeed[] = [
       "Business process understanding",
       "Repetitive task identification",
       "Current-state and future-state process mapping",
+      "Workflow automation and system integration planning",
       "AI-assisted intake, triage, and drafting concepts",
       "Notification, routing, and approval design",
       "Information ownership and access review",
@@ -280,6 +283,199 @@ const seeds: ServiceSeed[] = [
       "Reusable component prototype",
     ],
     tags: ["React", "TypeScript", "Accessibility"],
+  },
+  {
+    slug: "custom-ai-application-development",
+    title: "Custom AI Application Development",
+    icon: "code",
+    category: "Engineering",
+    summary:
+      "Design and build custom applications that connect AI capabilities to real user workflows, approved information, and clear human controls.",
+    audience: ["Businesses", "Product teams", "Technology leaders"],
+    capabilities: [
+      "AI-enabled web application design",
+      "Assistant and agent integration planning",
+      "User experience and workflow prototyping",
+      "API, data, and identity integration",
+      "Access, review, and escalation controls",
+      "Quality, accessibility, and performance planning",
+    ],
+    challenges: [
+      "An AI proof of concept does not fit the real application journey",
+      "Users need to understand, review, and correct AI-assisted results",
+    ],
+    deliverables: [
+      "Application scope and user journey",
+      "Working prototype or agreed implementation scope",
+      "Evaluation and operational-readiness plan",
+    ],
+    tags: ["AI Applications", "Web Development", "Human Review"],
+  },
+  {
+    slug: "ai-consulting-strategy",
+    title: "AI Consulting & Strategy",
+    icon: "layers",
+    category: "Strategy",
+    summary:
+      "Identify where AI may help, assess readiness and constraints, and shape a practical roadmap before committing to implementation.",
+    audience: ["Business owners", "Leaders", "Product and operations teams"],
+    capabilities: [
+      "AI readiness and opportunity discovery",
+      "Use-case prioritization by value, feasibility, and risk",
+      "Build, buy, or partner decision support",
+      "Data, integration, and operating-model assessment",
+      "Responsible AI and governance planning",
+      "Incremental adoption roadmaps",
+    ],
+    challenges: [
+      "Teams have many AI ideas but no shared priority",
+      "Business goals, data constraints, and delivery plans are disconnected",
+    ],
+    deliverables: [
+      "Opportunity and readiness brief",
+      "Prioritized use-case map",
+      "Practical roadmap with assumptions and open decisions",
+    ],
+    tags: ["AI Strategy", "Readiness", "Responsible AI"],
+  },
+  {
+    slug: "generative-ai-solutions",
+    title: "Generative AI Solutions",
+    icon: "brain",
+    category: "AI & Automation",
+    summary:
+      "Explore generative AI experiences for research, knowledge work, and content workflows with clear source, review, and data boundaries.",
+    audience: ["Business teams", "Product teams", "Technology leaders"],
+    capabilities: [
+      "Generative AI opportunity discovery",
+      "Knowledge retrieval and source-grounded response concepts",
+      "Drafting and summarization workflows",
+      "Prompt and output evaluation",
+      "Model and deployment trade-off assessment",
+      "Human review and escalation design",
+    ],
+    challenges: [
+      "Generated content is difficult to verify",
+      "Teams need to control which information an AI experience can use",
+    ],
+    deliverables: [
+      "Bounded use-case and experience brief",
+      "Source, permission, and review model",
+      "Evaluation scenarios and prototype scope",
+    ],
+    tags: ["Generative AI", "Knowledge Systems", "Evaluation"],
+  },
+  {
+    slug: "ai-chatbots-virtual-assistants",
+    title: "AI Chatbots & Virtual Assistants",
+    icon: "brain",
+    category: "AI & Automation",
+    summary:
+      "Design conversational support for defined tasks, with approved knowledge, visible limitations, and clear paths to a person.",
+    audience: [
+      "Customer support",
+      "Service teams",
+      "Internal knowledge owners",
+    ],
+    capabilities: [
+      "Customer and employee assistant use-case design",
+      "Approved knowledge-source planning",
+      "Conversation flows and response boundaries",
+      "Uncertainty, fallback, and escalation design",
+      "Privacy and access-control review",
+      "Quality evaluation and handoff planning",
+    ],
+    challenges: [
+      "People receive inconsistent answers across channels",
+      "A bot may fail to recognize when a person should take over",
+    ],
+    deliverables: [
+      "Assistant scope and conversation map",
+      "Knowledge and access requirements",
+      "Human handoff and evaluation plan",
+    ],
+    tags: ["Conversational AI", "Knowledge Retrieval", "Human Handoff"],
+  },
+  {
+    slug: "data-analytics-predictive-intelligence",
+    title: "Data Analytics & Predictive Intelligence",
+    icon: "chart",
+    category: "Strategy",
+    summary:
+      "Turn approved data into clearer reporting and testable predictive concepts, with assumptions, limitations, and human decisions made explicit.",
+    audience: ["Business analysts", "Data teams", "Operations leaders"],
+    capabilities: [
+      "Analytics and reporting opportunity discovery",
+      "Data quality and source-readiness review",
+      "Predictive use-case and assumption mapping",
+      "Dashboard and decision-support concepts",
+      "Evaluation and monitoring questions",
+      "Human review for consequential decisions",
+    ],
+    challenges: [
+      "Reports take time to prepare and reconcile",
+      "Predictions may be treated as certainty without validation",
+    ],
+    deliverables: [
+      "Data and decision context brief",
+      "Analytics or predictive prototype scope",
+      "Evaluation measures and limitation notes",
+    ],
+    tags: ["Data Analytics", "Predictive Models", "Decision Support"],
+  },
+  {
+    slug: "workflow-automation-integration",
+    title: "Workflow Automation & System Integration",
+    icon: "workflow",
+    category: "AI & Automation",
+    summary:
+      "Connect tools and automate repeatable handoffs while keeping approvals, exceptions, and process ownership visible.",
+    audience: ["Operations teams", "Process owners", "Technology leaders"],
+    capabilities: [
+      "Workflow and system-boundary mapping",
+      "API and integration planning",
+      "Intake, routing, and approval automation concepts",
+      "Exception handling and fallback design",
+      "Information ownership and permissions review",
+      "Measurement and operational handover planning",
+    ],
+    challenges: [
+      "Information is re-entered across disconnected systems",
+      "Automations are hard to audit when an exception occurs",
+    ],
+    deliverables: [
+      "Current-state workflow and integration map",
+      "Automation opportunities and boundaries",
+      "Exception, ownership, and rollout plan",
+    ],
+    tags: ["Workflow Automation", "System Integration", "Process Design"],
+  },
+  {
+    slug: "ai-adoption-implementation",
+    title: "AI Adoption & Implementation",
+    icon: "layers",
+    category: "Strategy",
+    summary:
+      "Prepare teams to adopt a bounded AI capability through clear roles, practical enablement, staged delivery, and ongoing evaluation.",
+    audience: ["Executive sponsors", "Managers", "Cross-functional teams"],
+    capabilities: [
+      "Adoption readiness and stakeholder mapping",
+      "Role-based AI learning and enablement",
+      "Pilot and implementation planning",
+      "Governance, ownership, and escalation design",
+      "Adoption and quality measurement",
+      "Incremental rollout and feedback loops",
+    ],
+    challenges: [
+      "Tools are introduced without shared expectations or support",
+      "Teams lack a plan for review, ownership, and ongoing improvement",
+    ],
+    deliverables: [
+      "Adoption and stakeholder plan",
+      "Pilot scope, roles, and success measures",
+      "Enablement and iteration roadmap",
+    ],
+    tags: ["AI Adoption", "Enablement", "Implementation Planning"],
   },
 ];
 export const services: Service[] = seeds

@@ -6,6 +6,8 @@ export interface SiteConfiguration {
   contactEmailConfigured: boolean;
   url: string;
   canonicalUrlConfigured: boolean;
+  whatsappUrl: string;
+  whatsappConfigured: boolean;
 }
 export interface NavigationItem {
   label: string;

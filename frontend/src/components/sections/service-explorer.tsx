@@ -97,7 +97,7 @@ export function ServiceExplorer({ services }: { services: ServiceSummary[] }) {
             </p>
             <h3>{group.title}</h3>
             <p className="muted">{group.description}</p>
-            <Link className="text-link" href="/request-proposal">
+            <Link className="text-link" href="/enquiry/ai-business-solutions">
               Discuss your idea
               <ArrowUpRight size={18} />
             </Link>

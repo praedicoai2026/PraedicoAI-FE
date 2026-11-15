@@ -8,6 +8,7 @@ import { navigation } from "@/data/navigation";
 import { blogCategories } from "@/data/blogPosts";
 import { serviceCategories, services } from "@/data/services";
 import { sectors } from "@/data/sectors";
+import { learningAudiences } from "@/data/learning-audiences";
 import { site } from "@/data/site";
 import { useTheme } from "@/hooks/useTheme";
 import { IconButton } from "@/components/ui/primitives";
@@ -41,6 +42,8 @@ export function Header() {
   const mobileProgramsDropdown = useRef<HTMLDetailsElement>(null);
   const mobileServicesDropdown = useRef<HTMLDetailsElement>(null);
   const mobileBlogDropdown = useRef<HTMLDetailsElement>(null);
+  const ecosystemDropdown = useRef<HTMLDetailsElement>(null);
+  const mobileEcosystemDropdown = useRef<HTMLDetailsElement>(null);
   useEffect(() => {
     const dialog = drawer.current;
     const handleClose = () => {
@@ -58,16 +61,24 @@ export function Header() {
     if (programsDropdown.current) programsDropdown.current.open = false;
     if (servicesDropdown.current) servicesDropdown.current.open = false;
     if (blogDropdown.current) blogDropdown.current.open = false;
+    if (ecosystemDropdown.current) ecosystemDropdown.current.open = false;
     if (mobileProgramsDropdown.current)
       mobileProgramsDropdown.current.open = false;
     if (mobileServicesDropdown.current)
       mobileServicesDropdown.current.open = false;
     if (mobileBlogDropdown.current) mobileBlogDropdown.current.open = false;
+    if (mobileEcosystemDropdown.current)
+      mobileEcosystemDropdown.current.open = false;
   }
   const active = (href: string) =>
     href === "/"
       ? pathname === "/"
       : pathname === href || pathname.startsWith(`${href}/`);
+  const activeLearning =
+    active("/programs") ||
+    pathname.startsWith("/learning/") ||
+    pathname === "/internships";
+  const activeEcosystem = ["/products", "/research", "/community"].some(active);
   return (
     <header className="site-header">
       <div className="container header-inner">
@@ -103,8 +114,8 @@ export function Header() {
                     event.currentTarget.open = false;
                 }}
               >
-                <summary className={active(item.href) ? "active" : ""}>
-                  Programs
+                <summary className={activeLearning ? "active" : ""}>
+                  {item.label}
                 </summary>
                 <div className="dropdown-content programs-mega-menu">
                   <Link
@@ -112,8 +123,23 @@ export function Header() {
                     href="/programs"
                     onClick={closeNavigation}
                   >
-                    All Programs <ArrowUpRight size={14} aria-hidden="true" />
+                    All AI Learning{" "}
+                    <ArrowUpRight size={14} aria-hidden="true" />
                   </Link>
+                  <div className="learning-audience-nav">
+                    {learningAudiences.map((audience) => (
+                      <Link
+                        href={`/learning/${audience.slug}`}
+                        key={audience.slug}
+                        onClick={closeNavigation}
+                      >
+                        {audience.eyebrow}
+                      </Link>
+                    ))}
+                    <Link href="/internships" onClick={closeNavigation}>
+                      Internships
+                    </Link>
+                  </div>
                   <div className="programs-mega-grid">
                     {sectors.map((sector) => (
                       <Link
@@ -145,7 +171,7 @@ export function Header() {
                 }}
               >
                 <summary className={active(item.href) ? "active" : ""}>
-                  Services
+                  {item.label}
                 </summary>
                 <div className="dropdown-content programs-mega-menu services-mega-menu">
                   <Link
@@ -153,7 +179,8 @@ export function Header() {
                     href="/services"
                     onClick={closeNavigation}
                   >
-                    All Services <ArrowUpRight size={14} aria-hidden="true" />
+                    All AI Solutions{" "}
+                    <ArrowUpRight size={14} aria-hidden="true" />
                   </Link>
                   <div className="services-mega-grid">
                     {serviceCategories.map((category) => (
@@ -194,7 +221,7 @@ export function Header() {
                 }}
               >
                 <summary className={active(item.href) ? "active" : ""}>
-                  Blog
+                  {item.label}
                 </summary>
                 <div className="dropdown-content programs-mega-menu blog-mega-menu">
                   <Link
@@ -215,6 +242,46 @@ export function Header() {
                         <small>Explore articles</small>
                       </Link>
                     ))}
+                  </div>
+                </div>
+              </details>
+            ) : item.href === "/products" ? (
+              <details
+                ref={ecosystemDropdown}
+                className="nav-dropdown ecosystem-nav-dropdown"
+                key={item.href}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.currentTarget.open = false;
+                    event.currentTarget.querySelector("summary")?.focus();
+                  }
+                }}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget))
+                    event.currentTarget.open = false;
+                }}
+              >
+                <summary className={activeEcosystem ? "active" : ""}>
+                  {item.label}
+                </summary>
+                <div className="dropdown-content programs-mega-menu ecosystem-mega-menu">
+                  <Link
+                    className="programs-mega-all"
+                    href="/products"
+                    onClick={closeNavigation}
+                  >
+                    AI products and platforms{" "}
+                    <ArrowUpRight size={14} aria-hidden="true" />
+                  </Link>
+                  <div className="ecosystem-menu-links">
+                    <Link href="/research" onClick={closeNavigation}>
+                      Research & innovation
+                      <span>Areas of interest and published work</span>
+                    </Link>
+                    <Link href="/community" onClick={closeNavigation}>
+                      Community & partnerships
+                      <span>Learning, events, and collaboration</span>
+                    </Link>
                   </div>
                 </div>
               </details>
@@ -247,8 +314,8 @@ export function Header() {
           >
             Sign in
           </button>
-          <Link className="header-cta" href="/request-proposal">
-            Let&apos;s work together
+          <Link className="header-cta" href="/enquiry">
+            Start an enquiry
             <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
           <button
@@ -287,15 +354,27 @@ export function Header() {
                     key={item.href}
                     ref={mobileProgramsDropdown}
                   >
-                    <summary
-                      aria-current={active(item.href) ? "page" : undefined}
-                    >
+                    <summary aria-current={activeLearning ? "page" : undefined}>
                       {item.label}
                     </summary>
                     <div>
                       <Link href="/programs" onClick={closeNavigation}>
-                        All Programs
+                        All AI Learning
                         <ArrowUpRight size={16} aria-hidden="true" />
+                      </Link>
+                      {learningAudiences.map((audience) => (
+                        <Link
+                          href={`/learning/${audience.slug}`}
+                          key={audience.slug}
+                          onClick={closeNavigation}
+                        >
+                          {audience.eyebrow}
+                          <span>Explore learning options</span>
+                        </Link>
+                      ))}
+                      <Link href="/internships" onClick={closeNavigation}>
+                        AI Internships
+                        <span>Discuss availability</span>
                       </Link>
                       {sectors.map((sector) => (
                         <Link
@@ -370,6 +449,32 @@ export function Header() {
                           <span>Explore</span>
                         </Link>
                       ))}
+                    </div>
+                  </details>
+                ) : item.href === "/products" ? (
+                  <details
+                    className="mobile-sector-list"
+                    key={item.href}
+                    ref={mobileEcosystemDropdown}
+                  >
+                    <summary
+                      aria-current={activeEcosystem ? "page" : undefined}
+                    >
+                      {item.label}
+                    </summary>
+                    <div>
+                      <Link href="/products" onClick={closeNavigation}>
+                        AI products and platforms
+                        <span>Browse early product concepts</span>
+                      </Link>
+                      <Link href="/research" onClick={closeNavigation}>
+                        Research & innovation
+                        <span>Research interests and publications</span>
+                      </Link>
+                      <Link href="/community" onClick={closeNavigation}>
+                        Community & partnerships
+                        <span>Learning, events, and collaboration</span>
+                      </Link>
                     </div>
                   </details>
                 ) : (

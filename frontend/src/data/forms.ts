@@ -1,5 +1,6 @@
 import type { FieldDefinition, FormKind } from "@/types/contact";
 import { services } from "./services";
+import { industries } from "./industries";
 export const inquiryTypes = [
   "General Inquiry",
   "AI Readiness & Use-case Discovery",
@@ -15,6 +16,11 @@ export const inquiryTypes = [
   "AI Video",
   "Social Media Growth",
   "Programs and learning",
+  "AI Solutions & Consulting",
+  "AI Training for Individuals",
+  "Corporate AI Training",
+  "College & Institutional Programs",
+  "AI Internship Inquiry",
   "Speaking Invitation",
   "Partnership",
   "Other",
@@ -40,7 +46,6 @@ const phone: FieldDefinition = {
   autoComplete: "tel",
   hint: "Include an international dialing code, for example +91.",
 };
-const company = field("company", "Company");
 const website = field("website", "Website", "url");
 const budget: FieldDefinition = {
   ...field("budgetRange", "Budget range"),
@@ -77,13 +82,20 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
         ...field("lastName", "Last name", "text", true),
         autoComplete: "family-name",
       },
+      field("company", "Organization", "text", true),
       email,
       country,
+      { ...phone, required: true },
+      field(
+        "industry",
+        "Industry",
+        "select",
+        true,
+        industries.map((industry) => industry.name),
+      ),
       field("inquiryType", "Inquiry type", "select", true, inquiryTypes),
       field("subject", "Subject", "text", true),
       field("message", "Message", "textarea", true),
-      phone,
-      company,
       field("jobTitle", "Job title"),
       website,
       field("city", "City"),
@@ -118,10 +130,16 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
     fields: [
       name,
       email,
-      phone,
-      company,
+      { ...phone, required: true },
+      field("company", "Organization", "text", true),
       country,
-      field("industry", "Industry"),
+      field(
+        "industry",
+        "Industry",
+        "select",
+        true,
+        industries.map((industry) => industry.name),
+      ),
       website,
       field("requiredServices", "Required services", "textarea", true),
       field("projectSummary", "Project summary", "textarea", true),
@@ -149,8 +167,16 @@ export const formDefinitions: Record<FormKind, FormDefinition> = {
     fields: [
       name,
       email,
-      company,
+      field("company", "Organization", "text", true),
+      { ...phone, required: true },
       country,
+      field(
+        "industry",
+        "Industry",
+        "select",
+        true,
+        industries.map((industry) => industry.name),
+      ),
       field("consultationTopic", "Consultation topic", "text", true),
       field("problemSummary", "Problem summary", "textarea", true),
       field("preferredDate", "Preferred date", "date"),

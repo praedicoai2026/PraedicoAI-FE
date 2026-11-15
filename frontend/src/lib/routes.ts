@@ -1,12 +1,19 @@
 import { services, serviceCategories } from "@/data/services";
+import { industries } from "@/data/industries";
 import { solutions } from "@/data/solutions";
 import { portfolioProjects } from "@/data/portfolio";
 import { caseStudies } from "@/data/caseStudies";
 import { programs } from "@/data/programs";
+import { learningAudiences } from "@/data/learning-audiences";
+import { internshipPrograms } from "@/data/internship-programs";
 import { allSectorRoutes, sectors } from "@/data/sectors";
 import { events } from "@/data/events";
+import { productIdeas } from "@/data/products";
+import { demos } from "@/data/demos";
 import { blogPosts, blogCategories } from "@/data/blogPosts";
 import { legalPages } from "@/data/legal";
+import { leadCategories } from "@/data/lead-categories";
+import { isNoIndexPath } from "@/data/seo-pages";
 import { slugify } from "./formatting";
 export const staticRoutes = [
   "/",
@@ -16,15 +23,23 @@ export const staticRoutes = [
   "/about/certifications",
   "/about/speaking",
   "/services",
+  "/industries",
   "/solutions",
   "/portfolio",
   "/case-studies",
   "/programs",
+  "/internships",
+  "/products",
+  "/research",
+  "/community",
+  "/demos",
   "/events",
   "/blog",
   "/resources",
+  "/updates",
   "/testimonials",
   "/faq",
+  "/enquiry",
   "/contact",
   "/request-proposal",
   "/book-consultation",
@@ -33,6 +48,7 @@ export const staticRoutes = [
 export const allRoutes = [
   ...staticRoutes,
   ...services.map((item) => `/services/${item.slug}`),
+  ...industries.map((industry) => `/industries/${industry.slug}`),
   ...serviceCategories.map(
     (category) => `/services/category/${slugify(category)}`,
   ),
@@ -52,6 +68,11 @@ export const allRoutes = [
   ...portfolioProjects.map((item) => `/portfolio/${item.slug}`),
   ...caseStudies.map((item) => `/case-studies/${item.slug}`),
   ...programs.map((program) => `/programs/${program.slug}`),
+  ...learningAudiences.map((audience) => `/learning/${audience.slug}`),
+  ...internshipPrograms.map((program) => `/internships/${program.slug}`),
+  ...productIdeas.map((product) => `/products/${product.slug}`),
+  ...demos.map((demo) => `/demos/${demo.slug}`),
+  ...leadCategories.map((item) => `/enquiry/${item.slug}`),
   ...allSectorRoutes(),
   ...sectors.flatMap((sector) =>
     [...new Set(sector.subjects.flatMap((subject) => subject.focusAreas))].map(
@@ -73,3 +94,7 @@ export const allRoutes = [
     ),
   ),
 ];
+
+export const sitemapRoutes = [...new Set(allRoutes)].filter(
+  (path) => !isNoIndexPath(path),
+);

@@ -16,11 +16,13 @@ import {
   Menu,
   Search,
   ShieldCheck,
+  Sparkles,
   Users,
   Workflow,
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { LeadManagementDashboard } from "@/components/portals/lead-management-dashboard";
 
 type PortalKind = "admin" | "demo";
 type Task = {
@@ -118,10 +120,17 @@ const demoNavigation = [
   ["Tasks", Check],
 ] as const;
 
-function PortalNotice({ children }: { children: React.ReactNode }) {
+function PortalNotice({
+  children,
+  portal,
+}: {
+  children: React.ReactNode;
+  portal: PortalKind;
+}) {
+  const Icon = portal === "demo" ? Sparkles : ShieldCheck;
   return (
     <div className="portal-notice" role="note">
-      <ShieldCheck size={17} aria-hidden="true" />
+      <Icon size={17} aria-hidden="true" />
       {children}
     </div>
   );
@@ -163,7 +172,46 @@ export function PortalLogin({ portal }: { portal: PortalKind }) {
         setError(message);
         return;
       }
-      router.push(`/${portal}/dashboard`);
+      let destination = `/${portal}/dashboard`;
+      if (portal === "admin") {
+        const permissions =
+          typeof result === "object" &&
+          result !== null &&
+          "permissions" in result &&
+          Array.isArray(result.permissions)
+            ? result.permissions.filter(
+                (permission): permission is string =>
+                  typeof permission === "string",
+              )
+            : [];
+        destination = permissions.includes("leads:read")
+          ? "/admin/dashboard"
+          : permissions.includes("demos:read")
+            ? "/admin/demos"
+            : permissions.includes("admins:manage")
+              ? "/admin/team"
+              : permissions.includes("employees:read")
+                ? "/admin/employees"
+                : permissions.includes("employees:self:read")
+                  ? "/admin/employees/me"
+                  : permissions.includes("employees:manage")
+                    ? "/admin/employees"
+                    : permissions.includes("projects:read") ||
+                      permissions.includes("projects:manage") ||
+                      permissions.includes("projects:self:read")
+                    ? "/admin/projects"
+                      : permissions.includes("reports:read")
+                        ? "/admin/reports"
+                        : permissions.includes("content:read") ||
+                            permissions.includes("content:manage")
+                          ? "/admin/content"
+                        : "/admin/login";
+        if (destination === "/admin/login") {
+          setError("This account has no permitted admin workspace.");
+          return;
+        }
+      }
+      router.push(destination);
     } catch {
       setError("Unable to contact the sign-in service. Please try again.");
     } finally {
@@ -193,12 +241,12 @@ export function PortalLogin({ portal }: { portal: PortalKind }) {
         </h1>
         <p className="portal-subtitle">
           {isAdmin
-            ? "Sign in to manage your workspace."
+            ? "Sign in to review and manage business and learning enquiries."
             : "Sign in with your demo access details to explore the platform."}
         </p>
-        <PortalNotice>
+        <PortalNotice portal={portal}>
           {isAdmin
-            ? "Admin prototype — credentials are checked server-side; the workspace uses static sample data."
+            ? "Access is limited to accounts provisioned by an authorized PraedicoAI operator."
             : "Demo Environment — Sample Data Only"}
         </PortalNotice>
         <form className="portal-login-form" onSubmit={enter}>
@@ -246,7 +294,7 @@ export function PortalLogin({ portal }: { portal: PortalKind }) {
         </Link>
         <p className="portal-login-footnote">
           {isAdmin
-            ? "The portal is a static prototype, not a production administration system."
+            ? "Admin accounts are managed through the secure backend. Public sign-up cannot grant administrator access."
             : "Demo access is separate from Admin. All content is sample data."}
         </p>
       </section>
@@ -678,7 +726,7 @@ function PortalFrame({ portal }: { portal: PortalKind }) {
             ))}
           </nav>
           <div className="portal-sidebar-bottom">
-            <PortalNotice>
+            <PortalNotice portal={isAdmin ? "admin" : "demo"}>
               {isAdmin ? "Static prototype" : "Sample data only"}
             </PortalNotice>
             {logoutError && (
@@ -745,7 +793,7 @@ function PortalFrame({ portal }: { portal: PortalKind }) {
             </div>
             {!isAdmin && noticeVisible && (
               <div className="portal-dismiss-notice">
-                <PortalNotice>
+                <PortalNotice portal="demo">
                   Demo Environment — Sample Data Only. AI workflows shown here
                   are not running.
                 </PortalNotice>
@@ -940,5 +988,9 @@ function PortalFrame({ portal }: { portal: PortalKind }) {
 }
 
 export function PortalDashboard({ portal }: { portal: PortalKind }) {
-  return <PortalFrame portal={portal} />;
+  return portal === "admin" ? (
+    <LeadManagementDashboard />
+  ) : (
+    <PortalFrame portal="demo" />
+  );
 }

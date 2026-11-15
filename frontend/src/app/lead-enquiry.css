@@ -1,0 +1,305 @@
+.lead-enquiry-section,
+.lead-category-section {
+  background:
+    radial-gradient(
+      ellipse at 12% 0%,
+      color-mix(in srgb, var(--primary) 8%, transparent),
+      transparent 34%
+    ),
+    var(--background);
+}
+.lead-form-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(250px, 0.75fr);
+  gap: 24px;
+  align-items: start;
+}
+.lead-form-card,
+.lead-form-aside {
+  min-width: 0;
+  padding: clamp(20px, 3vw, 34px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.lead-form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.lead-form-field {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 700;
+}
+.lead-form-field.wide {
+  grid-column: 1 / -1;
+}
+.lead-form-field strong {
+  color: var(--error);
+}
+.lead-form-field input,
+.lead-form-field select,
+.lead-form-field textarea,
+.lead-otp-actions input {
+  width: 100%;
+  min-width: 0;
+  min-height: 47px;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-input, var(--card));
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+}
+.lead-form-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.lead-form-field input:focus,
+.lead-form-field select:focus,
+.lead-form-field textarea:focus,
+.lead-otp-actions input:focus {
+  border-color: var(--primary);
+  outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  outline-offset: 1px;
+}
+.lead-form-field small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+.lead-form-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.lead-email-verification {
+  margin-top: 25px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--secondary);
+}
+.lead-email-verification-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.lead-email-verification-heading h2 {
+  font-size: 16px;
+}
+.lead-email-verification-heading p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.lead-verified {
+  padding: 4px 9px;
+  border: 1px solid color-mix(in srgb, var(--success) 32%, transparent);
+  border-radius: 99px;
+  color: var(--success);
+  font-size: 11px;
+  font-weight: 750;
+}
+.lead-otp-actions {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  margin-top: 15px;
+}
+.lead-otp-actions > label {
+  display: grid;
+  flex: 0 1 190px;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.lead-otp-actions input {
+  min-height: 43px;
+  background: var(--card);
+  letter-spacing: 0.16em;
+}
+.lead-otp-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.lead-otp-buttons .button-secondary {
+  min-height: 43px;
+  padding: 9px 13px;
+  font-size: 12px;
+}
+.lead-resend-button {
+  padding: 8px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.lead-consent input {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--primary);
+  flex: 0 0 auto;
+}
+.lead-consent a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.lead-form-message {
+  margin-top: 16px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.lead-form-message.error {
+  border-color: color-mix(in srgb, var(--error) 35%, var(--border));
+  color: var(--error);
+}
+.lead-form-message.success {
+  border-color: color-mix(in srgb, var(--success) 35%, var(--border));
+  color: var(--success);
+}
+.lead-submit {
+  margin-top: 17px;
+}
+.lead-form-footnote {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.lead-form-aside {
+  position: sticky;
+  top: 110px;
+  background: var(--surface-glass, var(--card));
+}
+.lead-form-aside h2 {
+  margin-top: 8px;
+  font-size: 25px;
+}
+.lead-form-aside > p:not(.eyebrow) {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.lead-form-aside .text-link {
+  display: inline-flex;
+  margin-top: 23px;
+}
+.lead-category-groups {
+  display: grid;
+  gap: 38px;
+}
+.lead-category-groups > section > h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+.lead-category-groups > section > h2 svg {
+  color: var(--primary);
+}
+.lead-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.lead-category-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 19px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+.lead-category-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.lead-category-card > span {
+  font-size: 16px;
+  font-weight: 750;
+}
+.lead-category-card > p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.lead-category-card > strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 16px;
+  color: var(--primary);
+  font-size: 12px;
+}
+.lead-category-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .lead-form-layout {
+    grid-template-columns: 1fr;
+  }
+  .lead-form-aside {
+    position: static;
+  }
+  .lead-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .lead-form-fields,
+  .lead-category-grid {
+    grid-template-columns: 1fr;
+  }
+  .lead-otp-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .lead-otp-actions > label {
+    flex-basis: auto;
+  }
+  .lead-otp-buttons {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .lead-otp-buttons .button-secondary {
+    width: 100%;
+  }
+}

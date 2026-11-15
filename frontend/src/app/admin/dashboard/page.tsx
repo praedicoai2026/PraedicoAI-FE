@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { PortalDashboard } from "@/components/portals/portal-app";
-import { portalCookieName, verifyPortalSession } from "@/lib/portal-auth";
+import { LeadManagementDashboard } from "@/components/portals/lead-management-dashboard";
+import {
+  getAdminSession,
+  hasAdminPortalAccess,
+} from "@/lib/server/admin-session";
+import { portalCookieName } from "@/lib/portal-auth";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -11,13 +15,11 @@ export const metadata: Metadata = {
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
-  if (
-    !verifyPortalSession(
-      cookieStore.get(portalCookieName("admin"))?.value,
-      "admin",
-    )
-  ) {
+  const session = await getAdminSession(
+    cookieStore.get(portalCookieName("admin"))?.value,
+  );
+  if (!hasAdminPortalAccess(session, "leads:read")) {
     redirect("/admin/login");
   }
-  return <PortalDashboard portal="admin" />;
+  return <LeadManagementDashboard permissions={session?.permissions ?? []} />;
 }

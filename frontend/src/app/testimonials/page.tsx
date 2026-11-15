@@ -42,7 +42,7 @@ export default function TestimonialsPage() {
               <ButtonLink href="/portfolio" secondary>
                 Explore concept work
               </ButtonLink>
-              <ButtonLink href="/contact">Discuss an opportunity</ButtonLink>
+              <ButtonLink href="/enquiry">Discuss an opportunity</ButtonLink>
             </div>
           </div>
         )}
