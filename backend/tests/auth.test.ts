@@ -89,6 +89,7 @@ describe("POST /api/v1/auth/register", () => {
       courseCategory: "IT & Software Development",
       courseName: "AI & the Future of IT Professionals",
     });
+    expect(createUser.mock.calls[0][0]).not.toHaveProperty("role");
   });
 
   it("rejects invalid registration details without accessing the database", async () => {
@@ -165,8 +166,30 @@ describe("POST /api/v1/auth/login", () => {
       fullName: "Ada Lovelace",
       email: "ada@example.com",
       accountType: "individual",
+      role: "member",
+      permissions: [],
     });
     expect(createSession).toHaveBeenCalledWith("user_123", expect.anything());
+  });
+
+  it("does not create sessions for deactivated accounts", async () => {
+    findUser.mockResolvedValue({
+      _id: { toString: () => "user_123" },
+      fullName: "Ada Lovelace",
+      email: "ada@example.com",
+      accountType: "individual",
+      isActive: false,
+      passwordHash: await hash("correct horse battery", 4),
+    });
+
+    const response = await request(app).post("/api/v1/auth/login").send({
+      email: "ada@example.com",
+      password: "correct horse battery",
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.body.error.code).toBe("INVALID_CREDENTIALS");
+    expect(createSession).not.toHaveBeenCalled();
   });
 });
 

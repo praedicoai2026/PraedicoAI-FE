@@ -6,7 +6,8 @@ export default defineConfig({
     env: {
       NODE_ENV: "test",
       LOG_LEVEL: "silent",
-      FRONTEND_ORIGIN: "http://localhost:3000",
+      FRONTEND_ORIGIN: "https://legacy.example",
+      FRONTEND_ORIGINS: "https://praedicoai.com,http://localhost:3000",
       DB_USER: "praedicoai_test",
       DB_PASSWORD: "praedicoai_test",
       MONGODB_URI: "mongodb://localhost:27017/praedicoai_test",

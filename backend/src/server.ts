@@ -5,7 +5,7 @@ import { connectToDatabase, disconnectFromDatabase } from "./db/mongoose.js";
 
 async function startServer() {
   await connectToDatabase();
-  const server = app.listen(env.PORT, () => {
+  const server = app.listen(env.PORT, "0.0.0.0", () => {
     logger.info({ port: env.PORT }, "API server listening");
   });
 

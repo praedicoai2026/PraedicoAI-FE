@@ -6,6 +6,7 @@ import type { RegistrationInput } from "./auth.schema.js";
 import { hashToken } from "./auth-session.js";
 import { Session } from "./session.model.js";
 import { User } from "./user.model.js";
+import { getEffectivePermissions, isUserRole } from "./roles.js";
 
 const bcryptCost = 12;
 
@@ -53,7 +54,7 @@ export async function authenticateUser(email: string, password: string) {
   const matches = user
     ? await compare(password, user.passwordHash)
     : (await hash(password, bcryptCost), false);
-  if (!user || !matches) {
+  if (!user || user.isActive === false || !matches) {
     throw new HttpError(
       401,
       "INVALID_CREDENTIALS",
@@ -61,11 +62,14 @@ export async function authenticateUser(email: string, password: string) {
     );
   }
 
+  const role = isUserRole(user.role) ? user.role : "member";
   return {
     id: user._id.toString(),
     fullName: user.fullName,
     email: user.email,
     accountType: user.accountType,
+    role,
+    permissions: getEffectivePermissions(role, user.permissions),
   };
 }
 
@@ -101,7 +105,7 @@ export async function resetPassword(token: string, password: string) {
   await Session.deleteMany({ userId: user._id });
 }
 
-export function isAuthorizedResetRequest(secret: string | undefined) {
+export function isAuthorizedInternalRequest(secret: string | undefined) {
   if (!secret) return false;
   const candidate = Buffer.from(secret);
   const expected = Buffer.from(env.AUTH_INTERNAL_SECRET);

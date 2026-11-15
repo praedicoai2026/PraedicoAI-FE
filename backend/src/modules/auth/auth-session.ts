@@ -2,6 +2,7 @@ import { createHash, randomBytes } from "node:crypto";
 import type { Request, Response } from "express";
 import { Session } from "./session.model.js";
 import { User } from "./user.model.js";
+import { getEffectivePermissions, isUserRole } from "./roles.js";
 
 export const sessionCookieName = "praedicoai_session";
 const sessionLifetimeSeconds = 7 * 24 * 60 * 60;
@@ -36,15 +37,18 @@ export async function getSessionUser(request: Request) {
   if (!session) return null;
 
   const user = await User.findById(session.userId)
-    .select("fullName email accountType")
+    .select("fullName email accountType role permissions isActive")
     .lean();
-  if (!user) return null;
+  if (!user || user.isActive === false) return null;
+  const role = isUserRole(user.role) ? user.role : "member";
 
   return {
     id: user._id.toString(),
     fullName: user.fullName,
     email: user.email,
     accountType: user.accountType,
+    role,
+    permissions: getEffectivePermissions(role, user.permissions),
   };
 }
 

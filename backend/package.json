@@ -9,6 +9,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
+    "superadmin:setup": "tsx src/scripts/setup-super-admin.ts",
+    "admin:grant": "tsx src/scripts/grant-admin.ts",
+    "team:grant": "tsx src/scripts/grant-team-member.ts",
     "start": "node dist/server.js",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit -p tsconfig.json",

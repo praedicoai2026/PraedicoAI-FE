@@ -7,7 +7,7 @@ import {
 } from "./auth.schema.js";
 import {
   authenticateUser,
-  isAuthorizedResetRequest,
+  isAuthorizedInternalRequest,
   issuePasswordReset,
   registerUser,
   resetPassword,
@@ -95,7 +95,7 @@ export const requestPasswordReset: RequestHandler = async (
   response,
   next,
 ) => {
-  if (!isAuthorizedResetRequest(request.header("x-auth-internal-secret"))) {
+  if (!isAuthorizedInternalRequest(request.header("x-auth-internal-secret"))) {
     response.status(403).json({
       error: { code: "FORBIDDEN", message: "This request is not allowed." },
     });

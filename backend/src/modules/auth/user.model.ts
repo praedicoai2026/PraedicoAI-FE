@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { adminPermissions, userRoles } from "./roles.js";
 
 const userSchema = new Schema(
   {
@@ -11,6 +12,15 @@ const userSchema = new Schema(
       enum: ["individual", "business"],
       required: true,
     },
+    role: {
+      type: String,
+      enum: userRoles,
+      default: "member",
+      required: true,
+      index: true,
+    },
+    permissions: { type: [String], enum: adminPermissions, default: undefined },
+    isActive: { type: Boolean, default: true, index: true },
     courseCategory: { type: String, required: true, maxlength: 120 },
     courseName: { type: String, required: true, maxlength: 200 },
     companyName: { type: String, maxlength: 150 },
