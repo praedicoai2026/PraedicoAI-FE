@@ -12,6 +12,9 @@ export default defineConfig({
       DB_PASSWORD: "praedicoai_test",
       MONGODB_URI: "mongodb://localhost:27017/praedicoai_test",
       AUTH_INTERNAL_SECRET: "test-only-internal-secret-change-me-123456",
+      OTP_EXPIRY_MINUTES: "10",
+      OTP_MAX_ATTEMPTS: "5",
+      OTP_RESEND_COOLDOWN_SECONDS: "60",
     },
   },
 });

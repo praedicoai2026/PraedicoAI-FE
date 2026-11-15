@@ -27,6 +27,14 @@ const environmentSchema = z
     GEMINI_DEMO_RELEASE_STATUS: z
       .enum(["coming-soon", "beta", "live"])
       .default("coming-soon"),
+    OTP_EXPIRY_MINUTES: z.coerce.number().int().min(1).max(1440).default(10),
+    OTP_MAX_ATTEMPTS: z.coerce.number().int().min(1).max(100).default(5),
+    OTP_RESEND_COOLDOWN_SECONDS: z.coerce
+      .number()
+      .int()
+      .min(1)
+      .max(86400)
+      .default(60),
     DEMO_MAX_INPUT_CHARACTERS: z.coerce
       .number()
       .int()

@@ -17,6 +17,7 @@ import {
 } from "./modules/employees/employee.routes.js";
 import { reportsRouter } from "./modules/reports/reports.routes.js";
 import { contentRouter } from "./modules/content/content.routes.js";
+import { contactOtpRouter } from "./modules/contact-otp/contact-otp.routes.js";
 
 export const app = express();
 
@@ -74,5 +75,6 @@ app.use("/api/v1/employees", employeeRouter);
 app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/reports", reportsRouter);
 app.use("/api/v1/content", contentRouter);
+app.use("/api/v1/contact-otp", contactOtpRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);

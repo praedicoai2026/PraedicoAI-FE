@@ -87,7 +87,7 @@ The public demo API can run short, text-only Gemini previews. It is disabled unl
 | `npm run typecheck`              | Check TypeScript                                         |
 | `npm test`                       | Run API tests                                            |
 
-In production, provide `MONGODB_URI`, `DB_USER`, `DB_PASSWORD`, `AUTH_INTERNAL_SECRET`, `NODE_ENV=production`, and a correct `FRONTEND_ORIGINS` allowlist through the deployment environment. Render supplies `PORT`; `LOG_LEVEL` is optional. Configure a managed MongoDB service and TLS for production; the Compose credentials are only for local development. Rate-limit and email OTP stores are process-local; use shared storage before deploying multiple or serverless instances.
+In production, provide `MONGODB_URI`, `DB_USER`, `DB_PASSWORD`, `AUTH_INTERNAL_SECRET`, `NODE_ENV=production`, and a correct `FRONTEND_ORIGINS` allowlist through the deployment environment. Render supplies `PORT`; `LOG_LEVEL` is optional. Configure a managed MongoDB service and TLS for production; the Compose credentials are only for local development. Email OTP challenges, resend cooldowns, verification attempts, and claims are stored in MongoDB and shared across backend instances. HTTP rate-limit counters remain process-local.
 
 ## Render deployment
 
@@ -119,6 +119,9 @@ Set the environment variables below in Render. Do not copy production credential
 | `DB_USER`                        | MongoDB database username passed separately to Mongoose                                       | Required                                 | Atlas database-user name                                                           |
 | `DB_PASSWORD`                    | MongoDB database password passed separately to Mongoose                                       | Required                                 | Secret value                                                                       |
 | `AUTH_INTERNAL_SECRET`           | Shared frontend/backend server-to-server authentication secret, at least 32 characters        | Required                                 | Random secret generated securely                                                   |
+| `OTP_EXPIRY_MINUTES`             | Lifetime of a contact email verification code                                                 | Optional, defaults to `10`               | `10`                                                                               |
+| `OTP_MAX_ATTEMPTS`               | Maximum incorrect codes accepted per challenge                                                | Optional, defaults to `5`                | `5`                                                                                |
+| `OTP_RESEND_COOLDOWN_SECONDS`    | Minimum time between codes sent to the same email address                                     | Optional, defaults to `60`               | `60`                                                                               |
 | `GEMINI_API_KEY`                 | Server-side key for interactive Gemini demos                                                  | Optional; omit to keep demos disabled    | Provider key stored as a secret                                                    |
 | `GEMINI_MODEL`                   | Gemini model name                                                                             | Optional, defaults to `gemini-3.8-flash` | `gemini-3.8-flash`                                                                 |
 | `GEMINI_DEMO_RELEASE_STATUS`     | Demo release gate; defaults to `coming-soon`                                                  | Optional                                 | `coming-soon`, `beta`, or `live`                                                   |
