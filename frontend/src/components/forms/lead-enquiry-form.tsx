@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { industries } from "@/data/industries";
 import type { LeadCategory, LeadFormKind } from "@/data/lead-categories";
+import { isContactEmailVerificationEnabled } from "@/lib/contact-email-verification";
 import { whatsapp } from "@/data/whatsapp";
 
 type FieldDefinition = {
@@ -356,7 +357,10 @@ export function LeadEnquiryForm({
     event.preventDefault();
     setError("");
     setStatus("");
-    if (!emailVerified || !verificationId) {
+    if (
+      isContactEmailVerificationEnabled &&
+      (!emailVerified || !verificationId)
+    ) {
       setError("Verify your email address before submitting this enquiry.");
       return;
     }
@@ -388,7 +392,10 @@ export function LeadEnquiryForm({
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lead, verificationId }),
+        body: JSON.stringify({
+          lead,
+          ...(isContactEmailVerificationEnabled ? { verificationId } : {}),
+        }),
       });
       const result: unknown = await response.json();
       if (!response.ok) {
@@ -527,67 +534,71 @@ export function LeadEnquiryForm({
           ))}
         </div>
 
-        <div className="lead-email-verification">
-          <div className="lead-email-verification-heading">
-            <div>
-              <h2>Verify your email</h2>
-              <p>We use this to confirm your enquiry and send a reply.</p>
+        {isContactEmailVerificationEnabled && (
+          <div className="lead-email-verification">
+            <div className="lead-email-verification-heading">
+              <div>
+                <h2>Verify your email</h2>
+                <p>We use this to confirm your enquiry and send a reply.</p>
+              </div>
+              {emailVerified && <span className="lead-verified">Verified</span>}
             </div>
-            {emailVerified && <span className="lead-verified">Verified</span>}
-          </div>
-          {!emailVerified && (
-            <div className="lead-otp-actions">
-              {verificationId && (
-                <label htmlFor="lead-otp-code">
-                  <span>Six-digit code</span>
-                  <input
-                    id="lead-otp-code"
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    maxLength={6}
-                    pattern="[0-9]{6}"
-                    value={code}
-                    onChange={(event) =>
-                      setCode(event.target.value.replace(/\D/g, "").slice(0, 6))
-                    }
-                    required
-                  />
-                </label>
-              )}
-              <div className="lead-otp-buttons">
-                {!verificationId ? (
-                  <button
-                    className="button-secondary"
-                    type="button"
-                    disabled={busy}
-                    onClick={sendVerificationCode}
-                  >
-                    {busy ? "Sending..." : "Send verification code"}
-                  </button>
-                ) : (
-                  <>
+            {!emailVerified && (
+              <div className="lead-otp-actions">
+                {verificationId && (
+                  <label htmlFor="lead-otp-code">
+                    <span>Six-digit code</span>
+                    <input
+                      id="lead-otp-code"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      maxLength={6}
+                      pattern="[0-9]{6}"
+                      value={code}
+                      onChange={(event) =>
+                        setCode(
+                          event.target.value.replace(/\D/g, "").slice(0, 6),
+                        )
+                      }
+                      required
+                    />
+                  </label>
+                )}
+                <div className="lead-otp-buttons">
+                  {!verificationId ? (
                     <button
                       className="button-secondary"
                       type="button"
                       disabled={busy}
-                      onClick={verifyEmail}
-                    >
-                      {busy ? "Checking..." : "Verify email"}
-                    </button>
-                    <button
-                      className="lead-resend-button"
-                      type="button"
-                      disabled={busy}
                       onClick={sendVerificationCode}
                     >
-                      Resend code
+                      {busy ? "Sending..." : "Send verification code"}
                     </button>
-                  </>
-                )}
+                  ) : (
+                    <>
+                      <button
+                        className="button-secondary"
+                        type="button"
+                        disabled={busy}
+                        onClick={verifyEmail}
+                      >
+                        {busy ? "Checking..." : "Verify email"}
+                      </button>
+                      <button
+                        className="lead-resend-button"
+                        type="button"
+                        disabled={busy}
+                        onClick={sendVerificationCode}
+                      >
+                        Resend code
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
 
         <label className="lead-consent" htmlFor="lead-consent">
           <input id="lead-consent" name="consent" type="checkbox" required />

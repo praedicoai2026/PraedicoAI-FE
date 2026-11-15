@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import { formDefinitions } from "@/data/forms";
+import { isContactEmailVerificationEnabled } from "@/lib/contact-email-verification";
 import {
   callContactOtpBackend,
   settleContactOtp,
@@ -287,44 +288,47 @@ export async function POST(request: NextRequest) {
       { status: 400 },
     );
   }
-  if (
-    typeof body.verificationId !== "string" ||
-    !/^[a-f0-9]{64}$/.test(body.verificationId)
-  ) {
-    return NextResponse.json(
-      {
-        error:
-          "Verify your email address before sending your inquiry. Request a new code if needed.",
-      },
-      { status: 403 },
-    );
-  }
-  const verificationId = body.verificationId;
-  let verificationClaim: { claimed: boolean };
-  try {
-    verificationClaim = await callContactOtpBackend({
-      action: "claim",
-      challengeId: verificationId,
-      email: values.email,
-    });
-  } catch (error) {
-    console.error(
-      "Contact verification claim could not be checked:",
-      error instanceof Error ? error.message : "Unknown backend error",
-    );
-    return NextResponse.json(
-      { error: "Email verification is temporarily unavailable." },
-      { status: 503 },
-    );
-  }
-  if (!verificationClaim.claimed) {
-    return NextResponse.json(
-      {
-        error:
-          "Verify your email address before sending your inquiry. Request a new code if needed.",
-      },
-      { status: 403 },
-    );
+  let verificationId: string | undefined;
+  if (isContactEmailVerificationEnabled) {
+    if (
+      typeof body.verificationId !== "string" ||
+      !/^[a-f0-9]{64}$/.test(body.verificationId)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Verify your email address before sending your inquiry. Request a new code if needed.",
+        },
+        { status: 403 },
+      );
+    }
+    verificationId = body.verificationId;
+    let verificationClaim: { claimed: boolean };
+    try {
+      verificationClaim = await callContactOtpBackend({
+        action: "claim",
+        challengeId: verificationId,
+        email: values.email,
+      });
+    } catch (error) {
+      console.error(
+        "Contact verification claim could not be checked:",
+        error instanceof Error ? error.message : "Unknown backend error",
+      );
+      return NextResponse.json(
+        { error: "Email verification is temporarily unavailable." },
+        { status: 503 },
+      );
+    }
+    if (!verificationClaim.claimed) {
+      return NextResponse.json(
+        {
+          error:
+            "Verify your email address before sending your inquiry. Request a new code if needed.",
+        },
+        { status: 403 },
+      );
+    }
   }
 
   const host = process.env.SMTP_HOST?.trim();
@@ -346,10 +350,16 @@ export async function POST(request: NextRequest) {
     !from ||
     !to
   ) {
-    await settleContactOtp(
-      { action: "release", challengeId: verificationId, email: values.email },
-      "Contact verification claim could not be released after SMTP configuration failure:",
-    );
+    if (verificationId) {
+      await settleContactOtp(
+        {
+          action: "release",
+          challengeId: verificationId,
+          email: values.email,
+        },
+        "Contact verification claim could not be released after SMTP configuration failure:",
+      );
+    }
     console.error(
       "Contact email delivery is unavailable: SMTP configuration is incomplete.",
     );
@@ -460,15 +470,27 @@ export async function POST(request: NextRequest) {
       text,
       html: notificationHtml,
     });
-    await settleContactOtp(
-      { action: "consume", challengeId: verificationId, email: values.email },
-      "Contact verification could not be consumed after inquiry delivery:",
-    );
+    if (verificationId) {
+      await settleContactOtp(
+        {
+          action: "consume",
+          challengeId: verificationId,
+          email: values.email,
+        },
+        "Contact verification could not be consumed after inquiry delivery:",
+      );
+    }
   } catch (error) {
-    await settleContactOtp(
-      { action: "release", challengeId: verificationId, email: values.email },
-      "Contact verification claim could not be released after SMTP failure:",
-    );
+    if (verificationId) {
+      await settleContactOtp(
+        {
+          action: "release",
+          challengeId: verificationId,
+          email: values.email,
+        },
+        "Contact verification claim could not be released after SMTP failure:",
+      );
+    }
     console.error(
       "Contact notification email delivery failed:",
       error instanceof Error ? error.message : "Unknown SMTP error",

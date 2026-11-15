@@ -1,33 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfcfd;
-  --foreground: #19282c;
-  --primary: #225b55;
-  --secondary: #eef3f3;
-  --accent: #4b55a4;
-  --muted: #59696e;
-  --border: #dce4e6;
-  --card: #fff;
-  --success: #24624d;
-  --warning: #885b11;
-  --error: #b02f3d;
-  --shadow: 0 8px 28px #152b3610;
+  --background: #f5f8fc;
+  --hero-background: #edf3fb;
+  --foreground: #14243b;
+  --primary: #2858c8;
+  --secondary: #eaf0f9;
+  --accent: #0b7a82;
+  --muted: #52637a;
+  --border: #dbe3ef;
+  --card: #ffffff;
+  --highlight: #3b72e7;
+  --action-text: #ffffff;
+  --success: #147a5a;
+  --warning: #8a5700;
+  --error: #b4233c;
+  --heading-start: #2858c8;
+  --heading-middle: #594fc5;
+  --heading-end: #0b7a82;
+  --spectrum: linear-gradient(110deg, #2858c8, #126f9d 60%, #14785c);
+  --surface-glass: linear-gradient(135deg, #fffffff2, #eef4fce8);
+  --surface-card: linear-gradient(145deg, #ffffff, #f7f9fd);
+  --surface-contact: linear-gradient(110deg, #e8f1fb, #fbfcfe 70%);
+  --surface-input: #ffffff;
+  --shadow: 0 10px 30px -20px #1e3a651c, 0 2px 6px #1e3a6508;
+  --shadow-hover: 0 18px 40px -24px #1e3a6533, 0 8px 18px -14px #2858c833;
+  --motion-fast: 160ms;
+  --motion-standard: 220ms;
+  --motion-slow: 360ms;
+  --motion-easing: cubic-bezier(0.2, 0.7, 0.2, 1);
   color-scheme: light;
 }
 [data-theme="dark"] {
-  --background: #121a1d;
-  --foreground: #e8eff0;
-  --primary: #92d9c5;
-  --secondary: #1c292d;
-  --accent: #b9baff;
-  --muted: #a5b7bc;
-  --border: #34464b;
-  --card: #192428;
-  --success: #95dcbe;
-  --warning: #edc677;
-  --error: #ff9eaa;
-  --shadow: 0 8px 28px #0002;
+  --background: #0b1220;
+  --hero-background: #101b2c;
+  --foreground: #e9f0fb;
+  --primary: #8cafef;
+  --secondary: #152238;
+  --accent: #5ad2cf;
+  --muted: #a8b6ca;
+  --border: #2a3a52;
+  --card: #111d30;
+  --highlight: #78a5ff;
+  --action-text: #0b1220;
+  --success: #6ed2a4;
+  --warning: #f2c56b;
+  --error: #ff8c9b;
+  --heading-start: #8cafef;
+  --heading-middle: #b5a0ff;
+  --heading-end: #5ad2cf;
+  --spectrum: linear-gradient(110deg, #8cafef, #5ad2cf 60%, #6ed2a4);
+  --surface-glass: linear-gradient(135deg, #17253be8, #101b2cf2);
+  --surface-card: linear-gradient(145deg, #152238, #101a2b);
+  --surface-contact: linear-gradient(110deg, #162a40, #0d1728 70%);
+  --surface-input: #0d1728;
+  --shadow: 0 16px 42px -26px #000000a6;
+  --shadow-hover: 0 22px 48px -26px #000000bf, 0 0 26px -18px #5ad2cf66;
   color-scheme: dark;
 }
 @theme inline {
@@ -71,6 +99,20 @@ select {
 a {
   text-decoration: none;
   color: inherit;
+}
+a,
+button,
+summary,
+input,
+select,
+textarea,
+[role="button"] {
+  transition:
+    color var(--motion-fast) var(--motion-easing),
+    background-color var(--motion-fast) var(--motion-easing),
+    border-color var(--motion-fast) var(--motion-easing),
+    box-shadow var(--motion-fast) var(--motion-easing),
+    transform var(--motion-standard) var(--motion-easing);
 }
 button {
   color: inherit;
@@ -180,7 +222,11 @@ main:focus {
   min-height: calc(100vh - 86px);
   padding-block: 64px;
   background:
-    radial-gradient(ellipse at 15% 10%, #c4e6dc55, transparent 42%),
+    radial-gradient(
+      ellipse at 15% 10%,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      transparent 42%
+    ),
     var(--background);
 }
 .registration-card {
@@ -426,8 +472,11 @@ main:focus {
   font-weight: 700;
   text-align: center;
   transition:
-    background 0.18s,
-    transform 0.18s;
+    background-color var(--motion-fast) var(--motion-easing),
+    color var(--motion-fast) var(--motion-easing),
+    border-color var(--motion-fast) var(--motion-easing),
+    box-shadow var(--motion-fast) var(--motion-easing),
+    transform var(--motion-standard) var(--motion-easing);
 }
 .button:hover {
   transform: translateY(-2px);

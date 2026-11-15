@@ -4,6 +4,7 @@ import {
   callContactOtpBackend,
   settleContactOtp,
 } from "@/lib/server/contact-otp-backend";
+import { isContactEmailVerificationEnabled } from "@/lib/contact-email-verification";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -216,12 +217,23 @@ export async function POST(request: NextRequest) {
     !isRecord(body.lead) ||
     typeof body.lead.email !== "string" ||
     typeof body.lead.category !== "string" ||
-    body.lead.consent !== true ||
-    typeof body.verificationId !== "string" ||
-    !/^[a-f0-9]{64}$/.test(body.verificationId)
+    body.lead.consent !== true
   ) {
     return NextResponse.json(
-      { error: "Check the enquiry details and email verification." },
+      { error: "Check the enquiry details and consent." },
+      { status: 400 },
+    );
+  }
+
+  const verificationId =
+    isContactEmailVerificationEnabled &&
+    typeof body.verificationId === "string" &&
+    /^[a-f0-9]{64}$/.test(body.verificationId)
+      ? body.verificationId
+      : undefined;
+  if (isContactEmailVerificationEnabled && !verificationId) {
+    return NextResponse.json(
+      { error: "Verify your email address before submitting this enquiry." },
       { status: 400 },
     );
   }
@@ -229,8 +241,11 @@ export async function POST(request: NextRequest) {
   const backendUrl = process.env.BACKEND_API_URL?.trim().replace(/\/+$/, "");
   const internalSecret = process.env.AUTH_INTERNAL_SECRET?.trim();
   if (!backendUrl || !internalSecret) {
+    const missingVariables: string[] = [];
+    if (!backendUrl) missingVariables.push("BACKEND_API_URL");
+    if (!internalSecret) missingVariables.push("AUTH_INTERNAL_SECRET");
     console.error(
-      "Lead submission is unavailable: backend configuration is incomplete.",
+      `Lead submission is unavailable: missing or empty ${missingVariables.join(", ")}.`,
     );
     return NextResponse.json(
       { error: "Enquiry submission is temporarily unavailable." },
@@ -238,33 +253,34 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const verificationId = body.verificationId;
   const email = body.lead.email;
-  let verificationClaim: { claimed: boolean };
-  try {
-    verificationClaim = await callContactOtpBackend({
-      action: "claim",
-      challengeId: verificationId,
-      email,
-    });
-  } catch (error) {
-    console.error(
-      "Lead verification claim could not be checked:",
-      error instanceof Error ? error.message : "Unknown backend error",
-    );
-    return NextResponse.json(
-      { error: "Email verification is temporarily unavailable." },
-      { status: 503 },
-    );
-  }
-  if (!verificationClaim.claimed) {
-    return NextResponse.json(
-      {
-        error:
-          "Verify your email address before sending your enquiry. Request a new code if needed.",
-      },
-      { status: 403 },
-    );
+  if (isContactEmailVerificationEnabled && verificationId) {
+    let verificationClaim: { claimed: boolean };
+    try {
+      verificationClaim = await callContactOtpBackend({
+        action: "claim",
+        challengeId: verificationId,
+        email,
+      });
+    } catch (error) {
+      console.error(
+        "Lead verification claim could not be checked:",
+        error instanceof Error ? error.message : "Unknown backend error",
+      );
+      return NextResponse.json(
+        { error: "Email verification is temporarily unavailable." },
+        { status: 503 },
+      );
+    }
+    if (!verificationClaim.claimed) {
+      return NextResponse.json(
+        {
+          error:
+            "Verify your email address before sending your enquiry. Request a new code if needed.",
+        },
+        { status: 403 },
+      );
+    }
   }
 
   let backendResponse: Response;
@@ -280,10 +296,12 @@ export async function POST(request: NextRequest) {
       signal: AbortSignal.timeout(15_000),
     });
   } catch (error) {
-    await settleContactOtp(
-      { action: "release", challengeId: verificationId, email },
-      "Lead verification claim could not be released after backend failure:",
-    );
+    if (verificationId) {
+      await settleContactOtp(
+        { action: "release", challengeId: verificationId, email },
+        "Lead verification claim could not be released after backend failure:",
+      );
+    }
     console.error(
       "Lead persistence request failed:",
       error instanceof Error ? error.message : "Unknown backend error",
@@ -295,10 +313,12 @@ export async function POST(request: NextRequest) {
   }
 
   if (!backendResponse.ok) {
-    await settleContactOtp(
-      { action: "release", challengeId: verificationId, email },
-      "Lead verification claim could not be released after rejected submission:",
-    );
+    if (verificationId) {
+      await settleContactOtp(
+        { action: "release", challengeId: verificationId, email },
+        "Lead verification claim could not be released after rejected submission:",
+      );
+    }
     const result: unknown = await backendResponse.json().catch(() => null);
     const message =
       isRecord(result) &&
@@ -312,10 +332,12 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  await settleContactOtp(
-    { action: "consume", challengeId: verificationId, email },
-    "Lead verification could not be consumed after persistence:",
-  );
+  if (verificationId) {
+    await settleContactOtp(
+      { action: "consume", challengeId: verificationId, email },
+      "Lead verification could not be consumed after persistence:",
+    );
+  }
   const details = getLeadDetails(body.lead);
   const emailOutcome = await sendLeadEmails(body.lead, details);
   let message: string;

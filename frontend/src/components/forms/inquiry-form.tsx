@@ -18,6 +18,7 @@ import {
   readInquiryValues,
 } from "@/lib/mailto";
 import { copyToClipboard } from "@/lib/formatting";
+import { isContactEmailVerificationEnabled } from "@/lib/contact-email-verification";
 import { FormField } from "./form-field";
 import { Alert } from "@/components/ui/primitives";
 
@@ -60,7 +61,8 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
   const [otpExpiryMinutes, setOtpExpiryMinutes] = useState(10);
   const [otpBusy, setOtpBusy] = useState(false);
   const emailVerified =
-    !!verifiedEmail && verifiedEmail === emailAddress.trim().toLowerCase();
+    !isContactEmailVerificationEnabled ||
+    (!!verifiedEmail && verifiedEmail === emailAddress.trim().toLowerCase());
   const hydrated = useSyncExternalStore(
     subscribe,
     () => true,
@@ -328,7 +330,10 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
     }
 
     if (!prepare() || !form.current) return;
-    if (!emailVerified || !otpChallengeId) {
+    if (
+      isContactEmailVerificationEnabled &&
+      (!emailVerified || !otpChallengeId)
+    ) {
       setStatus("Verify your email address before sending your inquiry.");
       return;
     }
@@ -341,7 +346,9 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           values: readInquiryValues(form.current, kind),
-          verificationId: otpChallengeId,
+          ...(isContactEmailVerificationEnabled
+            ? { verificationId: otpChallengeId }
+            : {}),
         }),
       });
       let result: unknown;
@@ -414,10 +421,13 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
   return (
     <div>
       {kind === "contact" ? (
-        <Alert>
-          Verify your email address with a one-time code before sending your
-          inquiry. Please do not include sensitive or confidential information.
-        </Alert>
+        isContactEmailVerificationEnabled ? (
+          <Alert>
+            Verify your email address with a one-time code before sending your
+            inquiry. Please do not include sensitive or confidential
+            information.
+          </Alert>
+        ) : null
       ) : site.contactEmailConfigured ? (
         <Alert>No information is automatically sent or stored.</Alert>
       ) : (
@@ -462,7 +472,9 @@ export function InquiryForm({ kind }: { kind: FormKind }) {
           </div>
         )}
         <div className="form-grid">
-          {kind === "contact" && emailFieldIndex >= 0 ? (
+          {kind === "contact" &&
+          emailFieldIndex >= 0 &&
+          isContactEmailVerificationEnabled ? (
             <>
               {required.slice(0, emailFieldIndex + 1).map((field) => (
                 <FormField

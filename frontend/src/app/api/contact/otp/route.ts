@@ -5,6 +5,7 @@ import {
   ContactOtpBackendError,
   settleContactOtp,
 } from "@/lib/server/contact-otp-backend";
+import { isContactEmailVerificationEnabled } from "@/lib/contact-email-verification";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,6 +39,13 @@ function isValidEmail(email: unknown): email is string {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isContactEmailVerificationEnabled) {
+    return NextResponse.json(
+      { error: "Email verification is disabled during local development." },
+      { status: 404 },
+    );
+  }
+
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return NextResponse.json(
       { error: "This request must use JSON. Please refresh and try again." },

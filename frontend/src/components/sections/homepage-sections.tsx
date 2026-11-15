@@ -295,6 +295,77 @@ export function HomeLearningPrograms() {
   );
 }
 
+export function HomePillars() {
+  const pillars = [
+    {
+      title: "AI Solutions & Consulting",
+      description:
+        "Custom AI solutions, business process automation, AI consulting, intelligent applications and enterprise AI transformation.",
+      href: "/services",
+      label: "Explore solutions",
+      Icon: BrainCircuit,
+    },
+    {
+      title: "AI Learning & Careers",
+      description:
+        "AI training programs, hands-on learning, internships, corporate training, skill development and career opportunities.",
+      href: "/programs",
+      label: "Explore learning",
+      Icon: GraduationCap,
+    },
+    {
+      title: "AI Products & Platforms",
+      description:
+        "Development of AI-powered products, SaaS platforms, intelligent tools, chatbots and agentic AI applications.",
+      href: "/products",
+      label: "Explore products",
+      Icon: Layers3,
+    },
+    {
+      title: "AI Research & Innovation",
+      description:
+        "Exploring emerging AI technologies, generative AI, multi-agent systems, research, experimentation and proof-of-concept development.",
+      href: "/research",
+      label: "Explore research",
+      Icon: Lightbulb,
+    },
+    {
+      title: "AI Community & Partnerships",
+      description:
+        "Building AI communities, industry collaborations, academic partnerships, startup collaborations, networking and knowledge sharing.",
+      href: "/community",
+      label: "Explore community",
+      Icon: UsersRound,
+    },
+  ];
+
+  return (
+    <Section className="section-tinted home-pillars-section" id="pillars">
+      <SectionHeader
+        eyebrow="Our five pillars"
+        title="Five connected ways to move AI forward."
+        description="Our work brings together practical solutions, learning, products, research, and collaboration."
+      />
+      <div className="home-pillars-grid">
+        {pillars.map(({ title, description, href, label, Icon }) => (
+          <article className="home-pillar-card" key={title}>
+            <span className="home-card-icon">
+              <Icon size={20} aria-hidden="true" />
+            </span>
+            <h3>
+              <Link href={href}>{title}</Link>
+            </h3>
+            <p className="muted">{description}</p>
+            <Link className="text-link" href={href}>
+              {label} <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 export function HomeEcosystem() {
   const ecosystemAreas = [
     {

@@ -4,7 +4,7 @@ A company website for PraedicoAI Private Limited, focused on applied AI, intelli
 
 ## Run Locally
 
-Use Node.js 20.9 or newer and npm. This workspace was developed with Node.js 22.16. Run the commands below from the `frontend` directory. Configure the SMTP values in the ignored `.env` file for contact-form delivery and password-reset emails. Vercel production uses `https://praedicoai.com` for canonical URLs and indexing unless `NEXT_PUBLIC_SITE_URL` overrides it.
+Use Node.js 20.9 or newer and npm. This workspace was developed with Node.js 22.16. Run the commands below from the `frontend` directory. Local development skips contact email verification; it remains enabled outside development. Configure the SMTP values in the ignored `.env` file for contact-form delivery and password-reset emails. Vercel production uses `https://praedicoai.com` for canonical URLs and indexing unless `NEXT_PUBLIC_SITE_URL` overrides it.
 
 ```powershell
 cd frontend

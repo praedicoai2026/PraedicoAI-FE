@@ -55,7 +55,12 @@ export async function callContactOtpBackend(
   const backendUrl = process.env.BACKEND_API_URL?.trim().replace(/\/+$/, "");
   const internalSecret = process.env.AUTH_INTERNAL_SECRET?.trim();
   if (!backendUrl || !internalSecret) {
-    throw new Error("Contact OTP backend configuration is incomplete.");
+    const missingVariables: string[] = [];
+    if (!backendUrl) missingVariables.push("BACKEND_API_URL");
+    if (!internalSecret) missingVariables.push("AUTH_INTERNAL_SECRET");
+    throw new Error(
+      `Contact OTP backend configuration is incomplete: ${missingVariables.join(", ")} is missing or empty.`,
+    );
   }
 
   let url: URL;

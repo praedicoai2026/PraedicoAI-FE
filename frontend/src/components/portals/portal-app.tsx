@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -23,6 +24,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { LeadManagementDashboard } from "@/components/portals/lead-management-dashboard";
+import { site } from "@/data/site";
 
 type PortalKind = "admin" | "demo";
 type Task = {
@@ -197,15 +199,15 @@ export function PortalLogin({ portal }: { portal: PortalKind }) {
                   : permissions.includes("employees:manage")
                     ? "/admin/employees"
                     : permissions.includes("projects:read") ||
-                      permissions.includes("projects:manage") ||
-                      permissions.includes("projects:self:read")
-                    ? "/admin/projects"
+                        permissions.includes("projects:manage") ||
+                        permissions.includes("projects:self:read")
+                      ? "/admin/projects"
                       : permissions.includes("reports:read")
                         ? "/admin/reports"
                         : permissions.includes("content:read") ||
                             permissions.includes("content:manage")
                           ? "/admin/content"
-                        : "/admin/login";
+                          : "/admin/login";
         if (destination === "/admin/login") {
           setError("This account has no permitted admin workspace.");
           return;
@@ -227,11 +229,23 @@ export function PortalLogin({ portal }: { portal: PortalKind }) {
         className="portal-login-card"
         aria-labelledby="portal-login-title"
       >
-        <Link className="portal-brand" href="/" aria-label="PraedicoAI home">
-          <span className="portal-brand-mark">
-            P<span>.</span>
+        <Link
+          className="portal-brand"
+          href="/"
+          aria-label={`${site.name}, home`}
+        >
+          <Image
+            className="portal-brand-logo"
+            src="/images/PAI.png"
+            alt=""
+            width={502}
+            height={198}
+            preload
+          />
+          <span className="portal-brand-copy">
+            {site.name}
+            <small>{site.title}</small>
           </span>
-          <span>PraedicoAI</span>
         </Link>
         <p className="portal-eyebrow">
           {isAdmin ? "Workspace administration" : "Interactive preview"}
@@ -699,9 +713,13 @@ function PortalFrame({ portal }: { portal: PortalKind }) {
       <div className={`portal-app ${isAdmin ? "admin-theme" : "demo-theme"}`}>
         <aside className={`portal-sidebar ${mobileNavOpen ? "is-open" : ""}`}>
           <Link href="/" className="portal-sidebar-brand">
-            <span className="portal-brand-mark">
-              P<span>.</span>
-            </span>
+            <Image
+              className="portal-sidebar-brand-logo"
+              src="/images/PAI.png"
+              alt=""
+              width={502}
+              height={198}
+            />
             <span>
               PraedicoAI
               <small>{isAdmin ? "ADMIN WORKSPACE" : "DEMO WORKSPACE"}</small>

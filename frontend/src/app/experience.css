@@ -1,55 +1,3 @@
-:root {
-  --background: #f8f9fc;
-  --hero-background: #f2f6fc;
-  --foreground: #112039;
-  --primary: #2563eb;
-  --secondary: #edf3fa;
-  --accent: #0e7490;
-  --muted: #4c6078;
-  --border: #16263d1c;
-  --card: #ffffff;
-  --highlight: #2563eb;
-  --action-text: #ffffff;
-  --success: #047857;
-  --warning: #936000;
-  --error: #be123c;
-  --heading-start: #2563eb;
-  --heading-middle: #4f46e5;
-  --heading-end: #0891b2;
-  --spectrum: linear-gradient(110deg, #3b82f6, #06b6d4 60%, #10b981);
-  --surface-glass: linear-gradient(135deg, #ffffffeb, #edf4fbe6);
-  --surface-card: linear-gradient(145deg, #ffffff, #f7f9fc);
-  --surface-contact: linear-gradient(110deg, #e0eff8, #f6f9ff 70%);
-  --surface-input: #ffffff;
-  --shadow: 0 8px 24px -16px #23395530, 0 1px 3px #23395506;
-  --shadow-hover: 0 16px 36px -20px #23395540;
-}
-
-[data-theme="dark"] {
-  --background: #020617;
-  --hero-background: #0b1425;
-  --foreground: #f8fafc;
-  --primary: #60a5fa;
-  --secondary: #0f172a;
-  --accent: #22d3ee;
-  --muted: #a3afc2;
-  --border: #ffffff1f;
-  --card: #0f172a;
-  --highlight: #3b82f6;
-  --success: #6ee7b7;
-  --warning: #fcd34d;
-  --error: #fda4af;
-  --heading-start: #22d3ee;
-  --heading-middle: #3b82f6;
-  --heading-end: #818cf8;
-  --surface-glass: linear-gradient(135deg, #172b40bf, #0b1525e6);
-  --surface-card: linear-gradient(145deg, #172336e8, #0c1424f5);
-  --surface-contact: linear-gradient(110deg, #102d3b, #081222 70%);
-  --surface-input: #0b1425d9;
-  --shadow: 0 16px 45px -30px #000000b3;
-  --shadow-hover: 0 20px 48px -26px #000000b3, 0 0 24px -18px #22d3ee80;
-}
-
 body {
   font-size: 16px;
   line-height: 1.65;
@@ -57,8 +5,8 @@ body {
   overflow-wrap: anywhere;
 }
 ::selection {
-  background: #155e75;
-  color: #ffffff;
+  background: color-mix(in srgb, var(--accent) 28%, var(--background));
+  color: var(--foreground);
 }
 .container {
   max-width: 1320px;
@@ -120,20 +68,20 @@ h3 {
   padding: 10px 16px;
   gap: 12px;
   transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s,
-    box-shadow 0.2s,
-    transform 0.2s;
+    background-color var(--motion-fast) var(--motion-easing),
+    color var(--motion-fast) var(--motion-easing),
+    border-color var(--motion-fast) var(--motion-easing),
+    box-shadow var(--motion-fast) var(--motion-easing),
+    transform var(--motion-standard) var(--motion-easing);
 }
 .button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px -10px #2563eb99;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
 }
 .button svg,
 .text-link svg,
 .header-cta svg {
-  transition: transform 0.25s;
+  transition: transform var(--motion-standard) var(--motion-easing);
 }
 .button:hover svg,
 .text-link:hover svg,
@@ -143,16 +91,16 @@ h3 {
 .button-primary,
 .home-hero .button-primary,
 .prefooter .button-primary {
-  background: linear-gradient(110deg, #2563eb, #1d4ed8 55%, #0e7490);
+  background: var(--spectrum);
   background-size: 160% 100%;
   color: var(--action-text);
   box-shadow:
-    0 4px 12px -5px #2563eb70,
+    0 4px 12px -5px color-mix(in srgb, var(--primary) 44%, transparent),
     inset 0 1px 0 #ffffff25;
   transition:
-    background-position 0.4s,
-    box-shadow 0.3s,
-    transform 0.25s;
+    background-position var(--motion-slow) var(--motion-easing),
+    box-shadow var(--motion-standard) var(--motion-easing),
+    transform var(--motion-standard) var(--motion-easing);
 }
 .button-primary:hover {
   background-position: 100% 50%;
@@ -222,7 +170,7 @@ h3 {
   margin-top: 2px;
 }
 .desktop-nav {
-  gap: 14px;
+  gap: 8px;
   flex-shrink: 0;
   font-size: 13px;
 }
@@ -245,7 +193,7 @@ h3 {
   background: var(--primary);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.2s;
+  transition: transform var(--motion-standard) var(--motion-easing);
 }
 .desktop-nav > a:hover::after,
 .desktop-nav > a.active::after {
@@ -263,26 +211,36 @@ h3 {
   border: 1px solid var(--primary);
   border-radius: 6px;
   transition:
-    background 0.2s,
-    color 0.2s,
-    box-shadow 0.2s;
+    background-color var(--motion-fast) var(--motion-easing),
+    color var(--motion-fast) var(--motion-easing),
+    box-shadow var(--motion-standard) var(--motion-easing);
 }
 .header-cta:is(:hover, :focus-visible) {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: var(--primary);
+  border-color: var(--primary);
   color: var(--action-text);
-  box-shadow: 0 8px 24px -10px #2563eb99;
+  box-shadow: var(--shadow-hover);
 }
 .header-actions {
   gap: 10px;
+  flex-shrink: 0;
+}
+.header-actions > a,
+.header-actions > button {
+  flex-shrink: 0;
+}
+.portal-nav-link,
+.auth-header-link,
+.header-cta {
+  white-space: nowrap;
 }
 .theme-toggle {
   background: var(--surface-card);
   color: var(--muted);
   transition:
-    background 0.2s,
-    border-color 0.2s,
-    color 0.2s;
+    background-color var(--motion-fast) var(--motion-easing),
+    border-color var(--motion-fast) var(--motion-easing),
+    color var(--motion-fast) var(--motion-easing);
 }
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
@@ -294,7 +252,7 @@ h3 {
   top: 100%;
   border-radius: 4px;
   padding: 10px;
-  animation: menu-enter 0.2s ease-out;
+  animation: menu-enter var(--motion-standard) var(--motion-easing);
 }
 .dropdown-content a {
   font-size: 14px;
@@ -512,12 +470,12 @@ h3 {
   font-size: 12px;
 }
 .mobile-drawer[open] .drawer-inner {
-  animation: drawer-enter 0.3s ease-out;
+  animation: drawer-enter var(--motion-slow) var(--motion-easing);
 }
 .drawer-inner nav a {
   transition:
-    color 0.2s,
-    padding 0.2s;
+    color var(--motion-fast) var(--motion-easing),
+    padding var(--motion-fast) var(--motion-easing);
 }
 .drawer-inner nav a:hover {
   color: var(--primary);
@@ -983,10 +941,10 @@ h3 {
   position: relative;
   overflow: hidden;
   transition:
-    border-color 0.25s,
-    background 0.25s,
-    transform 0.25s,
-    box-shadow 0.3s;
+    border-color var(--motion-standard) var(--motion-easing),
+    background-color var(--motion-standard) var(--motion-easing),
+    transform var(--motion-standard) var(--motion-easing),
+    box-shadow var(--motion-standard) var(--motion-easing);
 }
 .service-card::after {
   content: "";
@@ -1001,7 +959,7 @@ h3 {
   transition: transform 0.3s;
 }
 .service-card:is(:hover, :focus-within) {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   border-color: var(--accent);
   box-shadow: var(--shadow-hover);
 }
@@ -1080,12 +1038,12 @@ h3 {
   box-shadow: var(--shadow);
   overflow: hidden;
   transition:
-    transform 0.3s,
-    border-color 0.3s,
-    box-shadow 0.3s;
+    transform var(--motion-standard) var(--motion-easing),
+    border-color var(--motion-standard) var(--motion-easing),
+    box-shadow var(--motion-standard) var(--motion-easing);
 }
 .content-card:is(:hover, :focus-within) {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   border-color: var(--accent);
   box-shadow: var(--shadow-hover);
 }
@@ -1162,7 +1120,7 @@ h3 {
   color: var(--primary);
 }
 .accordion details[open] > p {
-  animation: menu-enter 0.2s ease-out;
+  animation: menu-enter var(--motion-standard) var(--motion-easing);
 }
 .prefooter {
   background: var(--surface-contact);
@@ -1233,20 +1191,8 @@ h3 {
   line-height: 1.9;
 }
 .mern-syllabus-page {
-  --primary: #225b55;
-  --foreground: #19282c;
-  --accent: #4b55a4;
-  --background: #fff;
-  --card: #fff;
   background: var(--background);
   color: var(--foreground);
-}
-[data-theme="dark"] .mern-syllabus-page {
-  --primary: #60a5fa;
-  --foreground: #f8fafc;
-  --accent: #22d3ee;
-  --background: #020617;
-  --card: #0f172a;
 }
 .mern-syllabus-intro {
   max-width: 850px;
@@ -1469,27 +1415,8 @@ h3 {
 }
 .programs-portal-page,
 .program-detail-page {
-  --primary: #225b55;
-  --foreground: #19282c;
-  --accent: #4b55a4;
-  --background: #fff;
-  --card: #fff;
-  --secondary: #eef3f3;
-  --muted: #59696e;
-  --border: #dce4e6;
   background: var(--background);
   color: var(--foreground);
-}
-[data-theme="dark"] .programs-portal-page,
-[data-theme="dark"] .program-detail-page {
-  --primary: #92d9c5;
-  --foreground: #e8eff0;
-  --accent: #b9baff;
-  --background: #121a1d;
-  --card: #192428;
-  --secondary: #1c292d;
-  --muted: #a5b7bc;
-  --border: #34464b;
 }
 .programs-introduction {
   max-width: 900px;
@@ -2302,8 +2229,8 @@ textarea {
 @media (prefers-reduced-motion: no-preference) {
   body {
     transition:
-      background-color 0.25s,
-      color 0.25s;
+      background-color var(--motion-standard) var(--motion-easing),
+      color var(--motion-standard) var(--motion-easing);
   }
   .service-card:is(:hover, :focus-within)::after {
     animation: light-sweep 1.6s ease-out;
@@ -2314,7 +2241,7 @@ textarea {
   .hero-intro,
   .hero-focus,
   .hero-bottom {
-    animation: hero-reveal 0.4s ease-out backwards;
+    animation: hero-reveal var(--motion-slow) var(--motion-easing) backwards;
   }
   .hero-kicker {
     animation-delay: 0.06s;
@@ -2341,7 +2268,7 @@ textarea {
 @keyframes hero-reveal {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -2359,7 +2286,7 @@ textarea {
 @keyframes menu-enter {
   from {
     opacity: 0;
-    transform: translateY(-7px);
+    transform: translateY(-5px);
   }
   to {
     opacity: 1;
@@ -2369,7 +2296,7 @@ textarea {
 @keyframes drawer-enter {
   from {
     opacity: 0.3;
-    transform: translateX(22px);
+    transform: translateX(16px);
   }
   to {
     opacity: 1;
@@ -2378,7 +2305,7 @@ textarea {
 }
 @keyframes nudge-down {
   50% {
-    transform: translateY(5px);
+    transform: translateY(4px);
   }
 }
 
@@ -3200,9 +3127,13 @@ textarea {
 .home-industry-grid,
 .home-services-grid,
 .home-learning-grid,
-.home-why-grid {
+.home-why-grid,
+.home-pillars-grid {
   display: grid;
   gap: 16px;
+}
+.home-pillars-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 .home-industry-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3216,7 +3147,8 @@ textarea {
 .home-industry-card,
 .home-service-card,
 .home-learning-card,
-.home-why-card {
+.home-why-card,
+.home-pillar-card {
   display: flex;
   min-width: 0;
   flex-direction: column;
@@ -3227,14 +3159,15 @@ textarea {
   background: var(--surface-card);
   box-shadow: var(--shadow);
   transition:
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color var(--motion-standard) var(--motion-easing),
+    transform var(--motion-standard) var(--motion-easing),
+    box-shadow var(--motion-standard) var(--motion-easing);
 }
 .home-industry-card:hover,
 .home-service-card:hover,
-.home-learning-card:hover {
-  transform: translateY(-3px);
+.home-learning-card:hover,
+.home-pillar-card:is(:hover, :focus-within) {
+  transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--primary) 52%, var(--border));
   box-shadow: var(--shadow-hover);
 }
@@ -3257,26 +3190,30 @@ textarea {
 .home-industry-card h3,
 .home-service-card h3,
 .home-learning-card h3,
-.home-why-card h3 {
+.home-why-card h3,
+.home-pillar-card h3 {
   margin: 0;
   font-size: 17px;
   line-height: 1.4;
 }
 .home-industry-card h3 a,
 .home-service-card h3 a,
-.home-learning-card h3 a {
+.home-learning-card h3 a,
+.home-pillar-card h3 a {
   color: var(--foreground);
   text-decoration: none;
 }
 .home-industry-card h3 a:hover,
 .home-service-card h3 a:hover,
-.home-learning-card h3 a:hover {
+.home-learning-card h3 a:hover,
+.home-pillar-card h3 a:hover {
   color: var(--primary);
 }
 .home-industry-card > .muted,
 .home-service-card > .muted,
 .home-learning-card > .muted,
-.home-why-card > .muted {
+.home-why-card > .muted,
+.home-pillar-card > .muted {
   margin: 14px 0;
   font-size: 13px;
   line-height: 1.7;
@@ -3307,14 +3244,16 @@ textarea {
 }
 .home-industry-card .text-link,
 .home-service-card .text-link,
-.home-learning-card .text-link {
+.home-learning-card .text-link,
+.home-pillar-card .text-link {
   margin-top: 15px;
   font-size: 12px;
   font-weight: 750;
 }
 .home-service-card .home-card-icon,
 .home-learning-card .home-card-icon,
-.home-why-card .home-card-icon {
+.home-why-card .home-card-icon,
+.home-pillar-card .home-card-icon {
   margin-bottom: 15px;
 }
 .home-learning-card .eyebrow {
@@ -3326,6 +3265,9 @@ textarea {
   text-transform: uppercase;
 }
 .home-learning-card .muted {
+  flex: 1;
+}
+.home-pillar-card > .muted {
   flex: 1;
 }
 .home-program-note {
@@ -3417,7 +3359,11 @@ textarea {
   padding-block: clamp(54px, 8vw, 92px);
   color: #f8fafc;
   background:
-    radial-gradient(circle at 100% 0, #2563eb70, transparent 38%),
+    radial-gradient(
+      circle at 100% 0,
+      color-mix(in srgb, var(--highlight) 35%, transparent),
+      transparent 38%
+    ),
     linear-gradient(125deg, #0b1425, #122b45);
 }
 .home-final-cta > .container {
@@ -3554,6 +3500,9 @@ textarea {
   .home-services-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .home-pillars-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 @media (max-width: 760px) {
   .home-hero > .container.home-hero-layout {
@@ -3594,7 +3543,8 @@ textarea {
   }
   .home-services-grid,
   .home-learning-grid,
-  .home-why-grid {
+  .home-why-grid,
+  .home-pillars-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .home-value-grid {
@@ -3645,13 +3595,15 @@ textarea {
   .home-services-grid,
   .home-learning-grid,
   .home-why-grid,
+  .home-pillars-grid,
   .home-final-cta-grid {
     grid-template-columns: 1fr;
   }
   .home-industry-card,
   .home-service-card,
   .home-learning-card,
-  .home-why-card {
+  .home-why-card,
+  .home-pillar-card {
     padding: 18px;
   }
   .home-why-card h3 {
